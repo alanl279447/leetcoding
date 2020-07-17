@@ -9,6 +9,7 @@ public class RotateList_61 {
 //    rotate 2 steps to the right: 4->5->1->2->3->NULL
 //    https://leetcode.com/problems/rotate-list/
 
+    //1-2-3-4-5, 5-1-2-3-4, 4-5-1-2-3
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
         node1.next = new ListNode(2);
@@ -16,7 +17,7 @@ public class RotateList_61 {
         node1.next.next.next = new ListNode(4);
         node1.next.next.next.next = new ListNode(5);
 
-        ListNode result = reverseKGroup(node1, 2);
+        ListNode result = rotateRight(node1, 2);
         while (result.next != null) {
             System.out.println("val: "+result.val);
             result = result.next;
@@ -25,33 +26,29 @@ public class RotateList_61 {
     }
 
 
-    //1-2-3-4-5
-    //1-2-4-3-5
+    public static ListNode rotateRight(ListNode head, int k) {
+        if(head==null)
+            return null;
+        int size = 1; // since we are already at head node
+        ListNode fast=head;
+        ListNode slow = head;
 
-    public static ListNode reverseKGroup(ListNode head, int k) {
-        //1. test weather we have more then k node left, if less then k node left we just return head
-        ListNode node = head;
-        int count = 0;
-
-        while (count < k) {
-            if (node == null) {
-                return head;
-            }
-            node = node.next;
-            count ++;
+        while(fast.next!=null){
+            size++;
+            fast = fast.next;
         }
 
-        ListNode pre = reverseKGroup(node, k);
+        for(int i=size-k%size;i>1;i--) // i>1 because we need to put slow.next at the start.
+            slow = slow.next;
 
-        while(count > 0) {
-         ListNode headNext = head.next;
-         head.next = pre;
-         pre = head;
-         head = headNext;
-         count --;
-        }
-        return pre;
+        // No dummy variable.
+        fast.next = head;
+        head = slow.next;
+        slow.next = null;
+
+        return head;
     }
+
 
     public static class ListNode {
       int val;

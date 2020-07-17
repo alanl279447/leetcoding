@@ -35,7 +35,6 @@ public class SplitLinkedListinParts {
         }
     }
 
-
     public static ListNode[] splitListToParts(ListNode root, int k) {
         ListNode cur = root;
         int N = 0;

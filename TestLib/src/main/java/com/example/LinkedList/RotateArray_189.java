@@ -2,57 +2,42 @@ package com.example.LinkedList;
 
 public class RotateArray_189 {
 
-//    Input: 1->2->3->4->5->NULL, k = 2
-//    Output: 4->5->1->2->3->NULL
+//    Input: nums = [1,2,3,4,5,6,7], k = 3
+//    Output: [5,6,7,1,2,3,4]
 //    Explanation:
-//    rotate 1 steps to the right: 5->1->2->3->4->NULL
-//    rotate 2 steps to the right: 4->5->1->2->3->NULL
-//    https://leetcode.com/problems/rotate-list/
+//    rotate 1 steps to the right: [7,1,2,3,4,5,6]
+//    rotate 2 steps to the right: [6,7,1,2,3,4,5]
+//    rotate 3 steps to the right: [5,6,7,1,2,3,4]
+//    https://leetcode.com/problems/rotate-array/
 
-    //1-2-3-4-5, 5-1-2-3-4, 4-5-1-2-3
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(1);
-        node1.next = new ListNode(2);
-        node1.next.next = new ListNode(3);
-        node1.next.next.next = new ListNode(4);
-        node1.next.next.next.next = new ListNode(5);
-
-        ListNode result = rotateRight(node1, 2);
-        while (result.next != null) {
-            System.out.println("val: "+result.val);
-            result = result.next;
+        int[] nums = {1,2,3,4,5,6,7};
+        rotate(nums, 3);
+        for (int num:nums) {
+            System.out.println(num);
         }
-        System.out.println("val: "+result.val);
     }
 
-    public static ListNode rotateRight(ListNode head, int k) {
-        if(head==null)
-            return null;
-        int size = 1; // since we are already at head node
-        ListNode fast=head;
-        ListNode slow = head;
+    //1,2,3,4,5,6,7
+    //7,6,5,4,3,2,1
+    //5,6,7,4,3,2,1
+    //5,6,7,1,2,3,4
 
-        while(fast.next!=null){
-            size++;
-            fast = fast.next;
-        }
-
-        for(int i=size-k%size;i>1;i--) // i>1 because we need to put slow.next at the start.
-            slow = slow.next;
-
-        // No dummy variable.
-        fast.next = head;
-        head = slow.next;
-        slow.next = null;
-
-        return head;
+    public static void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverseNumbers(nums, 0, nums.length - 1);
+        reverseNumbers(nums, 0, k-1);
+        reverseNumbers(nums, k, nums.length-1);
     }
 
-
-    public static class ListNode {
-      int val;
-      ListNode next;
-      public ListNode(int x) { val = x; }
-  }
+    public static void reverseNumbers(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
 
 }

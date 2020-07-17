@@ -23,9 +23,6 @@ public class Search2DMatrix_74 {
 //        System.out.println(searchMatrix(matrix, 20));
     }
 
-    private static int[][] localMatrix;
-    private static int localTarget;
-
     public static boolean searchMatrix(int[][] matrix, int target) {
          int column = matrix[0].length;
 

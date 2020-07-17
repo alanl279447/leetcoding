@@ -28,8 +28,7 @@ public class CriticalConnectionsInNetwork_1192 {
     }
 
     static int time = -1;
-    public static List<List<Integer>> criticalConnections(int n,
-                                                   List<List<Integer>> connections) {
+    public static List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer>[] graph = new List[n];
         buildGraph(connections, graph);
@@ -49,11 +48,13 @@ public class CriticalConnectionsInNetwork_1192 {
         return res;
     }
 
+//    low[u] records the lowest vertex u can reach
+//    disc[u] records the time when u was discovered
     private static void dfs(int u, int[] parents, int[] disc, int[] low,
                      List<Integer>[] graph, List<List<Integer>> res) {
         if (disc[u] != -1) return;
 
-        low[u] = disc[u] = time++;
+        low[u] = disc[u] = ++time;
 
         for (int v : graph[u]) {
             if (disc[v] == -1) {
@@ -70,8 +71,7 @@ public class CriticalConnectionsInNetwork_1192 {
         }
     }
 
-    private static void buildGraph(List<List<Integer>> connections,
-                            List<Integer>[] graph) {
+    private static void buildGraph(List<List<Integer>> connections, List<Integer>[] graph) {
         for (List<Integer> c : connections) {
             int from = c.get(0);
             int to = c.get(1);

@@ -2,45 +2,37 @@ package com.example.ArrayStrings;
 
 public class MaximumProductSubarray_152 {
 
-//    Input:
-//    s = "abcxyz123"
-//    dict = ["abc","123"]
-//    Output:"<b>abc</b>xyz<b>123</b>"
-//    https://leetcode.com/problems/add-bold-tag-in-string/
-//O(N*k)
+//     contiguous subarray within an array
+//    Input: [2,3,-2,4]
+//    Output: 6
+//    Explanation: [2,3] has the largest product 6.
+//    https://leetcode.com/problems/maximum-product-subarray/
+
     public static void main(String[] args) {
 
-        String s = "abcxyz123";
-        String[] dict = {"abc","123"};
-        System.out.println(addBoldTag(s, dict));
+        int[] nums = {2,3,-2,4};
+        System.out.println(maxProduct(nums));
     }
 
-    public static String addBoldTag(String s, String[] dict) {
-        boolean[] bold = new boolean[s.length()];
-        for (int i = 0, end = 0; i < s.length(); i++) {
-            for (String word : dict) {
-                if (s.startsWith(word, i)) {
-                    end = Math.max(end, i + word.length());
-                }
-            }
-            bold[i] = end > i;
-        }
+    // currentMin, currentMax, finalMax
+    //
 
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            if (!bold[i]) {
-                result.append(s.charAt(i));
-                continue;
-            }
-            int j = i;
-            while (j < s.length() && bold[j]) {
-                j++;
-            }
-            result.append("<b>" + s.substring(i, j) + "</b>");
-            i = j - 1;
-        }
+    public static int maxProduct(int[] nums) {
+      if (nums == null) return 0;
+      int currentMin = nums[0]; //2
+      int currentMax = nums[0]; //2
+      int finalValue = nums[0]; //2
 
-        return result.toString();
+      for (int i=1; i < nums.length; i++) {
+          int temp = currentMax;
+          currentMax = Math.max(Math.max(currentMax*nums[i], currentMin*nums[i]), nums[i]); //6
+          currentMin = Math.min(Math.min(temp*nums[i], currentMin*nums[i]), nums[i]); //2
+
+          if (currentMax > finalValue) {
+              finalValue = currentMax;
+          }
+      }
+      return finalValue;
     }
 
 }

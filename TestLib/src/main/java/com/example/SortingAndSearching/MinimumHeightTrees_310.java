@@ -1,67 +1,57 @@
 package com.example.SortingAndSearching;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class MinimumHeightTrees_310 {
 
-//    [0,1,3,5,6,8,12,17]
+//    Input: n = 4, edges = [[1, 0], [1, 2], [1, 3]]
 //
-//    There are a total of 8 stones.
-//    The first stone at the 0th unit, second stone at the 1st unit,
-//    third stone at the 3rd unit, and so on...
-//    The last stone at the 17th unit.
+//            0
+//            |
+//            1
+//           / \
+//          2   3
 //
-//    Return true. The frog can jump to the last stone by jumping
-//1 unit to the 2nd stone, then 2 units to the 3rd stone, then
-//2 units to the 4th stone, then 3 units to the 6th stone,
-//4 units to the 7th stone, and 5 units to the 8th stone.
-//    https://leetcode.com/problems/frog-jump/
+//    Output: [1]
+//    https://leetcode.com/problems/minimum-height-trees/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[] nums1 = {0,1,3,5,6,8,12,17};
-        System.out.print(canCross(nums1));
+        int[][] edges = {{1,0}, {1,2}, {1,3}};
+        System.out.print(findMinHeightTrees(4, edges));
     }
 
-    public static boolean canCross(int[] stones) {
-        for (int i=3; i < stones.length; i++) {
-           if (stones[i]>stones[i-1]*2) {
-               return false;
-           }
+    public static List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        if (n == 1) return Collections.singletonList(0);
+
+        List<Set<Integer>> adj = new ArrayList<>(n);
+        for (int i = 0; i < n; ++i) adj.add(new HashSet<>());
+        for (int[] edge : edges) {
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
         }
-        HashSet<Integer>set = new HashSet<>();
-        for (int stone:stones) {
-            set.add(stone);
-        }
 
-        int lastStone = stones[stones.length-1];
-        Stack<Integer> positions = new Stack<>();
-        Stack<Integer> jumps = new Stack<>();
-        positions.add(0);
-        jumps.add(0);
+        List<Integer> leaves = new ArrayList<>();
+        for (int i = 0; i < n; ++i)
+            if (adj.get(i).size() == 1) leaves.add(i);
 
-        while(!positions.isEmpty()) {
-            int position = positions.pop();
-            int jump = jumps.pop();
-
-            for (int i = jump-1; i <= jump+1;i++) {
-                if (i <=0) {
-                    continue;
-                }
-                int newPosition = position+i;
-                if (newPosition == lastStone) {
-                    return true;
-                } else if (set.contains(newPosition)) {
-                    positions.push(newPosition);
-                    jumps.add(i);
-                }
+        while (n > 2) {
+            n -= leaves.size();
+            List<Integer> newLeaves = new ArrayList<>();
+            for (int i : leaves) {
+                int j = adj.get(i).iterator().next();
+                adj.get(j).remove(i);
+                if (adj.get(j).size() == 1) newLeaves.add(j);
             }
+            leaves = newLeaves;
         }
-        return false;
+        return leaves;
     }
 
     public static class TreeNode {

@@ -13,8 +13,8 @@ public class FirstMissingPositive_41 {
 //    https://leetcode.com/problems/first-missing-positive/
 
     public static void main(String args[]) {
-       //int[] input = {3,4,-1,1};
-        int[] input = {1,2,0};
+       int[] input = {3,4,-1,1};
+        //int[] input = {1,2,0};
         int res = firstMissingPositive(input);
         System.out.println(res);
 

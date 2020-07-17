@@ -1,49 +1,40 @@
 package com.example.ArrayStrings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DegreeofanArray_697 {
-//    Input: candidates = [2,3,6,7], target = 7,
-//    A solution set is:
-//            [
-//            [7],
-//            [2,2,3]
-//            ]
-//    https://leetcode.com/problems/combination-sum/
-//    Time complexity is O(A^target) where A is a length of candidates array.
-//    Space complexity is O(target).
+//    Input: [1, 2, 2, 3, 1]
+//    Output: 2
+//    Explanation:
+//    The input array has a degree of 2 because both elements 1 and 2 appear twice.
+//    Of the subarrays that have the same degree:
+//            [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
+//    The shortest length is 2. So return 2.
+//    https://leetcode.com/problems/degree-of-an-array/
 
     public static void main(String args[]) {
-        int[] input = {2,3,6,7};
-        List<List<Integer>> res = combinationSum(input, 7);
-
-        for(List<Integer> re: res) {
-            System.out.println(re);
-        }
+        int[] input = {1,2,2,3,1};
+        int result = findShortestSubArray(input);
+            System.out.println(result);
     }
 
-    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(candidates);
-        backtracking(result, new ArrayList<>(), candidates, target, 0);
-        return result;
-    }
+    public static int findShortestSubArray(int[] nums) {
+        Map<Integer, Integer> left = new HashMap<>(), right = new HashMap<>(), count = new HashMap<>();
 
-    public static void backtracking(List<List<Integer>> res, List<Integer> temp_list, int[] candidates, int remainder, int start) {
-        if (remainder < 0) {
-            return;
+        for (int i=0; i < nums.length; i++) {
+            left.putIfAbsent(nums[i], i);
+            right.put(nums[i], i);
+            count.put(nums[i], count.getOrDefault(nums[i], 0)+1);
         }
-        if (remainder ==0) {
-            res.add(new ArrayList<>(temp_list));
-        } else {
-            for (int i=start; i < candidates.length; i++) {
-                temp_list.add(candidates[i]);
-                System.out.println(temp_list.toString());
-                backtracking(res, temp_list, candidates, remainder-candidates[i], i);
-                temp_list.remove(temp_list.size() -1);
+        int ans = nums.length;
+        int degree = Collections.max(count.values());
+        for (int num:nums) {
+            if (degree==count.get(num)) {
+                ans = right.get(num)-left.get(num)+1;
             }
         }
+        return ans;
     }
 }

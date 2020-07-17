@@ -1,52 +1,43 @@
 package com.example.DynamicProgramming;
 
+import java.util.HashMap;
+
 public class NumberDiceRollsWithTargetSum_1155 {
 
-//    Input: [7,1,5,3,6,4]
-//    Output: 5
-//    Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-//    Not 7-1 = 6, as selling price needs to be larger than buying price.
-//
-//    Input: [7,6,4,3,1]
-//    Output: 0
-//    Explanation: In this case, no transaction is done, i.e. max profit = 0.
+//    Input: d = 2, f = 6, target = 7
+//    Output: 6
+//    Explanation:
+//    You throw two dice, each with 6 faces.  There are 6 ways to get a sum of 7:
+//            1+6, 2+5, 3+4, 4+3, 5+2, 6+1.
+//    https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.print(maxProfit(prices));
+        System.out.print(numRollsToTarget(2,6,7));
     }
 
-    public static int maxProfit(int[] prices) {
-        int profit = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-
-        for (int i=0; i< prices.length;i++) {
-            if (prices[i] < min) {
-                min = prices[i];   //always the lowest
-            }
-
-            if (profit < (prices[i] - min)) {
-                profit = prices[i]-min;
-            }
-        }
-        return profit;
-
+    static int MOD = 1000000000+7;
+    static HashMap<String, Integer> map = new HashMap<>();
+    public static int numRollsToTarget(int d, int f, int target) {
+         if (d==0 && target ==0) {
+             return 1;
+         }
+         if (d==0 || target ==0) {
+             return 0;
+         }
+         String key = d+""+target;
+         if (map.containsKey(key)) {
+             return map.get(key);
+         }
+         int res = 0;
+         for (int i=1; i<=f; i++) {
+             if (target>i) {
+                 res = res+numRollsToTarget(d-1, f, target-i) %MOD;
+             } else {
+                 break;
+             }
+         }
+         map.put(key, res);
+         return res;
     }
-
-//    public static int maxProfit(int[] prices) {
-//      int minPrice = Integer.MAX_VALUE;
-//      int maxPrice = 0;
-//
-//      for (int price: prices) {
-//        if (price < minPrice) {
-//            minPrice = price;
-//        }
-//        if(price - minPrice > maxPrice) {
-//            maxPrice = price - minPrice;
-//        }
-//      }
-//      return maxPrice;
-//    }
-
 
 }

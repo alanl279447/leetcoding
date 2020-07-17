@@ -1,71 +1,31 @@
 package com.example.ArrayStrings;
 
-//        File file("abcdefghijk"); // File is "abcdefghijk", initially file pointer (fp) points to 'a'
-//        char[] buf = new char[4]; // Create buffer with enough space to store characters
-//        read4(buf); // read4 returns 4. Now buf = "abcd", fp points to 'e'
-//        read4(buf); // read4 returns 4. Now buf = "efgh", fp points to 'i'
-//        read4(buf); // read4 returns 3. Now buf = "ijk", fp points to end of file
-//https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/
+//Input: "GGLLGG"
+//        Output: true
+//        Explanation:
+//        The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).
+//        When repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.
+//        https://leetcode.com/problems/robot-bounded-in-circle/
 
 public class RobotBoundedInCircle_1041 {
 
-    static class Buffer {
-        int size;
-        int start;
-        int end;
-        char[] bf;
-        int cap;
-        public Buffer(int capacity) {
-            bf= new char[capacity];
-            size =0;
-            start=0;
-            end =0;
-            cap = capacity;
-        }
-
-        /**
-         * Transfers the content of the given source char array into this buffer.
-         * Returns the the number of chars that were written into the buffer.
-         */
-        public int write(char[] src) {
-            if(src == null || src.length ==0|| size == cap)
-                return 0;
-            int i = 0;
-            for(; i < src.length; i++){
-                bf[end++] = src[i];
-                size++;
-                end =end%cap;
-                if(size >= cap)
-                    break;
-            }
-            return i;
-        }
-
-        public char[] read(int n) {
-            int rl = n;
-            if(n> size)
-                rl = size;
-            char[] res = new char[rl];
-            for(int i = 0; i < rl; i++){
-                res[i] = bf[start++];
-                size--;
-                start = start%cap;
-            }
-            return res;
-        }
-    }
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        Buffer t = new Buffer(5);
-        char[] in = {'a','b','c'};
-        t.write(in);
-        char[] in2 = {'d','e','f'};
-        t.write(in2);
-        char[] out = t.read(3);
-        System.out.println(out);
-        char[] in3 = {'x','y','z','a','b','c'};
-        t.write(in3);
-        out = t.read(8);
-        System.out.println(out);
+        System.out.println(isRobotBounded("GGLLGG"));
+    }
+
+    public static boolean isRobotBounded(String ins) {
+        int x = 0, y = 0, i = 0, d[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        for (int j = 0; j < ins.length(); ++j) {
+            if (ins.charAt(j) == 'R')
+                i = (i + 1) % 4;
+            else if (ins.charAt(j) == 'L')
+                i = (i + 3) % 4;
+            else {
+                x += d[i][0];
+                y += d[i][1];
+            }
+        }
+        return x == 0 && y == 0 || i > 0;
     }
 }

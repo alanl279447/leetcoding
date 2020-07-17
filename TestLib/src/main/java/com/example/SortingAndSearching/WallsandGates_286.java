@@ -20,8 +20,6 @@ public class WallsandGates_286 {
 //    0  -1 INF INF
 //    https://leetcode.com/problems/walls-and-gates/
 
-    public static TreeNode root = null;
-
     public static int[] xValues = {-1, 0, 1, 0};
     public static int[] yValues = {0, -1, 0, 1};
 
@@ -38,6 +36,15 @@ public class WallsandGates_286 {
             System.out.print(res);
         }
     }
+
+    public static void wallsAndGatesTest(int[][] rooms) {
+        if (rooms==null || rooms.length==0) return;
+
+        Queue<Cell> queue = new ArrayDeque<>();
+
+
+    }
+
 
     public static void wallsAndGates(int[][] rooms) {
         if (rooms == null || rooms.length < 1) return;
@@ -81,36 +88,4 @@ public class WallsandGates_286 {
         }
     }
 
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
-    public static void addNode(int value) {
-        root = addNodeRecursive(root, value);
-        root.left = new TreeNode(9);
-        root.right = new TreeNode(20);
-        root.right.left = new TreeNode(15);
-        root.right.right = new TreeNode(7);
-    }
-
-    public static TreeNode addNodeRecursive(TreeNode node, int value) {
-//        TreeNode newNode = null;
-        if (node == null) {
-            node = new TreeNode(value);
-            return node;
-        }
-
-        if (value < node.val) {
-            node.left = addNodeRecursive(node.left, value);
-        } else if (value > node.val){
-            node.right = addNodeRecursive(node.right, value);
-        } else {
-            return node;
-        }
-        return node;
-    }
 }

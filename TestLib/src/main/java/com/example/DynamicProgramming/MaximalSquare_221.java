@@ -2,51 +2,33 @@ package com.example.DynamicProgramming;
 
 public class MaximalSquare_221 {
 
-//    Input: [7,1,5,3,6,4]
-//    Output: 5
-//    Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-//    Not 7-1 = 6, as selling price needs to be larger than buying price.
+//    Input:
 //
-//    Input: [7,6,4,3,1]
-//    Output: 0
-//    Explanation: In this case, no transaction is done, i.e. max profit = 0.
+//            1 0 1 0 0
+//            1 0 1 1 1
+//            1 1 1 1 1
+//            1 0 0 1 0
+//
+//    Output: 4
+//    https://leetcode.com/problems/maximal-square/
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.print(maxProfit(prices));
+        char[][] a = {};
+        System.out.print(maximalSquare(a));
     }
 
-    public static int maxProfit(int[] prices) {
-        int profit = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-
-        for (int i=0; i< prices.length;i++) {
-            if (prices[i] < min) {
-                min = prices[i];   //always the lowest
-            }
-
-            if (profit < (prices[i] - min)) {
-                profit = prices[i]-min;
+    public static int maximalSquare(char[][] a) {
+        if(a.length == 0) return 0;
+        int m = a.length, n = a[0].length, result = 0;
+        int[][] b = new int[m+1][n+1];
+        for (int i = 1 ; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if(a[i-1][j-1] == '1') {
+                    b[i][j] = Math.min(Math.min(b[i][j-1] , b[i-1][j-1]), b[i-1][j]) + 1;
+                    result = Math.max(b[i][j], result); // update result
+                }
             }
         }
-        return profit;
-
+        return result*result;
     }
-
-//    public static int maxProfit(int[] prices) {
-//      int minPrice = Integer.MAX_VALUE;
-//      int maxPrice = 0;
-//
-//      for (int price: prices) {
-//        if (price < minPrice) {
-//            minPrice = price;
-//        }
-//        if(price - minPrice > maxPrice) {
-//            maxPrice = price - minPrice;
-//        }
-//      }
-//      return maxPrice;
-//    }
-
-
 }

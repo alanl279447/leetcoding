@@ -1,14 +1,5 @@
 package com.example.DynamicProgramming;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-
 public class DecodeWays_91 {
 
 //    Input: "226"
@@ -19,7 +10,12 @@ public class DecodeWays_91 {
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int res = numDecodings("226");
-        System.out.println(res);
+
+        System.out.println("234".substring(1,2));
+        System.out.println("234".substring(0,2));
+        System.out.println("234".substring(0,3));
+
+//        System.out.println(res);
     }
 
     //space complexity 0(n)

@@ -1,5 +1,7 @@
 package com.example.SortingAndSearching;
 
+import com.example.LinkedList.ReverseNodeinKList;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,83 +9,37 @@ import java.util.Queue;
 
 public class MiddleoftheLinkedList_876 {
 
-//    Input: [[0,0,0],[1,1,0],[1,1,0]]
-//    Output: 4
-//    https://leetcode.com/problems/shortest-path-in-binary-matrix/
+//    Input: [1,2,3,4,5]
+//    Output: Node 3 from this list (Serialization: [3,4,5])
+//    The returned node has value 3.  (The judge's serialization of this node is [3,4,5]).
+//    Note that we returned a ListNode object ans, such that:
+//    ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and ans.next.next.next = NULL.
+//    https://leetcode.com/problems/middle-of-the-linked-list/
 
-    public static TreeNode root = null;
+    public static ListNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[][] grid = {{1,0,0}, {1,1,0}, {1,1,0}};
-        System.out.print(shortestPathBinaryMatrix(grid));
+        ListNode node1 = new ListNode(1);
+        node1.next = new ListNode(2);
+        node1.next.next = new ListNode(3);
+        node1.next.next.next = new ListNode(4);
+        node1.next.next.next.next = new ListNode(5);
+        System.out.print(middleNode(node1));
     }
 
-    static int[][] dir = {{0,1}, {-1,0}, {0,-1}, {1,0}, {1,1}, {1,-1}, {-1, 1}, {-1,-1}};
-    public static int shortestPathBinaryMatrix(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-
-        if (grid[0][0]==1 || grid[m-1][n-1]==1) {
-            return 0;
+    public static ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[] {0,0});
-        boolean[][] visited = new boolean[m][n];
-
-        int ans=0;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-
-            for (int i = 0; i < size; i++) {
-                int[] node = queue.poll();
-                if (node[0] == m - 1 && node[1] == n - 1) {
-                    return ans + 1;
-                }
-                for (int j=0; j < dir.length; j++) {
-                   int newX = node[0]+dir[j][0];
-                   int newY = node[1]+dir[j][1];
-
-                   if (newX>=0 && newX<m &&newY>=0 && newY<n && grid[newX][newY]==0
-                           && visited[newX][newY]==false) {
-                       queue.offer(new int[] {newX, newY});
-                       visited[newX][newY]=true;
-                   }
-                }
-            }
-            ans++;
-        }
-        return -1;
+        return slow;
     }
 
-    public static class TreeNode {
+    public static class ListNode {
         int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
+        ListNode next;
+        public ListNode(int x) { val = x; }
     }
 
-    public static void addNode(int value) {
-        root = addNodeRecursive(root, value);
-        root.left = new TreeNode(9);
-        root.right = new TreeNode(20);
-        root.right.left = new TreeNode(15);
-        root.right.right = new TreeNode(7);
-    }
-
-    public static TreeNode addNodeRecursive(TreeNode node, int value) {
-//        TreeNode newNode = null;
-        if (node == null) {
-            node = new TreeNode(value);
-            return node;
-        }
-
-        if (value < node.val) {
-            node.left = addNodeRecursive(node.left, value);
-        } else if (value > node.val){
-            node.right = addNodeRecursive(node.right, value);
-        } else {
-            return node;
-        }
-        return node;
-    }
 }

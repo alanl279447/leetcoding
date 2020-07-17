@@ -26,7 +26,6 @@ public class Search2DMatrixII_240 {
 //        System.out.println(searchMatrix(matrix, 20));
     }
 
-
     public static boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length ==0) return false;
 

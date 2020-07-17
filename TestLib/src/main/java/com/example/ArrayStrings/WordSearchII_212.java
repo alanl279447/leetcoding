@@ -12,17 +12,19 @@ package com.example.ArrayStrings;
 //        Output: ["eat","oath"]
 //
 //        https://leetcode.com/problems/word-search-ii/
+//        time complexity O(M(4⋅3L−1))
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WordSearchII_212 {
     public static void main(String[] args) {
-//        char[][] board = {{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}};
-//        String[] words = {"oath", "pea", "eat", "rain"};
+        char[][] board = {{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}};
+        String[] words = {"oath", "pea", "eat", "rain"};
 
-        char[][] board = {{'a', 'a'}};
-        String[] words = {"aa"};
+//        char[][] board = {{'a', 'a'}};
+//        String[] words = {"aa"};
         List<String> results = findWords(board, words);
         for (String res: results) {
             System.out.println(res);
@@ -62,7 +64,6 @@ public class WordSearchII_212 {
         if (col < board[0].length-1)  bfs(board, row, col+1, result, p);
         board[row][col] = c;
     }
-
 
     private static TrieNode buildTrie(String[] words) {
         TrieNode root = new TrieNode();

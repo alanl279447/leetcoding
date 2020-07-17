@@ -16,7 +16,6 @@ public class SubarraySumEqualsK_560 {
     }
 
     //map (sum, position), (0,1), (23,1), (25,1), ()
-
     public static int subarraySum(int[] nums, int k) {
         int result = 0, sum =0;
         Map<Integer, Integer> map = new HashMap<>();

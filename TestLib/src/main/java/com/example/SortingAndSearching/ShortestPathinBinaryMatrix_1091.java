@@ -1,69 +1,60 @@
 package com.example.SortingAndSearching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Stack;
 
-public class FrogJump_403 {
+public class ShortestPathinBinaryMatrix_1091 {
 
-//    [0,1,3,5,6,8,12,17]
-//
-//    There are a total of 8 stones.
-//    The first stone at the 0th unit, second stone at the 1st unit,
-//    third stone at the 3rd unit, and so on...
-//    The last stone at the 17th unit.
-//
-//    Return true. The frog can jump to the last stone by jumping
-//1 unit to the 2nd stone, then 2 units to the 3rd stone, then
-//2 units to the 4th stone, then 3 units to the 6th stone,
-//4 units to the 7th stone, and 5 units to the 8th stone.
-//    https://leetcode.com/problems/frog-jump/
+//    Input: [[0,0,0],[1,1,0],[1,1,0]]
+//    Output: 4
+//    https://leetcode.com/problems/shortest-path-in-binary-matrix/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[] nums1 = {0,1,3,5,6,8,12,17};
-        System.out.print(canCross(nums1));
+        int[][] grid = {{1,0,0}, {1,1,0}, {1,1,0}};
+        System.out.print(shortestPathBinaryMatrix(grid));
     }
 
-    public static boolean canCross(int[] stones) {
-        for (int i=3; i < stones.length; i++) {
-           if (stones[i]>stones[i-1]*2) {
-               return false;
-           }
+    static int[][] dir = {{0,1}, {-1,0}, {0,-1}, {1,0}, {1,1}, {1,-1}, {-1, 1}, {-1,-1}};
+    public static int shortestPathBinaryMatrix(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (grid[0][0]==1 || grid[m-1][n-1]==1) {
+            return 0;
         }
-        HashSet<Integer>set = new HashSet<>();
-        for (int stone:stones) {
-            set.add(stone);
-        }
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[] {0,0});
+        boolean[][] visited = new boolean[m][n];
 
-        int lastStone = stones[stones.length-1];
-        Stack<Integer> positions = new Stack<>();
-        Stack<Integer> jumps = new Stack<>();
-        positions.add(0);
-        jumps.add(0);
+        int ans=0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
 
-        while(!positions.isEmpty()) {
-            int position = positions.pop();
-            int jump = jumps.pop();
-
-            for (int i = jump-1; i <= jump+1;i++) {
-                if (i <=0) {
-                    continue;
+            for (int i = 0; i < size; i++) {
+                int[] node = queue.poll();
+                if (node[0] == m - 1 && node[1] == n - 1) {
+                    return ans + 1;
                 }
-                int newPosition = position+i;
-                if (newPosition == lastStone) {
-                    return true;
-                } else if (set.contains(newPosition)) {
-                    positions.push(newPosition);
-                    jumps.add(i);
+                for (int j=0; j < dir.length; j++) {
+                   int newX = node[0]+dir[j][0];
+                   int newY = node[1]+dir[j][1];
+
+                   if (newX>=0 && newX<m &&newY>=0 && newY<n && grid[newX][newY]==0
+                           && visited[newX][newY]==false) {
+                       queue.offer(new int[] {newX, newY});
+                       visited[newX][newY]=true;
+                   }
                 }
             }
+            ans++;
         }
-        return false;
+        return -1;
     }
 
     public static class TreeNode {

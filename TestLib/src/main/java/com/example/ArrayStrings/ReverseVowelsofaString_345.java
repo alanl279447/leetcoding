@@ -1,25 +1,33 @@
 package com.example.ArrayStrings;
 
-//        Input: ["h","e","l","l","o"]
-//        Output: ["o","l","l","e","h"]
-//        https://leetcode.com/problems/reverse-string/
+//        Input: "leetcode"
+//        Output: "leotcede"
+//        https://leetcode.com/problems/reverse-vowels-of-a-string/
 
 public class ReverseVowelsofaString_345 {
 
     public static void main(String[] args) {
-        char[] input = {'h','e','l','l','o'};
-        reverseString(input);
-        for (char c: input)
-          System.out.println(c);
+        System.out.println(reverseVowels("leetcode"));
     }
 
-    public static void reverseString(char[] s) {
-        int n = s.length-1;
-        int i=0;
-        while (i < n) {
-            char temp = s[i];
-            s[i++]=s[n];
-            s[n--]=temp;
+    public static String vowels = "aeiouAEIOU";
+    public static String reverseVowels(String s) {
+        int i=0, start =0, end = s.length()-1;
+        char[] arr = s.toCharArray();
+        while (start < end) {
+            while(start<end && vowels.indexOf(arr[start]) == -1) {
+                start++;
+            }
+            while(start<end && vowels.indexOf(arr[end]) == -1) {
+                end--;
+            }
+            char temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+            start++;
+            end--;
         }
+        return new String(arr);
     }
+
 }

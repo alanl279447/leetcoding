@@ -21,6 +21,19 @@ public class ReverseLinkedList {
         System.out.println("val: "+result.val);
     }
 
+    public static ListNode reverseListTest(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        while(current != null) {
+            ListNode temp = head.next;
+            head.next = prev;
+            prev = head;
+            head = temp;
+        }
+        return prev;
+    }
+
+
     public static ListNode reverseList(ListNode head) {
         ListNode current = head;
         ListNode prev = null;

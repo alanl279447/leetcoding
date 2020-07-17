@@ -5,36 +5,98 @@ import java.util.Map;
 
 public class WildcardMatching_44 {
 
-//    Input: [1, 2, 2, 3, 1]
-//    Output: 2
-//    Explanation:
-//    The input array has a degree of 2 because both elements 1 and 2 appear twice.
-//    Of the subarrays that have the same degree:
-//            [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
-//    The shortest length is 2. So return 2.
-//    https://leetcode.com/problems/degree-of-an-array/
+//    Input:
+//    s = "adceb"
+//    p = "*a*b"
+//    Output: true
+//    Explanation: The first '*' matches the empty sequence, while the second '*' matches the substring "dce".
+//    https://leetcode.com/problems/wildcard-matching/
+
+
+    //T[i][j] = T[i-1][j-1]   when str[i] == pt[j] || pattern[j]== ?
+    //        = T[i-1][j]  || T[i][j-1]  if pattern == '*'
+    //        = false
 
     public static void main(String[] args) {
-        int[] input = {1,2,2,3,1,4,2};
-//        int[] prices = {1};
-        System.out.println(findShortestSubArray(input));
+        String s = "adceb";
+        String p = "**a*b";
+        System.out.println(isMatch(s,p));
     }
 
-    public static int findShortestSubArray(int[] A) {
-        Map<Integer, Integer> count = new HashMap<>(), first = new HashMap<>();
-        int res = 0, degree = 0;
-        for (int i = 0; i < A.length; ++i) {
-            first.putIfAbsent(A[i], i);
-            count.put(A[i], count.getOrDefault(A[i], 0) + 1);
-            if (count.get(A[i]) > degree) {
-                degree = count.get(A[i]);
-                res = i - first.get(A[i]) + 1;
-            } else if (count.get(A[i]) == degree)
-                res = Math.min(res, i - first.get(A[i]) + 1);
+    public static boolean isMatchPrac(String s, String p) {
+        char[] sChars = s.toCharArray();
+        char[] pChars = p.toCharArray();
+
+        int writeIndex = 0;
+        boolean firstIndex = true;
+        for (int i=0; i < pChars.length; i++) {
+            if (pChars[i] == '*') {
+                if (firstIndex) {
+                  pChars[writeIndex++]=pChars[i];
+                  firstIndex=false;
+                } else {
+                    pChars[writeIndex++]=pChars[i];
+                    firstIndex=true;
+                }
+            }
         }
-        return res;
-
+        boolean[][] T = new boolean[sChars.length+1][pChars.length+1];
+        if (pChars[1] == '*') {
+            T[0][1] = true;
+        }
+        T[0][0] = true;
+        for (int i=1; i <= sChars.length; i ++) {
+            for (int j=1; j <=writeIndex; j++) {
+                if (pChars[j-1]=='?' || sChars[i-1]==pChars[j-1]) {
+                    T[i][j] = T[i-1][j-1];
+                } else if (pChars[j-1]=='*') {
+                    T[i][j]=T[i-1][j] || T[j-1][i];
+                }
+            }
+        }
+        return T[sChars.length][writeIndex];
     }
 
 
+    public static boolean isMatch(String s, String p) {
+        char[] str = s.toCharArray();
+        char[] pattern = p.toCharArray();
+
+        //replace multiple * with one *
+        //e.g a**b***c --> a*b*c
+        int writeIndex = 0;
+        boolean isFirst = true;
+        for ( int i = 0 ; i < pattern.length; i++) {
+            if (pattern[i] == '*') {
+                if (isFirst) {
+                    pattern[writeIndex++] = pattern[i];
+                    isFirst = false;
+                }
+            } else {
+                pattern[writeIndex++] = pattern[i];
+                isFirst = true;
+            }
+        }
+
+        boolean T[][] = new boolean[str.length + 1][writeIndex + 1];
+
+        if (writeIndex > 0 && pattern[0] == '*') {
+            T[0][1] = true;
+        }
+
+        T[0][0] = true;
+
+        for (int i = 1; i < T.length; i++) {
+            for (int j = 1; j < T[0].length; j++) {
+                if (pattern[j-1] == '?' || str[i-1] == pattern[j-1]) {
+                    T[i][j] = T[i-1][j-1];
+                } else if (pattern[j-1] == '*'){
+                    T[i][j] = T[i-1][j] || T[i][j-1];
+                }
+            }
+        }
+
+        return T[str.length][writeIndex];
+
+    }
 }

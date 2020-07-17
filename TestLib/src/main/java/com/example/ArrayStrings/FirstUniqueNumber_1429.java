@@ -1,54 +1,60 @@
 package com.example.ArrayStrings;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 public class FirstUniqueNumber_1429 {
 
-//    Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-//    Output: 7 -> 0 -> 8
-//    Explanation: 342 + 465 = 807.
-//    https://leetcode.com/problems/add-two-numbers/
+//    Input:
+//            ["FirstUnique","showFirstUnique","add","showFirstUnique","add","showFirstUnique","add","showFirstUnique"]
+//            [[[2,3,5]],[],[5],[],[2],[],[3],[]]
+//    Output:
+//            [null,2,null,2,null,3,null,-1]
+//    Explanation:
+//    FirstUnique firstUnique = new FirstUnique([2,3,5]);
+//firstUnique.showFirstUnique(); // return 2
+//firstUnique.add(5);            // the queue is now [2,3,5,5]
+//firstUnique.showFirstUnique(); // return 2
+//firstUnique.add(2);            // the queue is now [2,3,5,5,2]
+//firstUnique.showFirstUnique(); // return 3
+//firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
+//firstUnique.showFirstUnique(); // return -1
+//    https://leetcode.com/problems/first-unique-number/
 
-    public ListNode sumTwoNode(ListNode l1, ListNode l2) {
-        ListNode  dummyHead = new ListNode(0);
-        ListNode sum = dummyHead;
-        //loop over all elements
-        int carrydigit = 0;
-        while(l1 != null || l2 != null) {
-            int x = l1 != null ? l1.val: 0;
-            int y = l2 != null ? l2.val: 0;
-
-            int digitSum = x +  y + carrydigit;
-            carrydigit = digitSum/10;
-
-             sum.next = new ListNode(digitSum%10);
-             sum = sum.next;
-        }
-        if (carrydigit > 0) {
-            sum.next = new ListNode(carrydigit);
-        }
-        return sum.next;
+    public static void main(String args[]) {
+        int[] nums = {2,3,5};
+        FirstUnique obj = new FirstUnique(nums);
+        int param_1 = obj.showFirstUnique();
+        System.out.println(param_1);
+        obj.add(5);
+        int param_2 = obj.showFirstUnique();
+        System.out.println(param_2);
+        obj.add(2);
+        int param_3 = obj.showFirstUnique();
+        System.out.println(param_3);
+        obj.add(3);
+        int param_4 = obj.showFirstUnique();
+        System.out.println(param_4);
     }
 
-    public ListNode createNode(int[] vals) {
-        ListNode root = null;
-       //addRecusively(root, vals);
-       return root;
-    }
-
-    private ListNode addRecusively(ListNode node, int value) {
-        if (node == null) {
-            return node = new ListNode(value);
-        } else {
-          while (node.next != null) {
-
-          }
+    static class FirstUnique {
+        Map<Integer, Integer> freq = new HashMap<>();
+        Queue<Integer> q = new LinkedList<>();
+        public FirstUnique(int[] nums) {
+            for (int x : nums)
+                add(x);
         }
-        return null;
+        public int showFirstUnique() {
+            while (!q.isEmpty() && freq.get(q.peek()) > 1)
+                q.poll();
+            return q.isEmpty() ? -1 : q.peek();
+        }
+        public void add(int value) {
+            freq.put(value, freq.getOrDefault(value, 0) + 1);
+            q.offer(value);
+        }
     }
-
-    public class ListNode {
-      int val;
-      ListNode next;
-      public ListNode(int x) { val = x; }
-  }
 
 }

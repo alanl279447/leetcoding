@@ -18,11 +18,6 @@ public class LetterCombinationsPhoneNumber_17 {
             System.out.println(item);
     }
 
-    //outputArr.add("");
-    //Strin[] charMap
-    //for (int i=0; i < digits.length;i++)
-    // if ()
-
     public static List<String> letterCombinations(String digits) {
         LinkedList<String> output_arr = new LinkedList<>();
         if (digits.length() < 1) {

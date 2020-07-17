@@ -1,34 +1,25 @@
 package com.example.ArrayStrings;
 
-//        Input: s = "abcdefg", k = 2
-//        Output: "bacdfeg"
-//        https://leetcode.com/problems/reverse-string-ii/
+//        Input: ["h","e","l","l","o"]
+//        Output: ["o","l","l","e","h"]
+//        https://leetcode.com/problems/reverse-string/
 
 public class ReverseString_344 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println(reverseStrPrac("abcdefg", 2));
+        char[] input = {'h','e','l','l','o'};
+        reverseString(input);
+        for (char c: input)
+          System.out.println(c);
     }
 
-    public static String reverseStrPrac(String s, int k) {
-        int n = s.length();
-        char[] arr = s.toCharArray();
+    public static void reverseString(char[] s) {
+        int n = s.length-1;
         int i=0;
         while (i < n) {
-          int j = Math.min(i+k-1, n-1);
-          swap(arr, i, j);
-          i = i + 2*k;
-        }
-        return arr.toString();
-    }
-
-    private static void swap(char[] arr, int start, int end) {
-        while (start < end) {
-            char temp = arr[start];
-            arr[start++] = arr[end];
-            arr[end--] = temp;
+            char temp = s[i];
+            s[i++]=s[n];
+            s[n--]=temp;
         }
     }
-
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 public class LRUCacheDoubleLinkedListMain {
 
 //    LRUCache cache = new LRUCache( 2 /* capacity */ );
-//
 //cache.put(1, 1);
 //cache.put(2, 2);
 //cache.get(1);       // returns 1

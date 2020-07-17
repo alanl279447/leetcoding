@@ -2,45 +2,42 @@ package com.example.ArrayStrings;
 
 public class BackspaceStringCompare_844 {
 
-//    Input:
-//    s = "abcxyz123"
-//    dict = ["abc","123"]
-//    Output:"<b>abc</b>xyz<b>123</b>"
-//    https://leetcode.com/problems/add-bold-tag-in-string/
-//O(N*k)
-    public static void main(String[] args) {
+//    Input: S = "ab#c", T = "ad#c"
+//    Output: true
+//    Explanation: Both S and T become "ac".
+//    Can you solve it in O(N) time and O(1) space?
+//    https://leetcode.com/problems/backspace-string-compare/
 
-        String s = "abcxyz123";
-        String[] dict = {"abc","123"};
-        System.out.println(addBoldTag(s, dict));
+    public static void main(String[] args) {
+        String s = "ab#c", T="ad#c";
+        //S = "bxj##tw"; T = "bxj###tw";
+        System.out.println(backspaceCompare(s, T));
     }
 
-    public static String addBoldTag(String s, String[] dict) {
-        boolean[] bold = new boolean[s.length()];
-        for (int i = 0, end = 0; i < s.length(); i++) {
-            for (String word : dict) {
-                if (s.startsWith(word, i)) {
-                    end = Math.max(end, i + word.length());
-                }
+    public static boolean backspaceCompare(String S, String T) {
+        if (S == null || T == null) return S == T;
+        int m = S.length(), n = T.length();
+        int i = m - 1, j = n - 1;
+        int cnt1 = 0, cnt2 = 0;//number of '#';
+        while (i >= 0 || j >= 0) {
+            while (i >= 0 && (S.charAt(i) == '#' || cnt1 > 0)) {
+                if (S.charAt(i) == '#') cnt1++;
+                else cnt1--;
+                i--;
             }
-            bold[i] = end > i;
+            while (j >= 0 && (T.charAt(j) == '#' || cnt2 > 0)) {
+                if (T.charAt(j) == '#') cnt2++;
+                else cnt2--;
+                j--;
+            }
+            if (i >= 0 && j >= 0 && S.charAt(i) == T.charAt(j)) {
+                i--;
+                j--;
+            } else {
+                return i == -1 && j == -1;
+            }
         }
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            if (!bold[i]) {
-                result.append(s.charAt(i));
-                continue;
-            }
-            int j = i;
-            while (j < s.length() && bold[j]) {
-                j++;
-            }
-            result.append("<b>" + s.substring(i, j) + "</b>");
-            i = j - 1;
-        }
-
-        return result.toString();
+        return true;
     }
 
 }

@@ -2,37 +2,39 @@ package com.example.ArrayStrings;
 
 public class MaximumProductThreeNumbers_628 {
 
-//     contiguous subarray within an array
-//    Input: [2,3,-2,4]
-//    Output: 6
-//    Explanation: [2,3] has the largest product 6.
-//    https://leetcode.com/problems/maximum-product-subarray/
+//    Input: [1,2,3,4]
+//    Output: 24
+//    https://leetcode.com/problems/maximum-product-of-three-numbers/
 
     public static void main(String[] args) {
 
-        int[] nums = {2,3,-2,4};
-        System.out.println(maxProduct(nums));
+        int[] nums = {1,2,3,4};
+        System.out.println(maximumProduct(nums));
     }
 
-    // currentMin, currentMax, finalMax
-    //
+    public static int maximumProduct(int[] nums) {
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
 
-    public static int maxProduct(int[] nums) {
-      if (nums == null) return 0;
-      int currentMin = nums[0]; //2
-      int currentMax = nums[0]; //2
-      int finalValue = nums[0]; //2
+        for (int num: nums) {
+            if (num > max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = num;
+            } else if (num > max2) {
+                max3 = max2;
+                max2 = num;
+            } else if (num > max3) {
+                max3 = num;
+            }
 
-      for (int i=1; i < nums.length; i++) {
-          int temp = currentMax;
-          currentMax = Math.max(Math.max(currentMax*nums[i], currentMin*nums[i]), nums[i]); //6
-          currentMin = Math.min(Math.min(temp*nums[i], currentMin*nums[i]), nums[i]); //2
-
-          if (currentMax > finalValue) {
-              finalValue = currentMax;
-          }
-      }
-      return finalValue;
+            if (num < min1) {
+                min2 = min1;
+                min1 = num;
+            } else if (num < min2) {
+                min2 = num;
+            }
+        }
+        return Math.max(max1*max2*max3, min1*min2*max1);
     }
-
 }

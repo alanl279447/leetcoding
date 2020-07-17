@@ -1,59 +1,65 @@
 package com.example.SortingAndSearching;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BestMeetingPoint_296 {
-//    Input: weights = [1,2,3,4,5,6,7,8,9,10], D = 5
-//    Output: 15
-//    Explanation:
-//    A ship capacity of 15 is the minimum to ship all the packages in 5 days like this:
-//            1st day: 1, 2, 3, 4, 5
-//            2nd day: 6, 7
-//            3rd day: 8
-//            4th day: 9
-//            5th day: 10
+//    Input:
 //
-//    Note that the cargo must be shipped in the order given, so using a ship of capacity 14 and
-//    splitting the packages into parts like (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) is not allowed.
-//    https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+//            1 - 0 - 0 - 0 - 1
+//            |   |   |   |   |
+//            0 - 0 - 0 - 0 - 0
+//            |   |   |   |   |
+//            0 - 0 - 1 - 0 - 0
+//
+//    Output: 6
+//
+//    Explanation: Given three people living at (0,0), (0,4), and (2,2):
+//    The point (0,2) is an ideal meeting point, as the total travel distance
+//    of 2+2+2=6 is minimal. So return 6.
+//    https://leetcode.com/problems/best-meeting-point/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[] weights = {1,2,3,4,5,6,7,8,9,10};
-        System.out.println(shipWithinDays(weights, 5));
+        int[][] grid = {{1,0,0,0,1}, {0,0,0,0,0}, {0,0,1,0,0}};
+        System.out.println(minTotalDistance(grid));
     }
 
-    //min = max weight
-    //max = Sum(weights)
-    public static int shipWithinDays(int[] weights, int D) {
-        int lo = 0, high =0;
-        for (int weight:weights) {
-            lo = Math.max(lo, weight);
-            high += weight;
-        }
-        while (lo<=high) {
-            int midpt = lo+(high-lo)/2;
-            if (canFitWeight(weights, D, midpt)) {
-                high=midpt-1;
-            } else {
-                lo=midpt+1;
+
+    //get the list of x and y co-ordinates (sorted is needed)
+    // find the min distance by finding the median
+
+    public static int minTotalDistance(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+
+        List<Integer> I = new ArrayList<Integer>();
+        List<Integer> J = new ArrayList<Integer>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    I.add(i);
+                }
             }
         }
-        return lo;
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < m; i ++) {
+                if (grid[i][j] == 1) {
+                    J.add(j);
+                }
+            }
+        }
+        return minTotalDistance(I) + minTotalDistance(J);
     }
 
-    private static boolean canFitWeight(int[] weights, int D, int midpt) {
-        int curr =0, need =1;
-        for (int weight: weights) {
-            if (curr + weight > midpt) {
-                need++;
-                curr=0;
-            }
-            curr +=weight;
+    public static int minTotalDistance(List<Integer> grid) {
+        int i = 0, j = grid.size() - 1, sum = 0;
+        while (i < j) {
+            sum += grid.get(j--) - grid.get(i++);
         }
-        return need<=D;
+        return sum;
     }
 
     public static class TreeNode {

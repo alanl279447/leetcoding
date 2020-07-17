@@ -27,6 +27,28 @@ public class TopKFrequentWords_Queue {
         System.out.print(topKFrequent(words, 2));
     }
 
+    public static List<String> topKFrequentTest(String[] words, int k) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String word: words) {
+            map.put(word, map.getOrDefault(word, 0)+1);
+        }
+        PriorityQueue<String> pq = new PriorityQueue<>((a,b) -> map.get(a)== map.get(b) ?
+                a.compareTo(b) : map.get(a)-map.get(b));
+        for (String word: words) {
+            pq.offer(word);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        List<String> result = new ArrayList<>();
+        for (String item: pq) {
+            result.add(item);
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
     public static List<String> topKFrequent(String[] words, int k) {
         Map<String, Integer> count = new HashMap();
         for (String word: words) {

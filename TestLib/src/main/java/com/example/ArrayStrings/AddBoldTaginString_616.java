@@ -12,7 +12,6 @@ public class AddBoldTaginString_616 {
 //    https://leetcode.com/problems/add-bold-tag-in-string/
 //O(N*k)
     public static void main(String[] args) {
-
         String s = "abcxyz123";
         String[] dict = {"abc","123"};
         System.out.println(addBoldTag(s, dict));

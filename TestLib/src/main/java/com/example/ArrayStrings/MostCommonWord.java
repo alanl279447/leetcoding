@@ -8,69 +8,69 @@ import java.util.Set;
 public class MostCommonWord {
 
     public static void main(String[] args) {
-        String[] banned = {};
-
-        System.out.println("Start main " +mostCommonWord1("Bob", banned));
+        String[] banned = {"hit"};
+        System.out.println("Start main " +mostCommonWord2("Bob hit a ball, the hit BALL flew far after it was hit.",
+                banned));
     }
 
+    public static String mostCommonWord2(String paragraph, String[] banned) {
+        // split paragraph
+        String[] words = paragraph.toLowerCase().split("\\W+");
 
-    public static String mostCommonWord1(String paragraph, String[] banned) {
-        paragraph += ".";
+        // add banned words to set
+        Set<String> set = new HashSet<>();
+        for(String word : banned){
+            set.add(word);
+        }
 
-        Set<String> banset = new HashSet();
-        for (String word: banned) banset.add(word);
-        Map<String, Integer> count = new HashMap();
-
-        String ans = "";
-        int ansfreq = 0;
-
-        StringBuilder word = new StringBuilder();
-        for (char c: paragraph.toCharArray()) {
-            if (Character.isLetter(c)) {
-                word.append(Character.toLowerCase(c));
-            } else if (word.length() > 0) {
-                String finalword = word.toString();
-                if (!banset.contains(finalword)) {
-                    count.put(finalword, count.getOrDefault(finalword, 0) + 1);
-                    if (count.get(finalword) > ansfreq) {
-                        ans = finalword;
-                        ansfreq = count.get(finalword);
-                    }
-                }
-                word = new StringBuilder();
+        // add paragraph words to hash map
+        Map<String, Integer> map = new HashMap<>();
+        for(String word : words){
+            if(!set.contains(word)){
+                map.put(word, map.getOrDefault(word, 0) + 1);
             }
         }
 
-        return ans;
-    }
-
-    public static String mostCommonWord(String paragraph, String[] bannedWords) {
-        paragraph += ".";
-        Set<String> bannedSet = new HashSet<>();
-       Map<String, Integer> map = new HashMap<>();
-       int ans = 0;
-       String ansWord = null;
-
-       for (String word: bannedWords) {
-           bannedSet.add(word);
-       }
-
-       StringBuilder wordBuilder = new StringBuilder();
-       for(Character c: paragraph.toCharArray()) {
-        if (Character.isLetter(c)) {
-            wordBuilder.append(Character.toLowerCase(c));
-        } else if (wordBuilder.length() > 0) {
-            if (!bannedSet.contains(wordBuilder.toString())) {
-              map.put(wordBuilder.toString(), map.getOrDefault(wordBuilder.toString(), 0) + 1);
-              int currentMax = map.get(wordBuilder.toString());
-              if (currentMax > ans) {
-                  ans = currentMax;
-                  ansWord = wordBuilder.toString();
-              }
+        // get the most frequent word
+        int max = 0; // max frequency
+        String res = "";
+        for(String str : map.keySet()){
+            if(map.get(str) > max){
+                max = map.get(str);
+                res = str;
             }
-            wordBuilder = new StringBuilder();
         }
-       }
-       return ansWord;
+
+        return res;
     }
+
+//    public static String mostCommonWord(String paragraph, String[] bannedWords) {
+//        paragraph += ".";
+//        Set<String> bannedSet = new HashSet<>();
+//       Map<String, Integer> map = new HashMap<>();
+//       int ans = 0;
+//       String ansWord = null;
+//
+//       for (String word: bannedWords) {
+//           bannedSet.add(word);
+//       }
+//
+//       StringBuilder wordBuilder = new StringBuilder();
+//       for(Character c: paragraph.toCharArray()) {
+//        if (Character.isLetter(c)) {
+//            wordBuilder.append(Character.toLowerCase(c));
+//        } else if (wordBuilder.length() > 0) {
+//            if (!bannedSet.contains(wordBuilder.toString())) {
+//              map.put(wordBuilder.toString(), map.getOrDefault(wordBuilder.toString(), 0) + 1);
+//              int currentMax = map.get(wordBuilder.toString());
+//              if (currentMax > ans) {
+//                  ans = currentMax;
+//                  ansWord = wordBuilder.toString();
+//              }
+//            }
+//            wordBuilder = new StringBuilder();
+//        }
+//       }
+//       return ansWord;
+//    }
 }

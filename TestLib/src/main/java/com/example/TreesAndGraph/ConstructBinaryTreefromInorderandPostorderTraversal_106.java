@@ -6,48 +6,66 @@ import java.util.List;
 import java.util.Queue;
 
 public class ConstructBinaryTreefromInorderandPostorderTraversal_106 {
-//    Input: [1,2,3,null,5,null,4]
-//    Output: [1, 3, 4]
-//    Explanation:
-//
-//              1            <---
-//            /   \
-//            2     3         <---
-//            \     \
-//            5     4       <---
-//    https://leetcode.com/problems/binary-tree-right-side-view/
+//    inorder = [9,3,15,20,7]
+//    postorder = [9,15,7,20,3]
+//    https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
 
     public static TreeNode root = null;
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        addNode(1);
-        List<Integer> result = rightSideView(root);
-        for (int res: result) {
-            System.out.print(res);
-        }
+        int[] inorder =   {9,3,15,20,7};
+        int[] postorder =  {9,15,7,20,3};
+        TreeNode result = buildTree(inorder, postorder);
+        System.out.print(result.val);
     }
 
-    public static List<Integer> rightSideView(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<Integer> result = new ArrayList<>();
-        queue.offer(root);
+    private static int pS = 0;
+    private static TreeNode buildTreePrac(int[] inorder, int[] postOrder) {
+       int len = inorder.length;
+       pS = len-1;
+       TreeNode root = buildTreeHelper(inorder, 0, len, postOrder);
+       return root;
+    }
 
-        while(!queue.isEmpty()) {
-          int size = queue.size();
-          for (int i=0; i < size; i++) {
-              TreeNode currentNode = queue.poll();
-              if(i == 0) {
-                  result.add(currentNode.val);
-              }
-              if(currentNode.right != null) {
-                  queue.offer(currentNode.right);
-              }
-              if(currentNode.left != null) {
-                  queue.offer(currentNode.left);
-              }
-          }
+   private static TreeNode buildTreeHelper(int[] inorder, int iStart, int iEnd, int[] postorder) {
+        if (iStart>iEnd || iStart < 0) return null;
+
+        TreeNode root = new TreeNode(postorder[pS]);
+        pS--;
+        int iIndex = 0;
+        for (int i= iStart;i<iEnd; i++) {
+            if (inorder[i]==root.val) {
+                iIndex=i;
+                break;
+            }
         }
-        return result;
+       root.right = buildTreeHelper(inorder, iIndex+1, iEnd, postorder);
+       root.left = buildTreeHelper(inorder, iStart, iIndex-1, postorder);
+       return root;
+   }
+
+
+    public static TreeNode buildTree(int[] inorder, int[] postorder) {
+        int len = inorder.length;
+        pS = len-1;
+        return buildTree(inorder, 0, len-1, postorder);
+    }
+
+    private static TreeNode buildTree(int[] inorder, int iStart, int iEnd, int[] postorder) {
+        if(iEnd < iStart || iStart < 0) return null;
+        TreeNode root = new TreeNode(postorder[pS]);
+        pS--;
+        int index = -1;
+        for(int i=iStart;i<=iEnd;i++){
+            if(inorder[i] == root.val) {
+                index = i;
+                break;
+            }
+        }
+        root.right = buildTree(inorder, index+1, iEnd, postorder);
+        root.left = buildTree(inorder, iStart, index-1, postorder);
+
+        return root;
     }
 
     public static void addNode(int value) {

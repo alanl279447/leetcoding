@@ -1,32 +1,35 @@
 package com.example.ArrayStrings;
 
+import java.util.TreeSet;
+
 public class ThirdMaximumNumber_414 {
 
-//    Input: [1,3,5,6], 5
-//    Output: 2
-//    https://leetcode.com/problems/search-insert-position/
+//    Input: [3, 2, 1]
+//    Output: 1
+//    Explanation: The third maximum is 1.
+//    https://leetcode.com/problems/third-maximum-number/
 
     public static void main(String[] args) {
-        int[] nums = {1,3,5,6};
-        System.out.println(searchInsert(nums, 5));
+        int[] nums = {3,2,1};
+        System.out.println(thirdMax(nums));
     }
 
-    public static int searchInsert(int[] nums, int target) {
+    public static int thirdMax(int[] nums) {
 
-        if (nums==null || nums.length==0) {
-            return -1;
+      return 0;
+    }
+
+
+
+    public static int thirdMaxTest(int[] nums) {
+        TreeSet<Integer> set = new TreeSet<>();
+        for(int i=0; i<nums.length; i++) {
+            set.add(nums[i]);
         }
-        int left=0, right=nums.length-1;
-        while(left <= right) {
-            int mid=left+(right-left)/2;
-            if (nums[mid]==target) {
-                return mid;
-            } else if (nums[mid]>target) {
-                right=mid-1;
-            } else {
-                left=mid+1;
-            }
-        }
-        return left;
+        if(set.size() < 3)
+            return set.last();
+        set.remove(set.last());
+        set.remove(set.last());
+        return set.last(); //return highest
     }
 }

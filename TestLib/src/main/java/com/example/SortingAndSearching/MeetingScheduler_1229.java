@@ -8,88 +8,44 @@ import java.util.PriorityQueue;
 
 public class MeetingScheduler_1229 {
 
-//    Input: [[0, 30],[5, 10],[15, 20]]
-//    Output: 2
-//
-//    Input: [[7,10],[2,4]]
-//    Output: 1
+//    Input: slots1 = [[10,50],[60,120],[140,210]], slots2 = [[0,15],[60,70]], duration = 8
+//    Output: [60,68]
+//    https://leetcode.com/problems/meeting-scheduler/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        //int[][] nums1 = {{0,30}, {5, 10}, {15,20}};
-        int[][] nums1 = {{13,15},{1,13}};
-        System.out.print(minMeetingRooms(nums1));
+        int[][] slots1 = {{10,50},{60,120}, {140,210}};
+        int[][] slots2 = {{0,15},{60,70}};
+        List<Integer> result = minAvailableDuration(slots1, slots2, 8);
+        for (int res:result)
+           System.out.print(res);
     }
 
-    public static int minMeetingRooms(int[][] intervals) {
-         int length = intervals.length;
-        if (intervals.length == 0) {
-            return 0;
-        }
+    public static List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+        Arrays.sort(slots1, (a,b)->a[0]-b[0]);  //sort based on starting time  0(nlogn)
+        Arrays.sort(slots2, (a,b)->a[0]-b[0]);  //sort based on starting time  0(nlogn)
 
-         Arrays.sort(intervals, new Comparator<int[]>() {
-             @Override
-             public int compare(int[] o1, int[] o2) {
-                 return o1[0] - o2[0];   //sort based on start time
-             }
-         });
+        int len1 = 0, len2= 0;
+        while (len1 < slots1.length && len2< slots2.length) {
+            int[] intersection = new int[2];
 
-        PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[1] - o2[1];
+            intersection[0] = Math.max(slots1[len1][0], slots2[len2][0]);//10, 60, 60
+            intersection[1] = Math.min(slots1[len1][1], slots2[len2][1]);//15, 50, 70
+
+            if (intersection[1] - intersection[0] >= duration) { //6
+                intersection[1]=intersection[0]+duration;
+                return Arrays.asList(intersection[0], intersection[1]);
+            } else {
+                if (slots1[len1][1] < slots2[len2][1]) {
+                    len1++;  //len1=1
+                } else {
+                    len2++;   //len2=1
+                }
             }
-        });
-
-        queue.offer(intervals[0]);
-        for (int i =1; i < length; i++) {
-           if (intervals[i][0] >= queue.peek()[1]) {
-               queue.poll();
-               queue.offer(intervals[i]);
-           } else {
-               queue.offer(intervals[i]);
-           }
         }
-        return queue.size();
+        return new ArrayList<>();
     }
-
-
-
-
-
-
-
-
-//    public static int[][] kClosest(int[][] points, int K) {
-//
-//        int length = points.length;
-//        int[] distances = new int[length];
-//
-//        int i=0;
-//        for (int[] point: points) {
-//            distances[i++] = dist(point);
-//        }
-//        Arrays.sort(distances);
-//        int distK = distances[K-1];    //distance threshold is distK
-//
-//        int[][] ans = new int[K][2];
-//        int t =0;
-//        for (i = 0; i < length; i++) {
-//            if (dist(points[i]) <= distK) {
-//              ans[t++] = points[i];
-//            }
-//        }
-//        return ans;
-//    }
-//
-//    public static int dist(int[] point) {
-//        if (point.length ==2) {
-//            return point[0] * point[0] + point[1] * point[1];
-//        }
-//        return -1;
-//    }
-
 
 
 

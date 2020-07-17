@@ -6,29 +6,32 @@ import java.util.Stack;
 
 public class ValidateStackSequences_946 {
 
-//    For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73],
-//    your output should be [1, 1, 4, 2, 1, 1, 0, 0].
-//    https://leetcode.com/problems/daily-temperatures/
+//    Input: pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
+//    Output: true
+//    Explanation: We might do the following sequence:
+//    push(1), push(2), push(3), push(4), pop() -> 4,
+//    push(5), pop() -> 5, pop() -> 3, pop() -> 2, pop() -> 1
+//    https://leetcode.com/problems/validate-stack-sequences/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[] T = {73, 74, 75, 71, 69, 72, 76, 73};
-        System.out.print(dailyTemperatures(T));
+        int[] pushed = {1,2,3,4,5};
+        int[] popped = {4,5,3,2,1};
+        System.out.print(validateStackSequences(pushed, popped));
     }
 
-    public static int[] dailyTemperatures(int[] T) {
-        int[] result = new int[T.length];
-        if (T == null || T.length == 0) return result;
+    public static boolean validateStackSequences(int[] pushed, int[] popped) {
         Stack<Integer> stack = new Stack<>();
-        for (int i=0; i < T.length; i++) {
-            while (!stack.isEmpty() && stack.peek() < T[i]) {
-                int idx = stack.pop();
-                result[idx]=i-idx;
+        int i = 0;
+        for (int x : pushed) {
+            stack.push(x);
+            while (!stack.empty() && stack.peek() == popped[i]) {
+                stack.pop();
+                i++;
             }
-            stack.push(i);
         }
-       return result;
+        return stack.empty();
     }
 
     public static class TreeNode {

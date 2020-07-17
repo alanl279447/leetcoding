@@ -1,33 +1,79 @@
 package com.example.ArrayStrings;
+//       Input:
+//Input:
+//        [
+//        [0,1,2,0],
+//        [3,4,5,2],
+//        [1,3,1,5]
+//        ]
+//        Output:
+//        [
+//        [0,0,0,0],
+//        [0,4,5,0],
+//        [0,3,1,0]
+//        ]
+//        https://leetcode.com/problems/set-matrix-zeroes/
+//      time complexity 0(mn)
+//      space complexity 0(1)
 
-//        Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
-//        Input: word1 = “coding”, word2 = “practice”
-//        Output: 3
-//        https://leetcode.com/problems/shortest-word-distance/
 
 public class SetMatrixZeroes_73 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        String[] words = {"practice", "makes", "perfect", "coding", "makes"};
-        System.out.println(shortestDistance(words, "makes", "coding"));
+
+        int[][] matrix = {{0,1,2,0}, {3,4,5,2}, {1,3,1,5}};
+        setZeroes(matrix);
+        for (int i=0; i < matrix.length; i++) {
+            for (int j=0; j < matrix[0].length; j++)
+                System.out.println(matrix[i][j]);
+        }
     }
 
-    public static int shortestDistance(String[] words, String word1, String word2) {
-        int i1 = -1, i2 = -1;
-        int minDistance = words.length;
-        int currentDistance;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals(word1)) {
-                i1 = i;
-            } else if (words[i].equals(word2)) {
-                i2 = i;
+    public static void setZeroes(int[][] matrix) {
+        Boolean isCol = false;
+        int R = matrix.length;
+        int C = matrix[0].length;
+
+        for (int i = 0; i < R; i++) {
+
+            // Since first cell for both first row and first column is the same i.e. matrix[0][0]
+            // We can use an additional variable for either the first row/column.
+            // For this solution we are using an additional variable for the first column
+            // and using matrix[0][0] for the first row.
+            if (matrix[i][0] == 0) {
+                isCol = true;
             }
 
-            if (i1 != -1 && i2 != -1) {
-                minDistance = Math.min(minDistance, Math.abs(i1 - i2));
+            for (int j = 1; j < C; j++) {
+                // If an element is zero, we set the first element of the corresponding row and column to 0
+                if (matrix[i][j] == 0) {
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
             }
         }
-        return minDistance;
+
+        // Iterate over the array once again and using the first row and first column, update the elements.
+        for (int i = 1; i < R; i++) {
+            for (int j = 1; j < C; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // See if the first row needs to be set to zero as well
+        if (matrix[0][0] == 0) {
+            for (int j = 0; j < C; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // See if the first column needs to be set to zero as well
+        if (isCol) {
+            for (int i = 0; i < R; i++) {
+                matrix[i][0] = 0;
+            }
+        }
     }
 }

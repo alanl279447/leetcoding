@@ -21,10 +21,13 @@ public class LFUCacheDesign_460 {
 //    https://leetcode.com/problems/lfu-cache/
 
     public static void main(String[] args) {
-        int capacity = 4;
+        int capacity = 2;
         LFUCache obj = new LFUCache(capacity);
         obj.put(1, 1);
-        int param_1 = obj.get(1);
+        obj.put(2, 2);
+        obj.get(1);
+        obj.put(3, 3);
+        int param_1 = obj.get(2);
         System.out.println(param_1);
     }
 
@@ -139,7 +142,6 @@ public class LFUCacheDesign_460 {
             freq.put(1, curList);
         }
     }
-
 }
 
 /**

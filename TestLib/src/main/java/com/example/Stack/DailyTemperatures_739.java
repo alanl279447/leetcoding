@@ -6,56 +6,29 @@ import java.util.Stack;
 
 public class DailyTemperatures_739 {
 
-//    s = "3[a]2[bc]", return "aaabcbc".
-//    s = "3[a2[c]]", return "accaccacc".
-//    s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
-//    https://leetcode.com/problems/decode-string/
+//    For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73],
+//    your output should be [1, 1, 4, 2, 1, 1, 0, 0].
+//    https://leetcode.com/problems/daily-temperatures/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        System.out.print(decodeString("3[a2[c]]"));
+        int[] T = {73, 74, 75, 71, 69, 72, 76, 73};
+        System.out.print(dailyTemperatures(T));
     }
 
-    //3[a2[c]]
-    // 3 countStack   (3, )
-    // [  push to resStack("", a,
-    // ]  a append 2 * res
-    // String res = a
-    // 2[abc]3[cd]ef
-    public static String decodeString(String s) {
-        String res = "";
-        Stack<Integer> countStack = new Stack<>();
-        Stack<String> resStack = new Stack<>();
-        int idx = 0;
-        while (idx < s.length()) {
-            if (Character.isDigit(s.charAt(idx))) {
-                int count = 0;
-                while (Character.isDigit(s.charAt(idx))) {
-                    count = 10 * count + (s.charAt(idx) - '0');
-                    idx++;
-                }
-                countStack.push(count);
+    public static int[] dailyTemperatures(int[] T) {
+        int[] result = new int[T.length];
+        if (T == null || T.length == 0) return result;
+        Stack<Integer> stack = new Stack<>();
+        for (int i=0; i < T.length; i++) {
+            while (!stack.isEmpty() && T[stack.peek()] < T[i]) {
+                int idx = stack.pop();
+                result[idx]=i-idx;
             }
-            else if (s.charAt(idx) == '[') {
-                resStack.push(res);
-                res = "";
-                idx++;
-            }
-            else if (s.charAt(idx) == ']') {
-                StringBuilder temp = new StringBuilder (resStack.pop());
-                int repeatTimes = countStack.pop();
-                for (int i = 0; i < repeatTimes; i++) {
-                    temp.append(res);
-                }
-                res = temp.toString();
-                idx++;
-            }
-            else {
-                res += s.charAt(idx++);
-            }
+            stack.push(i);
         }
-        return res;
+        return result;
     }
 
     public static class TreeNode {

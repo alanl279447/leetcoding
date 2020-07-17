@@ -73,18 +73,6 @@ public class QuickSort_MergeSort {
         return rand.nextInt((high - low) + 1) + low;
     }
 
-//    private static void selectionSort(int[] nums){
-//        for (int i = 0; i < nums.length; i++){
-//            int minIndex = i;
-//            for (int j = i + 1; j < nums.length; j++){
-//                if (nums[j] < nums[minIndex]){
-//                    minIndex = j;
-//                }
-//            }
-//            exch(nums, i, minIndex);
-//        }
-//    }
-
     public static void mergeSort(int[] nums) {
         mergeSortInternal(nums, 0, nums.length-1);
     }

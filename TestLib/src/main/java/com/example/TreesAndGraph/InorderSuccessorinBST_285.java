@@ -5,56 +5,39 @@ import java.util.List;
 
 public class InorderSuccessorinBST_285 {
 
-//    Input:
-//
-//              1
-//            /   \
-//           2     3
-//            \
-//            5
-//           / \
-//          4  6
-//    Output: ["1->2->5", "1->3"]
-//
-//    Explanation: All root-to-leaf paths are: 1->2->5, 1->3
-//    https://leetcode.com/problems/binary-tree-paths/
+//    Input: root = [5,3,6,2,4,null,null,1], p = 3
+//    Output: 4
+//    Explanation: There is no in-order successor of the current node, so the answer is null.//    https://leetcode.com/problems/inorder-successor-in-bst/
 
     public static TreeNode root;
     private static TreeNode ans = null;
 
     public static void main(String[] args) {
-        addNode(1);
-        List<String> result = binaryTreePaths(root);
-        for (String res : result)
-            System.out.println(res.toString());
+        addNode(5);
+        TreeNode result = inorderSuccessor(root, root.left);
+        System.out.println(result.val);
     }
 
-    public static List<String> binaryTreePaths(TreeNode root) {
-        LinkedList<String> paths = new LinkedList();
-        construct_paths(root, "", paths);
-        return paths;
-    }
-
-    public static void construct_paths(TreeNode root, String path, LinkedList<String> paths) {
-        if (root != null) {
-            path += Integer.toString(root.val);
-            if ((root.left == null) && (root.right == null))  // if reach a leaf
-                paths.add(path);  // update paths
-            else {
-                path += "->";  // extend the current path
-                construct_paths(root.left, path, paths);
-                construct_paths(root.right, path, paths);
-            }
-        }
+    public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode ret = null;
+        while (root != null) { //5,3,4,null
+               if (p.val >= root.val) {  //3 >=5, 3>=3
+                   root = root.right;
+               } else {
+                   ret = root; //5,4
+                   root = root.left; //3,null
+               }
+           }
+        return ret;//4
     }
 
     public static void addNode(int value) {
         root = new TreeNode(value);
-        root.left = new TreeNode(2);
-        root.left.right = new TreeNode(5);
-        root.left.right.left = new TreeNode(4);
-        root.left.right.right = new TreeNode(6);
-        root.right = new TreeNode(3);
+        root.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.left.left = new TreeNode(2);
+        root.left.left.left = new TreeNode(1);
+        root.right = new TreeNode(6);
     }
 
     public static class Node {

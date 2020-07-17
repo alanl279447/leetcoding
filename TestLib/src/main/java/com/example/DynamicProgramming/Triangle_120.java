@@ -1,52 +1,36 @@
 package com.example.DynamicProgramming;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Triangle_120 {
 
-//    Input: [7,1,5,3,6,4]
-//    Output: 5
-//    Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-//    Not 7-1 = 6, as selling price needs to be larger than buying price.
-//
-//    Input: [7,6,4,3,1]
-//    Output: 0
-//    Explanation: In this case, no transaction is done, i.e. max profit = 0.
+//[
+//        [2],
+//        [3,4],
+//        [6,5,7],
+//        [4,1,8,3]
+//        ]
+//    The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+//    https://leetcode.com/problems/triangle/
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.print(maxProfit(prices));
+        Integer[][] prices = {{2}, {3,4}, {6,5,7}, {4,1,8,3}};
+        List<List<Integer>> pricesInt = Arrays.stream(prices).map(Arrays::asList).collect(Collectors.toList());
+        System.out.print(minimumTotal(pricesInt));
     }
 
-    public static int maxProfit(int[] prices) {
-        int profit = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
+    public static int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.size() == 0) return 0;
+        int rows = triangle.size();
+        int[] dp = new int[rows+1];
 
-        for (int i=0; i< prices.length;i++) {
-            if (prices[i] < min) {
-                min = prices[i];   //always the lowest
-            }
-
-            if (profit < (prices[i] - min)) {
-                profit = prices[i]-min;
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[j]=Math.min(dp[j], dp[j+1]) + triangle.get(i).get(j);
             }
         }
-        return profit;
-
+        return dp[0];
     }
-
-//    public static int maxProfit(int[] prices) {
-//      int minPrice = Integer.MAX_VALUE;
-//      int maxPrice = 0;
-//
-//      for (int price: prices) {
-//        if (price < minPrice) {
-//            minPrice = price;
-//        }
-//        if(price - minPrice > maxPrice) {
-//            maxPrice = price - minPrice;
-//        }
-//      }
-//      return maxPrice;
-//    }
-
-
 }

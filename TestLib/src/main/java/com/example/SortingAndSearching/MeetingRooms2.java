@@ -25,11 +25,12 @@ public class MeetingRooms2 {
     }
 
     public static int minMeetingRooms(int[][] intervals) {
-         int length = intervals.length;
+        int length = intervals.length;
         if (intervals.length == 0) {
             return 0;
         }
 
+        //[[0, 30],[5, 10],[15, 20]]
          Arrays.sort(intervals, new Comparator<int[]>() {
              @Override
              public int compare(int[] o1, int[] o2) {
@@ -37,6 +38,7 @@ public class MeetingRooms2 {
              }
          });
 
+        //
         PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {

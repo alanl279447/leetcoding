@@ -24,13 +24,6 @@ public class TopKFrequentElements {
         System.out.print(topKFrequentFast(nums1, 2));
     }
 
-//    HashMap (1, 3), (2, 3), (3,1)
-//    List<Integer>[] bucket (0, null), (1, [3]), (2, null), (3, (1,3))
-//    return 1,3
-
-
-
-
     // solution with time complexity for O(n)
     public static List<Integer> topKFrequentFast(int[] nums, int k) {
         Map<Integer, Integer> hm = new HashMap<>();

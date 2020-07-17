@@ -1,63 +1,60 @@
 package com.example.ArrayStrings;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class ImplementStackusingQueues_225 {
 
-//    MyQueue queue = new MyQueue();
+//    MyStack stack = new MyStack();
 //
-//queue.push(1);
-//queue.push(2);
-//queue.peek();  // returns 1
-//queue.pop();   // returns 1
-//queue.empty(); // returns false
-//    https://leetcode.com/problems/implement-queue-using-stacks/
+//stack.push(1);
+//stack.push(2);
+//stack.top();   // returns 2
+//stack.pop();   // returns 2
+//stack.empty(); // returns false
+//    https://leetcode.com/problems/implement-stack-using-queues/
 
     public static void main(String[] args) {
-        MyQueue obj = new MyQueue();
+        MyStack obj = new MyStack();
         obj.push(1);
         obj.push(2);
+        obj.push(3);
         int param_2 = obj.pop();
-        int param_3 = obj.peek();
+        System.out.println(param_2);
+        int param_3 = obj.top();
+        System.out.println(param_3);
         boolean param_4 = obj.empty();
+        System.out.println(param_4);
         System.out.println();
     }
 
-    static class MyQueue {
+    static class MyStack {
 
-        Stack<Integer> input=null;
-        Stack<Integer> output=null;
-        /** Initialize your data structure here. */
-        public MyQueue() {
-           input=new Stack<>();
-           output=new Stack<>();
-        }
+        //one Queue solution
+        private Queue<Integer> q = new LinkedList<Integer>();
 
-        /** Push element x to the back of queue. */
+        // Push element x onto stack.
         public void push(int x) {
-          input.add(x);
-        }
-
-        /** Removes the element from in front of queue and returns that element. */
-        public int pop() {
-            peek();
-            return output.pop();
-        }
-
-        /** Get the front element. */
-        public int peek() {
-            if (output.empty()) {
-                while(!input.isEmpty()) {
-                    output.add(input.pop());
-                }
+            q.add(x);
+            for(int i = 1; i < q.size(); i ++) { //rotate the queue to make the tail be the head
+                q.add(q.poll());
             }
-            return output.peek();
         }
 
-        /** Returns whether the queue is empty. */
+        // Removes the element on top of the stack.
+        public int pop() {
+           return q.poll();
+        }
+
+        // Get the top element.
+        public int top() {
+            return q.peek();
+        }
+
+        // Return whether the stack is empty.
         public boolean empty() {
-          return input.empty() && output.empty();
+            return q.isEmpty();
         }
     }
-
 }

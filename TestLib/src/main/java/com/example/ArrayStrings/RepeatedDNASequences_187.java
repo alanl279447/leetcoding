@@ -1,40 +1,45 @@
 package com.example.ArrayStrings;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class RepeatedDNASequences_187 {
 
-//    Input: [1,2,3,4]
-//    Output: 24
-//    https://leetcode.com/problems/maximum-product-of-three-numbers/
+//    Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
+//    Output: ["AAAAACCCCC", "CCCCCAAAAA"]
+//    https://leetcode.com/problems/repeated-dna-sequences/
 
     public static void main(String[] args) {
 
-        int[] nums = {1,2,3,4};
-        System.out.println(maximumProduct(nums));
+        String s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
+        System.out.println(findRepeatedDnaSequences(s));
     }
 
-    public static int maximumProduct(int[] nums) {
-        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
-        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+    public static List<String> findRepeatedDnaSequences(String s) {
+         Set<String> seen = new HashSet<>();
+         Set<String> repeated = new HashSet<>();
 
-        for (int num: nums) {
-            if (num > max1) {
-                max3 = max2;
-                max2 = max1;
-                max1 = num;
-            } else if (num > max2) {
-                max3 = max2;
-                max2 = num;
-            } else if (num > max3) {
-                max3 = num;
-            }
+         for (int i=0; i+9<s.length();i++) {
+             String temp = s.substring(i, i+10);
+             if (!seen.add(temp)) {
+                 repeated.add(temp);
+             }
+         }
+         return new ArrayList<>(repeated);
+    }
 
-            if (num < min1) {
-                min2 = min1;
-                min1 = num;
-            } else if (num < min2) {
-                min2 = num;
-            }
+    private static int hash(String s, int idx){
+        char ch = s.charAt(idx);
+        switch(ch) {
+            case 'A': return 0;
+            case 'C': return 1;
+            case 'G': return 2;
+            case 'T': return 3;
+            default: return 0;
         }
-        return Math.max(max1*max2*max3, min1*min2*max1);
     }
 }

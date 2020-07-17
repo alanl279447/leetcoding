@@ -4,47 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SameTree_100 {
-//    Given the following tree [3,9,20,null,null,15,7]:
+//    Input:     1         1
+//            / \       / \
+//            2   1     1   2
 //
-//              3
-//             / \
-//            9  20
-//              /  \
-//             15   7
-//    Return true.
-//    https://leetcode.com/problems/balanced-binary-tree/
+//            [1,2,1],   [1,1,2]
+//
+//    Output: false
+//    https://leetcode.com/problems/same-tree/
 
     public static TreeNode root = null;
+    public static TreeNode root2 = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         addNode();
-        System.out.println(isBalanced(root));
+        addNode2();
+        System.out.println(isSameTree(root, root2));
     }
 
-    public static boolean isBalanced(TreeNode root) {
-        return getHeight(root) != -1;
-    }
+    public static boolean isSameTree(TreeNode p, TreeNode q) {
+      if (p==null && q == null) return true;
+      if (p==null || q == null) return false;
 
-    private static int getHeight(TreeNode node) {
-        if (node == null) return 0;
-
-        int left = getHeight(node.left);
-        int right = getHeight(node.right);
-
-        // left, right subtree is unbalanced or cur tree is unbalanced
-        if (left == -1 || right == -1 || Math.abs(left - right) > 1) return -1;
-
-        return Math.max(left, right) + 1;
+      if (p.val != q.val) return false;
+      return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
     public static void addNode() {
-        root = addNodeRecursive(root, 3);
-        root.left = new TreeNode(9);
-//        root.left.left = new TreeNode(4);
-//        root.left.right = new TreeNode(7);
-        root.right = new TreeNode(20);
-        root.right.right = new TreeNode(7);
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+//        root.right.right = new TreeNode(7);
         root.right.left = new TreeNode(15);
+    }
+
+    public static void addNode2() {
+        root2 = new TreeNode(1);
+        root2.left = new TreeNode(2);
+        root2.right = new TreeNode(3);
+//        root2.right.right = new TreeNode(7);
+//        root2.right.left = new TreeNode(15);
     }
 
     public static class TreeNode {

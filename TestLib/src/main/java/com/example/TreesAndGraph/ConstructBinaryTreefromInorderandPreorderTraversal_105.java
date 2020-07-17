@@ -6,41 +6,42 @@ import java.util.List;
 import java.util.Queue;
 
 public class ConstructBinaryTreefromInorderandPreorderTraversal_105 {
+//    preorder = [3,9,20,15,7]
 //    inorder = [9,3,15,20,7]
-//    postorder = [9,15,7,20,3]
 //    https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
 
     public static TreeNode root = null;
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        addNode(1);
-        List<Integer> result = rightSideView(root);
-        for (int res: result) {
-            System.out.print(res);
-        }
+//        addNode(1);
+        int[] preorder = {3,9,20,15,7};
+        int[] inorder =  {9,3,15,20,7};
+        TreeNode result = buildTree(preorder, inorder);
+        System.out.print(result.val);
     }
 
-    public static List<Integer> rightSideView(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<Integer> result = new ArrayList<>();
-        queue.offer(root);
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+        return helper(0, 0, inorder.length - 1, preorder, inorder);
+    }
 
-        while(!queue.isEmpty()) {
-          int size = queue.size();
-          for (int i=0; i < size; i++) {
-              TreeNode currentNode = queue.poll();
-              if(i == 0) {
-                  result.add(currentNode.val);
-              }
-              if(currentNode.right != null) {
-                  queue.offer(currentNode.right);
-              }
-              if(currentNode.left != null) {
-                  queue.offer(currentNode.left);
-              }
-          }
+    public static TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
+        if (preStart > preorder.length - 1 || inStart > inEnd) {
+            return null;
         }
-        return result;
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int inIndex = 0; // Index of current root in inorder
+        for (int i = inStart; i <= inEnd; i++) {
+            if (inorder[i] == root.val) {
+                inIndex = i;
+            }
+        }
+        root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
+
+        // goal is to find right node position in pre-order traversal
+        // root position + no of nodes left + 1  (right position in pre-order)..
+        // on of nodes left (inIndex - inStart)
+        root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
+        return root;
     }
 
     public static void addNode(int value) {

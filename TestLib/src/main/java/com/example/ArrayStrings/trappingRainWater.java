@@ -14,7 +14,7 @@ public class trappingRainWater {
         int answer = 0, current =0;
 
         while(current < height.length) {
-          while(!stack.empty() && height[current] > height[stack.peek()]) {
+          while(!stack.empty() && height[current] > height[stack.peek()]) { //{0,1,0,0,3};
            int topIndex = stack.pop();
            if (stack.isEmpty()) break;
 
