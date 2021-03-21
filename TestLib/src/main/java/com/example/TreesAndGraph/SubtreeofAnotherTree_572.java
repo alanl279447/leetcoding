@@ -1,10 +1,11 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class SubtreeofAnotherTree_572 {
-
 //               3
 //              / \
 //             4   5
@@ -15,14 +16,62 @@ public class SubtreeofAnotherTree_572 {
 //              / \
 //             1   2
 //    Return true, because t has the same structure and node values with a subtree of s.
-
+//    https://leetcode.com/problems/subtree-of-another-tree/
     public static TreeNode root = null;
+
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         TreeNode s = addNodeNews(3);
         TreeNode t = addNodeNewt(4);
-
         System.out.print(isSubtree(s,t));
+    }
+
+    //recursive solution
+    public static boolean isSubtree(TreeNode s, TreeNode t) {
+        if (s == null) return false;
+        if (isSame(s, t)) return true;
+        return isSubtree(s.left, t) || isSubtree(s.right, t);
+    }
+
+    private static boolean isSame(TreeNode s, TreeNode t) {
+        if (s == null && t == null) return true;
+        if (s == null || t == null) return false;
+
+        if (s.val != t.val) return false;
+        return isSame(s.left, t.left) && isSame(s.right, t.right);
+    }
+
+    //iterative solution
+    public static boolean isSubtreeIterative(TreeNode s, TreeNode t) {
+        Queue<TreeNode> nodes = new ArrayDeque<>();
+        nodes.offer(s);
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.poll();
+            if (isSameTree(node, t)) {
+                return true;
+            }
+            if (node.left != null) {
+                nodes.offer(node.left);
+            }
+            if (node.right != null) {
+                nodes.offer(node.right);
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSameTree(TreeNode s, TreeNode t) {
+        if (s == null && t == null) {
+            return true;
+        }
+        if (s == null || t == null) {
+            return false;
+        }
+        if (s.val != t.val) {
+            return false;
+        } else {
+            return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
+        }
     }
 
     public static class TreeNode {
@@ -30,48 +79,6 @@ public class SubtreeofAnotherTree_572 {
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
-    }
-
-    //Time complexity 0(m*n)
-    public static boolean isSubtreePrac(TreeNode s, TreeNode t) {
-        return traverse(s,t);
-    }
-
-    public static boolean isEqual(TreeNode s, TreeNode t) {
-        if (s == null && t == null) {
-            return true;
-        }
-        if(s==null || t==null) {
-            return false;
-        }
-        return s.val==t.val && isEqual(s.left, t.left) && isEqual(s.right, t.right);
-    }
-
-    public static boolean traverse(TreeNode s, TreeNode t) {
-        return s != null && ((isEqual(s,t) || traverse(s.left, t)) || traverse(s.right, t));
-    }
-
-    //using String
-    // time complexity 0(m2+n2+mn)
-    public static boolean isSubtree(TreeNode s, TreeNode t) {
-        int tValue = t != null ? t.val: -1;
-        String sString = preorderString(s);
-        String tString = preorderString(t);
-
-        if (sString.contains(tString)) return true;
-        else return false;
-    }
-
-    public static String preorderString(TreeNode node) {
-      String output = "";
-        if (node == null) {
-          return output += "#null";
-      }
-      output+="#"+node.val;
-        output += preorderString(node.left);
-        output += preorderString(node.right);
-
-      return output;
     }
 
     public static TreeNode addNodeNews(int value) {

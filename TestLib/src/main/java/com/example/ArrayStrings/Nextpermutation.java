@@ -17,7 +17,6 @@ public class Nextpermutation {
     // then find the next largest number  (index of 5)
     // swap with the (4,5)  1,5,8,5,7,6,4,3,1
     //reverse from 5  1,5,8,5,1,3,4,6,7
-
     public static void nextPermutation(int[] nums) {
         int i = nums.length - 2;
         while (i >= 0 && nums[i] >= nums[i+1]) {

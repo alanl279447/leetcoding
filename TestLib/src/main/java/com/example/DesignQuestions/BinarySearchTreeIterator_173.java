@@ -29,34 +29,17 @@ public class BinarySearchTreeIterator_173 {
         System.out.println("Next :" +obj.next());
         System.out.println("Next :" +obj.hasNext());
         System.out.println("Next :" +obj.next());
-        System.out.println("Hasprev :" +obj.hasPrev());  //true
-        System.out.println("Prev :" +obj.prev());    //9
-        System.out.println("hasPrev :" +obj.hasPrev());
-        System.out.println("Next :" +obj.hasNext());  //
+        System.out.println("Next :" +obj.hasNext());
         System.out.println("Next :" +obj.next());
         System.out.println("Next :" +obj.hasNext());
     }
 
     public static class BSTIterator {
         Stack<TreeNode> stack = new Stack<>();
-        Deque<TreeNode> queue = new LinkedList<>();
 
         public BSTIterator(TreeNode root) {
             TreeNode curr = root;
             addAll(root);
-        }
-
-        public boolean hasPrev() {
-            return queue.size()>1;
-        }
-
-        /** Can only take 1 step back */
-        public Integer prev() {
-            if (hasPrev()) {
-                stack.push(queue.peekLast());
-                return queue.pollFirst().val;
-            }
-            return -1;
         }
 
         private void addAll(TreeNode node) {
@@ -72,10 +55,6 @@ public class BinarySearchTreeIterator_173 {
              TreeNode curr = stack.pop();
              if (curr != null) {
                  addAll(curr.right);
-                 if (queue.size() ==2) {
-                     queue.removeFirst();
-                 }
-                 queue.addLast(curr);
                  return curr.val;
              }
              return -1;

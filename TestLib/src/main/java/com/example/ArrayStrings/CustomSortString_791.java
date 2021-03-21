@@ -23,7 +23,6 @@ public class CustomSortString_791 {
 
     //int[] count 1,1,1,1,0,0,...0 (based on T)
     //string  c,b,a,d
-
     public static String customSortString(String S, String T) {
         int[] count = new int[26];
         for (char c : T.toCharArray()) {
@@ -42,5 +41,4 @@ public class CustomSortString_791 {
         }
         return sb.toString();
     }
-
 }

@@ -39,6 +39,7 @@ public class SmallestSubtreewithalltheDeepestNodes_865 {
         return currentMax;
     }
 
+    //added for tree creation
     public static void addNode(int value) {
         if (root == null) {
             root = new TreeNode(value);

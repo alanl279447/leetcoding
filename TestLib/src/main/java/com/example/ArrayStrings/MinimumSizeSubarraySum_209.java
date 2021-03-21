@@ -10,6 +10,9 @@ public class MinimumSizeSubarraySum_209 {
 //    Explanation: the subarray [4,3] has the minimal length under the problem constraint.
 //    https://leetcode.com/problems/minimum-size-subarray-sum/
 
+    //Related topic
+    //https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
+
     public static void main(String args[]) {
         int[] input = {2,3,1,2,4,3};
         int res = minSubArrayLen(7, input);

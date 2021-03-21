@@ -21,6 +21,9 @@ public class SubarraySumsDivisiblebyK_974 {
         System.out.println(res);
     }
 
+    // sum (0, i)  = kn+x
+    // sum (o, j)  = km+x
+    // sum(i,j) kn+x - (km+x) = k (n-m)
     public static int subarraysDivByK(int[] A, int K) {
         int ans = 0, sum = 0;
         // map from cumulative sum's modulo to its appear times

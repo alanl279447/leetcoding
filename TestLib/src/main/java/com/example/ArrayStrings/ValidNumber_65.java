@@ -18,11 +18,11 @@ package com.example.ArrayStrings;
 
 // eSeen
 // dotSeen
-// signSeen
 // digitSeen
 // digitAfterE
 
-
+// no number seen before e
+// dot seen after e
 public class ValidNumber_65 {
 
     public static void main(String[] args) {
@@ -31,6 +31,23 @@ public class ValidNumber_65 {
         System.out.print(result);
     }
 
+
+//    public static boolean isNumberTest(String s) {
+//      int len = s.length();
+//      boolean isNumSeen = false, isDotSeen = false, isESeen = false;
+//      boolean isNumberAfterE = false;
+//
+//
+//
+//
+//    }
+
+
+
+    //check for number b/w [0, 9]
+    // dot check if eSeen or dotSeen then false
+    // e  check if e seen !numberSeen
+    // sign check if prev is i==0 || e
     public static boolean isNumber(String s) {
         s = s.trim();
 
@@ -61,7 +78,6 @@ public class ValidNumber_65 {
                 return false;
             }
         }
-
         return numberSeen && numberAfterE;
     }
 }

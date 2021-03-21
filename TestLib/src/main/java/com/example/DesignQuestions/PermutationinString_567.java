@@ -1,9 +1,5 @@
 package com.example.DesignQuestions;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PermutationinString_567 {
 
@@ -11,7 +7,7 @@ public class PermutationinString_567 {
 //    Output: True
 //    Explanation: s2 contains one permutation of s1 ("ba").
 //    https://leetcode.com/problems/permutation-in-string/
-//Time complexity : O(l_1+26*(l_2-l_1)) Space complexity : O(1)
+//    Time complexity : O(l_1+26*(l_2-l_1)) Space complexity : O(1)
 
     public static void main(String[] args) {
 

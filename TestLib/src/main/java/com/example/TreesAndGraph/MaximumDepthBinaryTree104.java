@@ -1,7 +1,9 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class MaximumDepthBinaryTree104 {
 //                    3
@@ -20,6 +22,35 @@ public class MaximumDepthBinaryTree104 {
         System.out.print(maxDepth(root));
     }
 
+    public static int maxDepthIterative(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList();
+        queue.offer(root);
+        int count = 0;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            while (size-- > 0) {
+             TreeNode curr = queue.poll();
+             if (curr.left != null) {
+                 queue.offer(curr.left);
+             }
+             if (curr.right!= null) {
+                 queue.offer(curr.right);
+             }
+            }
+            count++;
+        }
+        return count;
+    }
+
+    public static int maxDepthRecursive(TreeNode root) {
+        if (root == null) return 0;
+        return 1+ Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right));
+    }
+
+    //recursive solution
     public static int maxDepth(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         int res = getMaxDepth(root, 0, result);
@@ -36,7 +67,6 @@ public class MaximumDepthBinaryTree104 {
         int currMax  = depths.size();
         int leftMax = getMaxDepth(node.left, depth+1, depths);
         int rightMax = getMaxDepth(node.right, depth+1, depths);
-
         return Math.max(currMax, Math.max(leftMax, rightMax));
     }
 

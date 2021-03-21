@@ -38,5 +38,4 @@ public class OneEditDistance_3015 {
         }
         return sLength == tLength+1;
     }
-
 }

@@ -1,6 +1,5 @@
 package com.example.ArrayStrings;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,9 @@ public class Permutations_46 {
 //            ]
 //    https://leetcode.com/problems/permutations/
 //    time complexity 0(n!)
+//    For the complexity, I think you can explain in this way: in the first level of the tree,
+//    you have N options and for each of the option, you have N-1 option, and for each of these N-1 options, you have another N-2 options,
+//    so putting them together you would end up N*(N-1)*(N-2).... = N!
 
     public static void main(String[] args) {
         int[] board = {1,2,3};
@@ -25,6 +27,7 @@ public class Permutations_46 {
             System.out.println(res);
         }
     }
+
 
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
@@ -45,9 +48,6 @@ public class Permutations_46 {
              }
          }
     }
-
-
-
 
 //    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
 //        if(tempList.size() == nums.length){

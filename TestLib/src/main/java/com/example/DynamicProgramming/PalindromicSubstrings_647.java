@@ -10,11 +10,11 @@ public class PalindromicSubstrings_647 {
 //    Explanation: Three palindromic strings: "a", "b", "c".
 //    https://leetcode.com/problems/palindromic-substrings/
 //    https://leetcode.com/problems/palindromic-substrings/discuss/105749/Java-O(n2)-DP-solution
+//    time complexity 0(n^2)
 
     public static void main(String[] args) {
         System.out.print(countSubstrings("aaa"));
     }
-
         static int count = 0;
         public static int countSubstrings(String s) {
             if (s == null || s.length() == 0) return 0;
@@ -23,7 +23,6 @@ public class PalindromicSubstrings_647 {
                 extendPalindrome(s, i, i); // odd length;
                 extendPalindrome(s, i, i + 1); // even length
             }
-
             return count;
         }
 
@@ -34,4 +33,4 @@ public class PalindromicSubstrings_647 {
                 right++;
             }
         }
-    }
+}

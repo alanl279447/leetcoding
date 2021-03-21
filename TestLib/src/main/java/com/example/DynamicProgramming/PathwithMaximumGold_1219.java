@@ -15,6 +15,8 @@ public class PathwithMaximumGold_1219 {
 //            [0,9,0]]
 //    Path to get the maximum gold, 9 -> 8 -> 7.
 //    https://leetcode.com/problems/path-with-maximum-gold/
+//    Time: O(4 * 3^k), where k <= 25 is the number of cells that have gold.
+//      first cell has 4 choices, next all have 3 choices
 
     public static void main(String[] args) {
         int[][] grid = {{0,6,0}, {5,8,7}, {0,9,0}};

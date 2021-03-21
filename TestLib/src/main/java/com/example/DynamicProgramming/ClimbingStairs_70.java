@@ -14,25 +14,7 @@ public class ClimbingStairs_70 {
         System.out.println(res);
     }
 
-//    public static int climbStairsSpaceOptimized(int n) {
-//
-//        if (n ==1) {
-//            return n;
-//        }
-//        int first = 1;
-//        int second = 1;
-//        int current = 0;
-//
-//        for (int i = 2; i <=n; i++) {
-//            current = second+first;
-//            first = second;
-//            second = current;
-//        }
-//        return current;
-//    }
-
-        public static int climbStairs(int n) {
-
+    public static int climbStairs(int n) {
         if (n ==1) {
             return n;
         }
@@ -45,5 +27,4 @@ public class ClimbingStairs_70 {
         }
         return dp[n];
     }
-
 }

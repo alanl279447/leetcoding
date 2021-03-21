@@ -1,5 +1,7 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -12,6 +14,7 @@ public class ValidBST_98 {
 //
 //    Input: [2,1,3]
 //    Output: true
+//    https://leetcode.com/problems/validate-binary-search-tree/
 
     public static TreeNode root = null;
     public static void main(String[] args) {
@@ -22,21 +25,20 @@ public class ValidBST_98 {
         System.out.println(isValidBST(root));
     }
 
-    public static boolean isValidBSTPractice(TreeNode root) {
+//    https://leetcode.com/problems/validate-binary-search-tree/discuss/32112/Learn-one-iterative-inorder-traversal-apply-it-to-multiple-tree-questions-(Java-Solution)
+    public boolean isValidBSTGeneric(TreeNode root) {
         if (root == null) return true;
-        Stack<TreeNode> stack = new Stack();
-        double minvalue = -Double.MAX_VALUE;
-        while(!stack.isEmpty() || root != null) {
-            while(root != null) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
             root = stack.pop();
-            if (root.val < minvalue) {
-                return false;
-            }
-            minvalue = root.val;
-            stack.push(root.right);
+            if(pre != null && root.val <= pre.val) return false;
+            pre = root;
+            root = root.right;
         }
         return true;
     }

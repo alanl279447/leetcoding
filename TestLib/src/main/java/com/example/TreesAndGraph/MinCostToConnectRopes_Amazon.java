@@ -1,6 +1,7 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -22,8 +23,13 @@ public class MinCostToConnectRopes_Amazon {
         System.out.println(result);
     }
 
+    //10+18+30
+    // minHeap 4,6,8,12
+    // 8,10,12
+    //18+12
+    //58
     public static int connectRopes(int[] ropes) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
         for (int rope:ropes) {
             pq.offer(rope);
         }

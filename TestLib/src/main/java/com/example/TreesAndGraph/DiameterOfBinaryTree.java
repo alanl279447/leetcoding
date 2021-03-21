@@ -23,8 +23,6 @@ public class DiameterOfBinaryTree {
     }
 
     static int ans;
-
-
     public static int diameterOfBinaryTree(TreeNode root) {
         //ans = 1;
         depth(root);
@@ -36,6 +34,8 @@ public class DiameterOfBinaryTree {
         int L = depth(node.left);
         int R = depth(node.right);
         ans = Math.max(ans, L+R);
+        // return the longest one between left_path and right_path;
+        // remember to add 1 for the path connecting the node and its parent
         return Math.max(L, R) + 1;
     }
 

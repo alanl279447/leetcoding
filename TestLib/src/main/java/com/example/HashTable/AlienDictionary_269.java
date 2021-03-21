@@ -1,12 +1,9 @@
 package com.example.HashTable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -27,13 +24,31 @@ public class AlienDictionary_269 {
 
     //map character, Set<chracter>
     //int[] degree = new int[26];
-    //
+    //build a graph and adjacency list
+    //BFS starting with characters having inDegree==0
 
     public static void main(String[] args) {
         String[] words = {"wrt", "wrf", "er","ett", "rftt"};
         String res = alienOrder(words);
         System.out.println(res);
     }
+
+    //map char and adj chars, out and in chars, inDegree[in] = 0
+    //BFS for all the node with inDegree==0
+//    public static String alienOrderTest(String[] words) {
+//        HashMap<Character, Set<Character>> map = new HashMap();
+//        int[] inDegree = new int[26];
+//        buildGraphTest(map, inDegree, words);
+//        bfsTest(map, inDegree, words);
+//    }
+//
+//    public static void buildGraphTest(HashMap<Character, Set<Character>>  map, int[] inDegree, String[] words) {
+//
+//    }
+//
+//    public static String bfsTest(HashMap<Character, Set<Character>>  map, int[] inDegree, String[] words) {
+//
+//    }
 
     public static String alienOrder(String[] words) {
         Map<Character, Set<Character>> graph = new HashMap<>();
@@ -42,11 +57,9 @@ public class AlienDictionary_269 {
         return bfs(graph, inDegree);
     }
 
-
     private static String bfs(Map<Character, Set<Character>> map, int[] inDegree) {
         StringBuilder sb = new StringBuilder();
         Queue<Character> queue = new LinkedList<>();
-
         for (char c: map.keySet()) {
            if (inDegree[c -'a'] == 0)   {
                queue.offer(c);
@@ -64,7 +77,7 @@ public class AlienDictionary_269 {
                }
             }
         }
-        return (sb.length() == map.size() ? sb.toString(): "incorrect");
+        return (sb.length() == map.size() ? sb.toString(): "");
     }
 
     private static void buildGraph(Map<Character, Set<Character>> graph, int[] inDegree, String[] words) {

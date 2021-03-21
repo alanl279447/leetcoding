@@ -13,6 +13,7 @@ package com.example.ArrayStrings;
 //
 //        https://leetcode.com/problems/word-search-ii/
 //        time complexity O(M(4⋅3L−1))
+//         M is the number of cells, L length of the word
 
 
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class WordSearchII_212 {
         }
     }
 
+
+    //build the Trie for the words to search
+    //dfs for all the matrix cells
     public static List<String> findWords(char[][] board, String[] words) {
         //setup Trie structure
         int row = board.length;
@@ -38,16 +42,15 @@ public class WordSearchII_212 {
         List<String> result = new ArrayList<>();
         TrieNode root = buildTrie(words);
 
-
         for (int i=0; i<row; i++) {
          for (int j=0; j < col; j++) {
-            bfs(board, i, j, result, root);
+            dfs(board, i, j, result, root);
          }
         }
         return result;
     }
 
-    private static void bfs(char[][] board, int row, int col, List<String> result, TrieNode root) {
+    private static void dfs(char[][] board, int row, int col, List<String> result, TrieNode root) {
         char c = board[row][col];
         if (c=='#' || root.nodes[c-'a'] == null) return;
         TrieNode p = root.nodes[c-'a'];
@@ -57,11 +60,11 @@ public class WordSearchII_212 {
         }
         board[row][col] = '#';
 
-        if (row > 0)  bfs(board, row-1, col, result, p);
-        if (row < board.length-1)  bfs(board, row+1, col, result, p);
+        if (row > 0)  dfs(board, row-1, col, result, p);
+        if (row < board.length-1)  dfs(board, row+1, col, result, p);
 
-        if (col > 0)  bfs(board, row, col-1, result, p);
-        if (col < board[0].length-1)  bfs(board, row, col+1, result, p);
+        if (col > 0)  dfs(board, row, col-1, result, p);
+        if (col < board[0].length-1)  dfs(board, row, col+1, result, p);
         board[row][col] = c;
     }
 

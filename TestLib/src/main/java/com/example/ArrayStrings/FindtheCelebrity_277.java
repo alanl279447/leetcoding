@@ -10,6 +10,7 @@ public class FindtheCelebrity_277 {
 //    Explanation: There are three persons labeled with 0, 1 and 2.
 //    graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j.
 //    The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.
+//    https://leetcode.com/problems/find-the-celebrity/
 
     public static void main(String args[]) {
         int n  = 3;
@@ -18,7 +19,6 @@ public class FindtheCelebrity_277 {
     }
 
     private static int numberOfPeople;
-
     // 0,1,2,3
     // 0-1
     // 1

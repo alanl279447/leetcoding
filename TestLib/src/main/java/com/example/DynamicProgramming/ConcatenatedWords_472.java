@@ -18,22 +18,21 @@ public class ConcatenatedWords_472 {
 // "dogcatsdog" can be concatenated by "dog", "cats" and "dog";
 //"ratcatdogcat" can be concatenated by "rat", "cat", "dog" and "cat".
 //    https://leetcode.com/problems/concatenated-words/
+//   O(N * L^2)
 
     public static void main(String[] args) {
-        String[] prices = {"cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"};
+        String[] prices = {"cat", "cats", "catsdogcats", "dog", "dogcatsdog",
+                "hippopotamuses", "rat", "ratcatdogcat"};
 //        String[] prices = {"cat", "cats", "catsdogcats", "dog"};
         List<String> result =  findAllConcatenatedWordsInADict(prices);
         for (String res:result) {
-            System.out.print(res);
+            System.out.println(res);
         }
     }
 
     public static List<String> findAllConcatenatedWordsInADict(String[] words) {
         List<String> ret = new ArrayList<>();
-        Set<String> set = new HashSet<>();
-        for (String word : words) {
-            set.add(word);
-        }
+        Set<String> set = new HashSet<>(Arrays.asList(words));
         for (String word : words) {
             if (isConcatenated(set, word)) {
                 ret.add(word);
@@ -43,15 +42,15 @@ public class ConcatenatedWords_472 {
     }
 
     private static boolean isConcatenated(Set<String> set, String s) {
-        for (int i = 1; i < s.length(); i++) {
+            for (int i = 1; i < s.length(); i++) {
             if (set.contains(s.substring(0, i))) {
                 String rightStr = s.substring(i);
-                if (set.contains(rightStr) || isConcatenated(set, rightStr))
+                if (set.contains(rightStr) || isConcatenated(set, rightStr)) {
+                    set.add(s);
                     return true;
+                }
             }
         }
         return false;
     }
-
-
 }

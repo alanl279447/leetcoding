@@ -1,8 +1,5 @@
 package com.example.Stack;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
 public class AsteroidCollision_735 {
@@ -23,6 +20,8 @@ public class AsteroidCollision_735 {
          System.out.print(res);
     }
 
+    //if i>0 s.offer(i)
+    // else !stack.isemtpy && pop in loop
     public static int[] asteroidCollision(int[] asteroids) {
         Stack<Integer> s = new Stack<>();
         for(int i: asteroids){

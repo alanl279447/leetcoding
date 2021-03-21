@@ -15,7 +15,7 @@ public class PathSumIII_437 {
 //         3   2   11
 //       / \   \
 //     3  -2   1
-//
+
 //    Return 3. The paths that sum to 8 are:
 //
 //            1.  5 -> 3
@@ -37,6 +37,9 @@ public class PathSumIII_437 {
        return count;
     }
 
+    //pre-sum hashmap to start the curr sum
+    //currSum - target in map, count += map.get(currSum-target)
+    //traverse left & right sub tree, then remove the currSum from the map
     public static void helper(TreeNode node, int currSum, Map<Integer, Integer> map, int target) {
       if (node == null) return;
       currSum = currSum + node.val;
@@ -50,32 +53,6 @@ public class PathSumIII_437 {
       helper(node.right, currSum, map, target);
       map.put(currSum, map.get(currSum)-1);
     }
-
-
-//    public static int pathSum(TreeNode root, int sum) {
-//        HashMap<Integer, Integer> preSum = new HashMap();
-//        preSum.put(0,1);
-//        helper(root, 0, sum, preSum);
-//        return count;
-//    }
-//
-//    public static void helper(TreeNode root, int currSum, int target, HashMap<Integer, Integer> preSum) {
-//        if (root == null) {
-//            return;
-//        }
-//
-//        currSum += root.val;
-//
-//        if (preSum.containsKey(currSum - target)) {
-//            count += preSum.get(currSum - target);
-//        }
-//
-//        preSum.put(currSum, preSum.getOrDefault(currSum, 0)+1);
-//
-//        helper(root.left, currSum, target, preSum);
-//        helper(root.right, currSum, target, preSum);
-//        preSum.put(currSum, preSum.get(currSum) - 1);
-//    }
 
     public static class TreeNode {
         int val;

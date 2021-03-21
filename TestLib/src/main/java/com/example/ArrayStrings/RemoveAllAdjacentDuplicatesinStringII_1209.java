@@ -1,5 +1,7 @@
 package com.example.ArrayStrings;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class RemoveAllAdjacentDuplicatesinStringII_1209 {
@@ -13,8 +15,9 @@ public class RemoveAllAdjacentDuplicatesinStringII_1209 {
 //    https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
 
     public static void main(String args[]) {
-        int[] input = {1,8,6,2,5,4,8,3,7};
-        String res = removeDuplicates("deeedbbcccbdaa", 3);
+//        int[] input = {1,8,6,2,5,4,8,3,7};
+//        String res = removeDuplicates("deeedbbcccbdaa", 3);
+        String res = removeDuplicates("abbaca", 2);
         System.out.println(res);
     }
 
@@ -25,9 +28,9 @@ public class RemoveAllAdjacentDuplicatesinStringII_1209 {
             if (i == 0 || sb.charAt(i) != sb.charAt(i - 1)) {
                 counts.push(1);
             } else {
-                int incremented = counts.pop() + 1;
+                int incremented = counts.pop() + 1;  //increment the count of consecutive numbers
                 if (incremented == k) {
-                    sb.delete(i - k + 1, i + 1);
+                    sb.delete(i - k + 1, i + 1);   //delete from start to end-1
                     i = i - k;
                 } else {
                     counts.push(incremented);
@@ -36,5 +39,4 @@ public class RemoveAllAdjacentDuplicatesinStringII_1209 {
         }
         return sb.toString();
     }
-
 }

@@ -1,8 +1,10 @@
 package com.example.TreesAndGraph;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BSTzigzagLevelOrderTraversal {
 //                3
@@ -10,7 +12,6 @@ public class BSTzigzagLevelOrderTraversal {
 //              9  20
 //                /  \
 //               15   7
-//
 //                        [
 //                        [3],
 //                        [20, 9],
@@ -28,6 +29,36 @@ public class BSTzigzagLevelOrderTraversal {
             System.out.println();
         }
     }
+
+    public static List<List<Integer>> zigzagLevelOrderIterative(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> temp = new ArrayList<>();
+            for (int i=0; i < size; i++) {
+                TreeNode curr = queue.poll();
+                if (result.size() %2 ==0) {
+                    temp.add( curr.val);
+                } else {
+                    temp.add(0, curr.val);
+                }
+                if (curr.left!= null) {
+                    queue.offer(curr.left);
+                }
+                if (curr.right!= null) {
+                    queue.offer(curr.right);
+                }
+            }
+            result.add(temp);
+        }
+          return result;
+    }
+
 
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if (root == null) {

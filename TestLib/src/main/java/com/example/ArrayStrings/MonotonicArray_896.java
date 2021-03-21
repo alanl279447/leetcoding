@@ -11,7 +11,7 @@ public class MonotonicArray_896 {
     }
 
     public static boolean isMonotonic(int[] A) {
-        boolean decreasing = true, increasing = false;
+        boolean decreasing = true, increasing = true;
 
         for (int i=1; i < A.length; i++) {
            if (A[i]>A[i-1]) {
@@ -23,5 +23,4 @@ public class MonotonicArray_896 {
         }
         return increasing||decreasing;
     }
-
 }

@@ -22,6 +22,9 @@ public class WordLadder_II_126 {
 //    Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
 //            return its length 5.
     //    https://leetcode.com/problems/word-ladder-ii/submissions/
+    //O(26 * WordLen * NumberOfWord * 2 * ( V + E))
+//    Graph: { hit=[hot],  hot=[dot, lot], dot=[dog], lot=[log], dog=[cog], log=[cog], cog=[]}
+//    Distance or Depth: {hit=0, hot=1, dot=2 lot=2, , dog=3 log=3, cog=4}
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -31,6 +34,13 @@ public class WordLadder_II_126 {
         System.out.print(findLadders("hit", "cog", Arrays.asList(dict)));
     }
 
+//    public static List<List<String>> findLaddersTest(String beginWord, String endWord, List<String> wordList) {
+//       Set<String> wordDict = new HashSet<>(wordList);
+//       HashMap<String, List<String>> map = new HashMap<>();
+//    }
+
+    //bfs for all the next combinations
+    //dfs to find all until the end
     public static List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
         List<List<String>> res = new ArrayList();
         Set<String> dict = new HashSet<>(wordList);
@@ -64,40 +74,40 @@ public class WordLadder_II_126 {
     }
 
     private static void bfs(Set<String> startSet, String beginWord, String endWord, Map<String, List<String>> map, Set<String> dict) {
-      if(startSet.size() == 0) return;
+        if(startSet.size() == 0) return;
 
-      Set<String> tmp = new HashSet<>();
-      dict.removeAll(startSet);
-      boolean finish = false;
+        Set<String> tmp = new HashSet<>();
+        dict.removeAll(startSet);
+        boolean finish = false;
 
-      for (String s: startSet) {
-          char[] chs = s.toCharArray();
-          for (int i = 0; i < chs.length; i++) {
-              char old = chs[i];
+        for (String s: startSet) {
+            char[] chs = s.toCharArray();
+            for (int i = 0; i < chs.length; i++) {
+                char old = chs[i];
 
-              for (char c = 'a'; c <= 'z'; c++) {
+                for (char c = 'a'; c <= 'z'; c++) {
 //                  if (c == old)
-                  chs[i] = c;
-                  String newWord = new String(chs);
-                  if (dict.contains(newWord)) {
-                      if (newWord.equalsIgnoreCase(endWord)) {
-                          finish = true;
-                      } else {
-                          tmp.add(newWord);
-                      }
+                    chs[i] = c;
+                    String newWord = new String(chs);
+                    if (dict.contains(newWord)) {
+                        if (newWord.equalsIgnoreCase(endWord)) {
+                            finish = true;
+                        } else {
+                            tmp.add(newWord);
+                        }
 
-                      if (map.get(s) == null) {
-                         map.put(s, new ArrayList<>());
-                      }
-                      map.get(s).add(newWord);
-                  }
-              }
-              chs[i] = old;
-          }
-      }
-      if (!finish) {
-          bfs(tmp, beginWord, endWord, map, dict);
-      }
+                        if (map.get(s) == null) {
+                            map.put(s, new ArrayList<>());
+                        }
+                        map.get(s).add(newWord);
+                    }
+                }
+                chs[i] = old;
+            }
+        }
+        if (!finish) {
+            bfs(tmp, beginWord, endWord, map, dict);
+        }
     }
 
     public static class TreeNode {

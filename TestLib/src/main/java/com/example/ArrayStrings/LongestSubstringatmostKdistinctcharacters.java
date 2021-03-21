@@ -2,14 +2,14 @@ package com.example.ArrayStrings;
 
 public class LongestSubstringatmostKdistinctcharacters {
 
-//    Input: s = "eceeba", k = 2
+//    Input: s = "eceba", k = 2
 //    Output: 3
 //    Explanation: T is "ece" which its length is 3.
 //    https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters
 
     public static void main(String[] args) {
 //        String input = "ADOBECODEBANC";
-        String input = "eceba";
+        String input = "eceeeba";
         int K = 2;
         int result = lengthOfLongestSubstringKDistinct(input, K);
         System.out.print(result);
@@ -36,29 +36,4 @@ public class LongestSubstringatmostKdistinctcharacters {
         }
         return len;
     }
-
-//    public static int lengthOfLongestSubstringKDistinct(String s, int k) {
-//        int[] map = new int[128];
-//        int start = 0, end = 0, maxLength = Integer.MIN_VALUE, counter = 0;
-//        int length = s.length();
-//
-//        while (end < s.length()) {
-//            final char c1 = s.charAt(end);
-//            if (map[c1] == 0) counter++;
-//            map[c1]++;
-//            end++;
-//
-//            while (counter > k) {
-//                char c2 = s.charAt(start);
-//                if (map[c2] == 1) counter--;
-//                map[c2]--;
-//                start++;
-//            }
-//
-//            if (counter == k)
-//                maxLength = Math.max(maxLength, end-start);
-//        }
-//
-//        return maxLength;
-//    }
 }

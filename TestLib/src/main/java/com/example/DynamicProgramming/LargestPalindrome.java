@@ -1,9 +1,5 @@
 package com.example.DynamicProgramming;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class LargestPalindrome {
 
 //    Input: "babad"
@@ -13,12 +9,11 @@ public class LargestPalindrome {
 //    Input: "cbbd"
 //    Output: "bb"
 //    https://leetcode.com/problems/longest-palindromic-substring/
+//    time complexity 0(n^2)
 
     public static void main(String[] args) {
-        //int[][] nums1 = {{1,3}, {-2,2}};
         System.out.print(longestPalindrome("cbbd"));
     }
-
 
     public static String longestPalindrome(String s) {
         if (s == null || s.length() < 1) return "";

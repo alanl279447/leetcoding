@@ -23,36 +23,36 @@ public class pancakeSorting_969 {
           System.out.println(re);
     }
 
-//    public static List<Integer> pancakeSortPrac(int[] A) {
-//        List<Integer> result = new ArrayList<>();
-//        int n = A.length, largest = n;
-//        for (int i=0; i < n; i++) {
-//            int index = find(A, largest);
-//            if(index==largest-1) {
-//                continue;
-//            }
-//            flipPrac(A, index);
-//            flipPrac(A, largest-1);
-//            result.add(index+1);
-//            result.add(largest--);
-//        }
-//    }
+    public static List<Integer> pancakeSortTest(int[] A) {
+        int length = A.length, largest = length;
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            int index = find(A, largest);
+            if (index == largest-1) continue;
 
-//    public static void flipPrac(int[]A, int index) {
-//        int i=0, j = index;
-//        while(i<index) {
-//            int temp=A[i];
-//            A[i++]=A[index];
-//            A[index--]=temp;
-//        }
-//    }
+            flip(A, index);
+            flip(A, largest-1);
+
+            result.add(index+1);
+            result.add(largest--);
+        }
+           return result;
+    }
 
 
+//    At each round, we identify the value to sort (named as value_to_sort), which is the number we would put in place at this round.
+//    We then locate the index of the value_to_sort.
+//    If the value_to_sort is not at its place already, we can then perform at most two pancake flips as we explained in the intuition.
+//    At the end of the round, the value_to_sort would be put in place.
     public static List<Integer> pancakeSort(int[] A) {
         List<Integer> result = new ArrayList<>();
         int n = A.length, largest = n;
         for (int i = 0; i < n; i++) {
+            // locate the position for the value to sort in this round
             int index = find(A, largest);
+
+            // sink the value_to_sort to the bottom,
+            // with at most two steps of pancake flipping.
             if(index==largest-1) {
                 continue;
             }

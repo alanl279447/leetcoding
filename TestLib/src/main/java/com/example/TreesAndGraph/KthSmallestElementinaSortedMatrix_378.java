@@ -1,13 +1,7 @@
 package com.example.TreesAndGraph;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
 
 public class KthSmallestElementinaSortedMatrix_378 {
-
 //    matrix = [
 //            [ 1,  5,  9],
 //            [10, 11, 13],
@@ -17,6 +11,7 @@ public class KthSmallestElementinaSortedMatrix_378 {
 //
 //            return 13.
 //    https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
+//    https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
 
     public static TreeNode root;
     private static TreeNode ans = null;
@@ -24,23 +19,45 @@ public class KthSmallestElementinaSortedMatrix_378 {
     public static void main(String[] args) {
         addNode(1);
         int[][] input={{1,5,9}, {10,11,13},{12,13,15}};
-        int result = kthSmallest(input, 8);
+        int result = kthSmallest(input, 6);
         //for(String res: result)
         System.out.println(result);
     }
 
+
+    //add all the first row elementd
+//    public static int kthSmallestTest(int[][] matrix, int k) {
+//      int rows = matrix.length;
+//      int cols = matrix[0].length;
+//      PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)-> a[2]-b[2]);
+//
+//      for (int i=0; i < cols; i++) {
+//          pq.add(new int[] {0,i, matrix[0][i]});
+//      }
+//
+//      for (int i=0; i < k-1;i++) {
+//          int[] curr = pq.poll();
+//          if (curr[0] ==rows-1) continue;
+//          pq.add(new int[]{curr[0]+1, curr[1], matrix[curr[0]+1][curr[1]]});
+//      }
+//      return pq.peek()[2];
+//    }
+
+    //   1,5,9
+    //   10,11,13
+    //   12,13,15
     public static int kthSmallest(int[][] matrix, int k) {
         int row = matrix.length;
         int column = matrix[0].length;
         PriorityQueue<Tuple> pq = new PriorityQueue<>();
 
         for (int i=0; i < row; i++) {
-            pq.offer(new Tuple(0, i, matrix[0][i]));
+            pq.offer(new Tuple(0, i, matrix[0][i]));   //add all the items from first row
         }
         for (int i=0; i< k-1; i++) {
             Tuple curr = pq.poll();
             if (curr.x == column-1) continue;
-            pq.offer(new Tuple(curr.x+1, curr.y, matrix[curr.x+1][curr.y]));
+            pq.offer(new Tuple(curr.x+1, curr.y, matrix[curr.x+1][curr.y])); //keep adding items from the same row we popped the item.
         }
         return pq.poll().value;
     }

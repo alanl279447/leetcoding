@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import javafx.util.Pair;
+
 
 public class WordLadder {
 //    Input:
@@ -20,7 +22,8 @@ public class WordLadder {
 //
 //    Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
 //            return its length 5.
-//   time complexity 0(MxN) m - length of words, n no of words.
+//   time complexity 0(M^2xN) m - length of words, n no of words.
+//   where MM is the length of each word and NN is the total number of words in the input word list.
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
 
@@ -32,10 +35,6 @@ public class WordLadder {
     //map string, List<String>
     //queue LinkedList beginWord, level
     //hot-*ot-h*t
-
-    //hot  *ot, h*t, ho*
-    //*ot   = hot, dot, lot
-
     public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
         // Since all words are of same length.
         int L = beginWord.length();
@@ -51,22 +50,22 @@ public class WordLadder {
                 // Value is a list of words which have the same intermediate generic word.
                 String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
                 ArrayList<String> transformations =
-                        allComboDict.getOrDefault(newWord, new ArrayList<String>());
+                        allComboDict.getOrDefault(newWord, new ArrayList<>());
                 transformations.add(word);
                 allComboDict.put(newWord, transformations);
             }
         }
 
         // Queue for BFS
-        Queue<Map.Entry<String, Integer>> Q = new LinkedList<Map.Entry<String, Integer>>();
-        Q.add(new AbstractMap.SimpleEntry<>(beginWord, 1));
+        Queue<Pair<String, Integer>> Q = new LinkedList<Pair<String, Integer>>();
+        Q.add(new Pair(beginWord, 1));
 
         // Visited to make sure we don't repeat processing same word.
         HashMap<String, Boolean> visited = new HashMap<String, Boolean>();
         visited.put(beginWord, true);
 
         while (!Q.isEmpty()) {
-            Map.Entry<String, Integer> node = Q.remove();
+            Pair<String, Integer> node = Q.remove();
             String word = node.getKey();
             int level = node.getValue();
             for (int i = 0; i < L; i++) {
@@ -84,7 +83,7 @@ public class WordLadder {
                     // Otherwise, add it to the BFS Queue. Also mark it visited
                     if (!visited.containsKey(adjacentWord)) {
                         visited.put(adjacentWord, true);
-                        Q.add(new AbstractMap.SimpleEntry<>(adjacentWord, level + 1));
+                        Q.add(new Pair(adjacentWord, level + 1));
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package com.example.ArrayStrings;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +21,27 @@ public class CombinationSum_39 {
 
         for(List<Integer> re: res) {
             System.out.println(re);
+        }
+    }
+
+    //backTracking
+    public static List<List<Integer>> combinationSumPrac(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrackingPrac(result, new ArrayList<>(), candidates, target, 0);
+        return result;
+    }
+
+    public static void backtrackingPrac(List<List<Integer>> result, List<Integer> temp, int[] candidate, int remainder, int position) {
+        if (remainder < 0) return;
+        if (remainder ==0) {
+            result.add(temp);
+        } else {
+            for (int i=position; i < candidate.length; i++) {
+                temp.add(candidate[position]);
+                System.out.println(temp.toString());
+                backtrackingPrac(result, temp, candidate, remainder-candidate[position], i);
+                temp.remove(temp.size()-1);
+            }
         }
     }
 

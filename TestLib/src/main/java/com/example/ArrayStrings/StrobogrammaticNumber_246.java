@@ -15,6 +15,8 @@ public class StrobogrammaticNumber_246 {
         System.out.println(isStrobogrammatic("9696"));
     }
 
+
+    //0,1,8,00,11,88,69,96
     public static boolean isStrobogrammatic(String num) {
         HashSet<String> set = new HashSet<>();
         set.add("0");

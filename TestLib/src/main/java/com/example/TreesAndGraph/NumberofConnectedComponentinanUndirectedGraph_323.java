@@ -18,18 +18,56 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
 //
 //    Output: 2
 //    https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
+//   time complextity 0(n+m)
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
 //        addNode(3);
         int[][] edges = {{0,1}, {1,2}, {3,4}};
-        int result = countComponents(5, edges);
+        int result = countComponentsDfs(5, edges);
+        result = countComponentsUnionFind(5, edges);
         System.out.print(result);
     }
 
+    //union find path compression & union by size
+    public static int countComponentsUnionFind(int n, int[][] edges) {
+        int[] parent = new int[n];
+        int[] size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+        int components = n;
+        for (int[] e : edges) {
+            int p1 = find(parent, e[0]);
+            int p2 = find(parent, e[1]);
+            if (p1 != p2) {
+                if (size[p1] < size[p2]) { // Merge small size to large size
+                    size[p2] += size[p1];
+                    parent[p1] = p2;
+                } else {
+                    size[p1] += size[p2];
+                    parent[p2] = p1;
+                }
+                components--;
+            }
+        }
+        return components;
+    }
 
-    public static int countComponents(int nodesCount, int[][] edges) {
+    public static int find(int[] roots, int id) {
+        while(roots[id] != id) {
+            roots[id] = roots[roots[id]];  // optional: path compression
+            id = roots[id];
+        }
+        return id;
+    }
+    //union find
+
+
+    //dfs soln
+    public static int countComponentsDfs(int nodesCount, int[][] edges) {
         if (nodesCount <= 1) return 1;
         Map<Integer, List<Integer>> map = new HashMap<>();
 
@@ -60,35 +98,8 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
           }
         }
     }
+    //dfs soln
 
-//    public static int countComponents(int n, int[][] edges) {
-//        if (n <= 1)
-//            return n;
-//        Map<Integer, List<Integer>> map = new HashMap<>();
-//        for (int i = 0; i < n; i++) {
-//            map.put(i, new ArrayList<>());
-//        }
-//        for (int[] edge : edges) {
-//            map.get(edge[0]).add(edge[1]);
-//            map.get(edge[1]).add(edge[0]);
-//        }
-//        Set<Integer> visited = new HashSet<>();
-//        int count = 0;
-//        for (int i = 0; i < n; i++) {
-//            if (visited.add(i)) {
-//                dfsVisit(i, map, visited);
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
-//
-//    private static void dfsVisit(int i, Map<Integer, List<Integer>> map, Set<Integer> visited) {
-//        for (int j : map.get(i)) {
-//            if (visited.add(j))
-//                dfsVisit(j, map, visited);
-//        }
-//    }
 
     public static void addNode(int value) {
         if (root == null)
@@ -113,4 +124,3 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
       TreeNode(int x) { val = x; }
   }
 }
-

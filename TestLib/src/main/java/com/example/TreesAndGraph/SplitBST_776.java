@@ -11,19 +11,19 @@ public class SplitBST_776 {
 //
 //    The given tree [4,2,6,1,3,5,7] is represented by the following diagram:
 //
-//            4
+//              4
 //            /   \
-//            2      6
-//            / \    / \
-//            1   3  5   7
+//          2      6
+//         / \    / \
+//        1   3  5   7
 //
 //            while the diagrams for the outputs are:
 //
-//            4
+//              4
 //            /   \
-//            3      6      and    2
-//            / \           /
-//            5   7         1
+//           3    6      and    2
+//               / \           /
+//              5   7         1
 //    https://leetcode.com/problems/split-bst/
 
     public static TreeNode root;
@@ -38,7 +38,6 @@ public class SplitBST_776 {
 
     public static TreeNode[] splitBST(TreeNode root, int V) {
         if(root==null) return new TreeNode[]{null, null};
-
         TreeNode[] splitted;
         if(root.val<= V) {
             splitted = splitBST(root.right, V);
@@ -49,7 +48,6 @@ public class SplitBST_776 {
             root.left = splitted[1];
             splitted[1] = root;
         }
-
         return splitted;
     }
 

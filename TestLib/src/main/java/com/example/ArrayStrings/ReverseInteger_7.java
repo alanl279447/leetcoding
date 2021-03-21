@@ -1,7 +1,5 @@
 package com.example.ArrayStrings;
 
-import java.util.Stack;
-
 public class ReverseInteger_7 {
 
 //    Input: 123
@@ -11,11 +9,13 @@ public class ReverseInteger_7 {
 //    Output: -321
 //
 //    https://leetcode.com/problems/reverse-integer/
+//     -2,147,483,648 (-231) to 2,147,483,647 (231-1)
 
     public static void main(String[] args) {
         int input = -123;
         System.out.println(reverse(input));
     }
+
 
     public static int reverse(int x) {
         int pop = 0;

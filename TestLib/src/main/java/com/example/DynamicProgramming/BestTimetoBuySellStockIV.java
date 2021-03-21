@@ -13,16 +13,29 @@ public class BestTimetoBuySellStockIV {
         System.out.print(maxProfit(prices, 2));
     }
 
-    public static int maxProfitSlow(int[] prices, int K) {
-        int[][]profit = new int[K][prices.length];
+//    In order to reduce it to O(nk), we must find t:0->j-1 max(prices[j]-prices[t]+dp[i-1][t-1])
+//    this expression in constant time. If you see carefully,
+//    t:0->j-1 max(prices[j]-prices[t]+dp[i-1][t-1]) is same as
+//    prices[j] + t:0->j-1 max(dp[i-1][t-1]-prices[t])
+//    Second part of the above expression maxTemp = t:0->j-1 max(dp[i-1][t-1]-prices[t])
+//    can be included in the dp loop by keeping track of the maximum value till j-1.
+//    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/discuss/54113/A-Concise-DP-Solution-in-Java
 
-        for (int i=0;i<profit.length;i++) {
-            for (int j =0; j < profit[0].length; j++) {
-                int maxValue = 0;
-                for (int m=0; m < j; m++) {
-                    maxValue = Math.max(maxValue, prices[j]-prices[m]+profit[i-1][m]);
-            }
-                profit[i][j]= Math.max(profit[i][j-1], maxValue);
+
+    public static int maxProfitTest(int[] prices, int K) {
+        if (K==0 || prices.length==0) return 0;
+
+        if (K > prices.length/2) {
+            return quickSolve(prices);
+        }
+        int[][] profit = new int[K+1][prices.length];  //i - transactions, j - days
+        for (int i=0; i < profit.length; i++) {
+            int tempMax =  - prices[0];
+            for (int j = 1; j < profit[0].length; j++) {
+                profit[i][j] = Math.max(profit[i][j-1], tempMax+prices[j]);
+                tempMax = Math.max(tempMax, profit[i-1][j-1] - prices[j]);
+                //t:0->j-1 max(prices[j]-prices[t]+dp[i-1][t-1]) is same as
+                //prices[j] + t:0->j-1 max(dp[i-1][t-1]-prices[t])
             }
         }
         return profit[K][prices.length-1];
@@ -32,12 +45,9 @@ public class BestTimetoBuySellStockIV {
         if (K == 0 || prices.length == 0) {
             return 0;
         }
-
         if (K >= prices.length / 2) return quickSolve(prices);
-
         int profit[][] = new int[K+1][prices.length];
-
-        for (int i = 1; i < profit.length; i++) {
+        for (int i = 1; i < profit.length; i++) {   // i - transaction, j - no of days
             int maxDiff = -prices[0];
             for (int j = 1; j < profit[0].length; j++) {
                 profit[i][j] = Math.max(profit[i][j-1], prices[j] + maxDiff);
@@ -55,24 +65,18 @@ public class BestTimetoBuySellStockIV {
         return profit;
     }
 
-
-
-
-
-//    public static int maxProfit(int[] prices) {
-//      int minPrice = Integer.MAX_VALUE;
-//      int maxPrice = 0;
+    //    public static int maxProfitSlow(int[] prices, int K) {
+//        int[][]profit = new int[K][prices.length];
 //
-//      for (int price: prices) {
-//        if (price < minPrice) {
-//            minPrice = price;
+//        for (int i=0;i<profit.length;i++) {
+//            for (int j =0; j < profit[0].length; j++) {
+//                int maxValue = 0;
+//                for (int m=0; m < j; m++) {
+//                    maxValue = Math.max(maxValue, prices[j]-prices[m]+profit[i-1][m]);
+//            }
+//                profit[i][j]= Math.max(profit[i][j-1], maxValue);
+//            }
 //        }
-//        if(price - minPrice > maxPrice) {
-//            maxPrice = price - minPrice;
-//        }
-//      }
-//      return maxPrice;
+//        return profit[K][prices.length-1];
 //    }
-
-
 }

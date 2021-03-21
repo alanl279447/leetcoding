@@ -40,12 +40,6 @@ public class VerticalOrderTraversalBinaryTree_987_test {
             System.out.println(res.toString());
     }
 
-//    public static List<List<Integer>> verticalTraversalPrac(TreeNode root) {
-//        List<List<Integer>> result = new ArrayList<>();
-//
-//
-//
-//    }
     static List<location> locations = new ArrayList<>();
     public static List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
@@ -61,7 +55,6 @@ public class VerticalOrderTraversalBinaryTree_987_test {
             }
             result.get(result.size()-1).add(current.val);
         }
-
         return result;
     }
 

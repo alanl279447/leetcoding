@@ -1,6 +1,7 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FindKClosestElements_658 {
@@ -8,6 +9,8 @@ public class FindKClosestElements_658 {
 //    Input: [1,2,3,4,5], k=4, x=3
 //    Output: [1,2,3,4]
 //    https://leetcode.com/problems/find-k-closest-elements/
+//    0(logn + K)
+//    O(logn) is for the time of binary search, while O(k)O(k) is for shrinking the index range to k elements.
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -19,6 +22,7 @@ public class FindKClosestElements_658 {
             System.out.print(res);
         }
     }
+
 
     public static List<Integer> findClosestElements(int[] arr, int k, int x) {
          List<Integer> result = new ArrayList<>();

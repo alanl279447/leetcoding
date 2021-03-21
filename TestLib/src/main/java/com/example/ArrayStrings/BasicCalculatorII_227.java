@@ -4,15 +4,20 @@ package com.example.ArrayStrings;
 //        Output: 5
 //        https://leetcode.com/problems/basic-calculator-ii/
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Stack;
+
 public class BasicCalculatorII_227 {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        System.out.println(calculate(" 3+5/2 "));
+        System.out.println(calculate(" -3+5/2 "));
 //        System.out.println(calculate(" 3-2 "));
     }
 
-
+//    Stack    -3   +2
+//          -1
     public static int calculate(String s) {
         if(s == null || s.length() == 0) {
             return 0;

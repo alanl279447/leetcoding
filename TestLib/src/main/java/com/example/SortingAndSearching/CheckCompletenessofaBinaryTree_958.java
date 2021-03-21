@@ -16,22 +16,40 @@ public class CheckCompletenessofaBinaryTree_958 {
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         addNode(1);
-        System.out.println(isCompleteTree(root));
+        System.out.println(isCompleteTreeTest(root));
+    }
+
+    //queue with the root added
+    //if queue.peek != null, add both the left & right
+    //while queue !isEmpty && queue.peek() == null poll elements
+    public static boolean isCompleteTreeTest(TreeNode root) {
+        Queue<TreeNode> bfs = new LinkedList<TreeNode>();
+        bfs.offer(root);
+        while (bfs.peek() != null) {
+            TreeNode node = bfs.poll();
+            bfs.offer(node.left);
+            bfs.offer(node.right);
+        }
+        while (!bfs.isEmpty() && bfs.peek() == null)
+            bfs.poll();
+        return bfs.isEmpty();
     }
 
     public static boolean isCompleteTree(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-
-        while(queue.peek() != null) {
-            TreeNode node = queue.poll();
-            queue.offer(node.left);
-            queue.offer(node.right);
-        }
-        while(!queue.isEmpty() && queue.peek() == null) {
-            queue.poll();
-        }
-         return queue.isEmpty();
+      if (root == null) return true;
+      Queue<TreeNode> queue = new LinkedList();
+      queue.offer(root);
+      boolean isEnd = false;
+      while (!queue.isEmpty()) {
+          TreeNode curr = queue.poll();
+          if (curr == null) isEnd = true;
+          else {
+              if(isEnd) return false;
+              queue.add(curr.left);
+              queue.add(curr.right);
+          }
+      }
+      return false;
     }
 
     public static class TreeNode {
@@ -48,7 +66,7 @@ public class CheckCompletenessofaBinaryTree_958 {
         root.left.right = new TreeNode(5);
 
         root.right = new TreeNode(3);
-        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(6);
     }
 
     public static TreeNode addNodeRecursive(TreeNode node, int value) {

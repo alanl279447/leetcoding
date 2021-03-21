@@ -12,10 +12,9 @@ public class MajorityElement169 {
     //space complexity 0(1)
 
     public static void main(String[] args) {
-        int[] input = {2,2,1,1,1,2,2};
+        int[] input = {2,2,2,1,1,1,2,2};
         System.out.println("Longest subString is: "+majorityElement(input));
     }
-
 
     public static int majorityElement(int[] nums) {
         int count = 0;

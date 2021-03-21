@@ -11,8 +11,8 @@ public class ValidPalindrome_125 {
 //        String input2 =  "race a car";
 //        String input = ".,";
         System.out.println("Palindrome result:  " + isPalindrome(input));
-//        System.out.println("Palindrome result:  " + isPalindrome(input2));
     }
+
 
     public static boolean isPalindrome(String s) {
         int length = s.length();

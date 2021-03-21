@@ -9,12 +9,13 @@ package com.example.ArrayStrings;
 
 public class ReadNCharactersGivenRead4_157 {
 
-
     //submitted to leetcode
     public static void main(String[] args) {
-        String input = "abca";
+//        String input = "abca";
+        String input = "abcdefghijk";
 //        System.out.println("Palindrome result:  " + isPalindrome(input));
     }
+
 
     public static int read(char[] buf, int n) {
         int total = 0;

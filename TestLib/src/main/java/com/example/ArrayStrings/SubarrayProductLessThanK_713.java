@@ -12,7 +12,6 @@ public class SubarrayProductLessThanK_713 {
 //        int[] input = {1,7,3,6,5,6};
         int[] input = {10,5,2,6};
         int res = numSubarrayProductLessThanK(input, 100);
-
         //for(List<Integer> re: res) {
             System.out.println(res);
 //        }

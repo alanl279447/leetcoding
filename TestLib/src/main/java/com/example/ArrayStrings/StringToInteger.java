@@ -7,73 +7,42 @@ public class StringToInteger {
 //    https://leetcode.com/problems/string-to-integer-atoi/
 
     public static void main(String[] args) {
-        System.out.println("Start main " +myAtoi3("-42"));
-        System.out.println("Start main " +myAtoi3("2147483646"));
-        System.out.println("Start main " +myAtoi3("2147483646"));
+        System.out.println("Start main " + myAtoi("-42"));
+        System.out.println("Start main " + myAtoi("2147483646"));
+        System.out.println("Start main " + myAtoi("2147483646"));
     }
 
-    private static int myAtoi3Practice(String str) {
-       int resultInt = 0, i =0, length = str.length(), signFlag = 0;
+    //1 check for preceeding/trailing white spaces
+    //2 sign
+    //3 Non digit i.e character
+    //4 & overflow
+    public static int myAtoi(String str) {
+        int index = 0, sign = 1, total = 0;
+        //1. Empty string
+        if (str.length() == 0) return 0;
 
-       while (i < length) {
-           if (str.charAt(i) == ' ') i++;
-       }
-       if (i < length && str.charAt(i) == '-') {
-           signFlag = -1;
-           i++;
-       } else if (i < length && str.charAt(i) == '+') {
-           signFlag = +1;
-           i++;
-       }
+        //2. Remove Spaces
+        while (str.charAt(index) == ' ' && index < str.length())
+            index++;
 
-       while (i < length && str.charAt(i)>='0' && str.charAt(i)<='9') {
-         if (resultInt>Integer.MAX_VALUE/10 || resultInt==Integer.MAX_VALUE/10 && str.charAt(i)-'0'>Integer.MAX_VALUE%10) {
-             return (signFlag>0)? Integer.MAX_VALUE : Integer.MIN_VALUE;
-         }
-         resultInt=resultInt*10+ str.charAt(i)-'0';
-       }
+        //3. Handle signs
+        if (str.charAt(index) == '+' || str.charAt(index) == '-') {
+            sign = str.charAt(index) == '+' ? 1 : -1;
+            index++;
+        }
 
+        //4. Convert number and avoid overflow
+        while (index < str.length()) {
+            int digit = str.charAt(index) - '0';
+            if (digit < 0 || digit > 9) break;
 
+            //check if total will be overflow after 10 times and add digit
+            if (Integer.MAX_VALUE / 10 < total || Integer.MAX_VALUE / 10 == total && Integer.MAX_VALUE % 10 < digit)
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 
-       while (i < length && str.charAt(i) >='0' && str.charAt(i) <='9') {
-           if (resultInt > Integer.MAX_VALUE/10 || resultInt==Integer.MAX_VALUE/10
-                   && str.charAt(i)-'0' > Integer.MAX_VALUE%10) {
-               return (signFlag>0)?Integer.MAX_VALUE:Integer.MIN_VALUE;
-           }
-           resultInt = resultInt*10+str.charAt(i)-'0';
-           i++;
-       }
-       return resultInt;
+            total = 10 * total + digit;
+            index++;
+        }
+        return total * sign;
     }
-
-
-
-    //zneed to improve of time complexity
-    private static int myAtoi3(String str) {
-        int returnInt = 0, i =0;
-        int signFlag = 1;
-        if (str == null || str.length() == 0) return returnInt;
-
-        while (i < str.length() && str.charAt(i) == ' ') {
-            i++;
-        }
-        if (i < str.length() && str.charAt(i) == '-') {
-            signFlag = -1;
-            i++;
-        } else if (i < str.length() && str.charAt(i) == '+') {
-            signFlag = +1;
-            i++;
-        }
-
-        while(i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
-            if (returnInt > Integer.MAX_VALUE/10 ||
-                    (returnInt == Integer.MAX_VALUE/10 && str.charAt(i) - '0'> Integer.MAX_VALUE%10)) {
-                return signFlag == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-            }
-            returnInt = returnInt * 10 + str.charAt(i) - '0';
-            i++;
-        }
-        return returnInt*signFlag;
-    }
-
 }

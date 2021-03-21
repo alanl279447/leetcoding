@@ -27,28 +27,44 @@ public class ConvertSortedListBinarySearchTree_109 {
     }
 
     public static TreeNode sortedListToBST(ListNode head) {
-        if(head==null) {
-            return null;
-        }
-        return toBST(head,null);
-    }
-
-    public static TreeNode toBST(ListNode head, ListNode tail){
-        ListNode slow = head;
-        ListNode fast = head;
-        if(head==tail) {
-            return null;
-        }
-
-        while(fast!=tail&&fast.next!=tail){
-            fast = fast.next.next;
+        if (head == null) return null;
+        if (head.next == null) return new TreeNode(head.val);
+        ListNode slow = head, pre = null, fast = head;
+        while (fast != null && fast.next != null) {
+            pre = slow;
             slow = slow.next;
+            fast = fast.next.next;
         }
-        TreeNode thead = new TreeNode(slow.val);
-        thead.left = toBST(head,slow);
-        thead.right = toBST(slow.next,tail);
-        return thead;
+        pre.next = null; //cut left sub list here
+        TreeNode n = new TreeNode(slow.val);
+        n.left = sortedListToBST(head);
+        n.right = sortedListToBST(slow.next);
+        return n;
     }
+
+//    public static TreeNode sortedListToBST(ListNode head) {
+//        if(head==null) {
+//            return null;
+//        }
+//        return toBST(head,null);
+//    }
+//
+//    public static TreeNode toBST(ListNode head, ListNode tail){
+//        ListNode slow = head;
+//        ListNode fast = head;
+//        if(head==tail) {
+//            return null;
+//        }
+//
+//        while(fast!=tail&&fast.next!=tail){
+//            fast = fast.next.next;
+//            slow = slow.next;
+//        }
+//        TreeNode thead = new TreeNode(slow.val);
+//        thead.left = toBST(head,slow);
+//        thead.right = toBST(slow.next,tail);
+//        return thead;
+//    }
 
     public static void addNode(int value) {
         root = new ListNode(value);

@@ -17,6 +17,7 @@ public class CourseSchedule_ii_210 {
 //    Explanation: There are a total of 2 courses to take.
 //    To take course 1 you should have finished course 0, and to take course 0 you should
 //    also have finished course 1. So it is impossible.
+//    https://leetcode.com/problems/course-schedule-ii/solution/
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -29,35 +30,65 @@ public class CourseSchedule_ii_210 {
         }
     }
 
-    public static int[] findOrder(int numCourses, int[][] prerequisites) {
-        int[] inDegree = new int[numCourses];
+    public static int[] findOrderTest(int numCourses, int[][] prerequisites) {
+      int[] inDegree = new int[numCourses];
+      List<List<Integer>> adj = new ArrayList<>();
+      int[] result = new int[numCourses];
+      for (int i = 0; i < numCourses; i++) {
+          adj.add(new ArrayList<>());
+      }
+      for (int[] pre: prerequisites) {
+          adj.get(pre[1]).add(pre[0]);  //adj list for the dependency
+          inDegree[pre[0]]++;           // increase the inDegree for the courses having pre-requisite
+      }
 
-        for (int i =0; i < prerequisites.length; i++) {
-            inDegree[prerequisites[i][0]]++;
+      Queue<Integer> queue = new LinkedList<>();
+      for (int i = 0; i < numCourses; i++) {
+          if (inDegree[i] == 0) {
+              queue.offer(i);
+          }
+      }
+
+      int index = 0;
+      while (!queue.isEmpty()) {
+          int node = queue.poll();
+          result[index++] = node;
+          for (int neigh: adj.get(node)) {
+              if (--inDegree[neigh] == 0) {
+                  queue.offer(neigh);
+              }
+          }
+      }
+      return index == numCourses ? result : new int[0];
+    }
+
+    //java BFS soln with adj list
+    public static int[] findOrder(int numCourses, int[][] prerequisites) {
+        int[] degree = new int[numCourses], res = new int[numCourses];
+        List<Integer>[] graph = new ArrayList[numCourses];
+        for (int i = 0; i < numCourses; i++) graph[i] = new ArrayList<>();
+        for (int i = 0; i < prerequisites.length; i++) {
+            degree[prerequisites[i][0]]++;
+            graph[prerequisites[i][1]].add(prerequisites[i][0]);
         }
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i =0; i < inDegree.length; i++) {
-            if (inDegree[i] == 0) {
-                queue.offer(i);
+        int index = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (degree[i] == 0) {
+                q.offer(i);
+                res[index++] = i;
             }
         }
-        int[] result = new int[numCourses];
-        int count = 0;
-        while(!queue.isEmpty()) {
-            int course = queue.poll();
-            result[count] = course;
-            for (int i = 0; i < prerequisites.length; i++) {
-                if (prerequisites[i][1] == course) {
-                    inDegree[prerequisites[i][0]]--;
-
-                    if (inDegree[prerequisites[i][0]] == 0) {
-                        queue.offer(prerequisites[i][0]);
-                    }
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            for (int nei : graph[cur]) {
+                if (--degree[nei] == 0) {
+                    q.offer(nei);
+                    res[index++] = nei;
                 }
             }
-            count++;
         }
-        return result;
+        return index == numCourses ? res : new int[0];
     }
 
 }

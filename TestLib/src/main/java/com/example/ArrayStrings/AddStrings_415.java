@@ -1,18 +1,13 @@
 package com.example.ArrayStrings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddStrings_415 {
 
 //    Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
 //    https://leetcode.com/problems/add-strings/
 
     public static void main(String args[]) {
-
         String result  = addStrings("123", "345");
         System.out.println(result);
-
     }
 
     public static String addStrings(String num1, String num2) {
@@ -30,5 +25,4 @@ public class AddStrings_415 {
         }
         return sb.reverse().toString();
     }
-
 }

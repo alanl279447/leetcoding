@@ -20,10 +20,7 @@ public class FindPivotIndex724 {
     public static void main(String args[]) {
         int[] input = {1,7,3,6,5,6};
         int res = pivotIndex(input);
-
-        //for(List<Integer> re: res) {
-            System.out.println(res);
-//        }
+        System.out.println(res);
     }
 
     public static int pivotIndex(int[] nums) {

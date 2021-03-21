@@ -53,6 +53,11 @@ public class CloneGraph_133 {
         public List<Node> neighbors;
         public Node() {}
 
+        public Node(int _val) {
+            val = _val;
+            neighbors = new ArrayList<Node>();
+        }
+
         public Node(int _val,List<Node> _neighbors) {
             val = _val;
             neighbors = _neighbors;

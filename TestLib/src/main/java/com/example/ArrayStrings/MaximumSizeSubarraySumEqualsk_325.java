@@ -24,25 +24,6 @@ public class MaximumSizeSubarraySumEqualsk_325 {
     //0,1,0,5,3,6
     //-3, -2, -3, 2, 0
     //(0,0),(1,0),(0,2),(5,3),(3,4),(6,5)
-
-//    public static int maxSubArrayLenPrac(int[] arr, int k) {
-//      int[] preSum = new int[arr.length+1];
-//      for (int i=1; i <= arr.length; i++) {
-//          preSum[i] += preSum[i-1]+arr[i-1 ];
-//      }
-//      Map<Integer, Integer> map = new HashMap();
-//      int ans = 0;
-//      for(int i=0; i < arr.length;i++) {
-//          int right = preSum[i];
-//          int left = right-k;
-//          if (map.containsKey(left)) {
-//              ans = Math.max(ans, i-map.get(left));
-//          }
-//
-//      }
-//
-//    }
-
 //    {1, -1, 5, -2, 3};
     public static int maxSubArrayLen(int[] arr, int k) {
         int n = arr.length;
@@ -64,4 +45,22 @@ public class MaximumSizeSubarraySumEqualsk_325 {
         }
         return ans;
     }
+
+    //    public static int maxSubArrayLenPrac(int[] arr, int k) {
+//      int[] preSum = new int[arr.length+1];
+//      for (int i=1; i <= arr.length; i++) {
+//          preSum[i] += preSum[i-1]+arr[i-1 ];
+//      }
+//      Map<Integer, Integer> map = new HashMap();
+//      int ans = 0;
+//      for(int i=0; i < arr.length;i++) {
+//          int right = preSum[i];
+//          int left = right-k;
+//          if (map.containsKey(left)) {
+//              ans = Math.max(ans, i-map.get(left));
+//          }
+//
+//      }
+//
+//    }
 }

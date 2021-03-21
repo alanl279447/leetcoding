@@ -20,6 +20,7 @@ public class TimeBasedKeyValueStore_981 {
 //kv.get("foo", 4); // output "bar2"
 //kv.get("foo", 5); //output "bar2"
 //    https://leetcode.com/problems/time-based-key-value-store/
+//    Time Complexity: O(1)O(1) for each set operation, and O(\log N)O(logN) for each get operation
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -61,7 +62,6 @@ public class TimeBasedKeyValueStore_981 {
                 TreeMap<Integer, String> treeMap = map.get(key);
                     Map.Entry<Integer, String> entry = treeMap.floorEntry(timestamp);
                     String value = entry != null ? entry.getValue(): "";
-
                 return value;
         }
     }

@@ -10,35 +10,34 @@ public class BestTimetoBuySellStockIII {
 //    Input: [7,6,4,3,1]
 //    Output: 0
 //    Explanation: In this case, no transaction is done, i.e. max profit = 0.
+//    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/39611/Is-it-Best-Solution-with-O(n)-O(1).
 
     public static void main(String[] args) {
         int[] prices = {7, 1, 5, 3, 6, 10};
         System.out.print(maxProfit(prices));
     }
-
+//    Here, the oneBuy keeps track of the lowest price, and oneBuyOneSell keeps track of the biggest profit we could get.
+//    Then the tricky part comes, how to handle the twoBuy? Suppose in real life,
+//    you have bought and sold a stock and made $100 dollar profit. When you want to purchase a stock which costs you $300 dollars,
+//    how would you think this? You must think, um, I have made $100 profit,
+//    so I think this $300 dollar stock is worth $200 FOR ME since I have hold $100 for free.
+//    There we go, you got the idea how we calculate twoBuy!!
+//    We just minimize the cost again!! The twoBuyTwoSell is just making as much profit as possible.
+//    Hope this explanation helps other people to understand this!
     public static int maxProfit(int[] prices) {
-        int length = prices.length;
-        if (length <= 0) {
-            return 0;
+        int oneBuyOneSell = 0;
+        int twoBuyTwoSell = 0;
+        int oneBuy = Integer.MAX_VALUE;
+        int twoBuy = Integer.MAX_VALUE;
+
+        for(int i = 0; i < prices.length; i++) {
+            int p = prices[i];
+            oneBuy = Math.min(oneBuy, p);
+            oneBuyOneSell = Math.max(oneBuyOneSell, p - oneBuy);
+            twoBuy = Math.min(twoBuy, p - oneBuyOneSell);
+            twoBuyTwoSell = Math.max(twoBuyTwoSell, p - twoBuy);
         }
-        int leftMin = prices[0];
-        int rightMax = prices[length - 1];
-        int[] leftProfits = new int[length];
-        // pad the right DP array with an additional zero for convenience.
-        int[] rightProfits = new int[length + 1];
-        // construct the bidirectional DP array
-        for (int l = 1; l < length; ++l) {
-            leftProfits[l] = Math.max(leftProfits[l - 1], prices[l] - leftMin);
-            leftMin = Math.min(leftMin, prices[l]);
-            int r = length - 1 - l;
-            rightProfits[r] = Math.max(rightProfits[r + 1], rightMax - prices[r]);
-            rightMax = Math.max(rightMax, prices[r]);
-        }
-        int maxProfit = 0;
-        for (int i = 0; i < length; ++i) {
-            maxProfit = Math.max(maxProfit, leftProfits[i] + rightProfits[i + 1]);
-        }
-        return maxProfit;
+        return twoBuyTwoSell;
     }
 
 

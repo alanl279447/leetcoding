@@ -32,8 +32,8 @@ public class ReverseLinkedListII_92 {
           m--;
           n--;
         }
-        ListNode connectionNode=prev;
-        ListNode tail=current_node;
+        ListNode firstNode=prev;  //1
+        ListNode tail=current_node;   // 2
 
         while(n>0) {
             ListNode temp = current_node.next;
@@ -42,12 +42,12 @@ public class ReverseLinkedListII_92 {
             current_node=temp;
             n--;
         }
-        if (connectionNode!= null) {
-            connectionNode.next=prev;
+        if (firstNode!= null) {
+            firstNode.next=prev;   //prev=4
         } else {
             head=prev;
         }
-        tail.next=current_node;
+        tail.next=current_node;  //tail = 2
         return head;
     }
 

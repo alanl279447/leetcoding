@@ -7,15 +7,12 @@ import java.util.Queue;
 
 public class BinaryTreeVerticalOrderTraversal_314 {
 //    Input: [3,9,20,null,null,15,7]
-//
 //              3
 //            /  \
 //           9   8
 //        /   \ /  \
 //       4    0 1   7
-//
 //    Output:
-//
 //            [
 //            [4],
 //            [9],
@@ -37,7 +34,6 @@ public class BinaryTreeVerticalOrderTraversal_314 {
     }
 
     private static int min = 0, max = 0;
-
     public static List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
         if(root == null)    return list;

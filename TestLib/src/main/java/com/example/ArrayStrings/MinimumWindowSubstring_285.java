@@ -6,8 +6,8 @@ public class MinimumWindowSubstring_285 {
 //    Output: "BANC"
 
     public static void main(String[] args) {
-        String input = "ADOBECODEBANC";
-//        String input = "ADOBANCZ";
+//        String input = "ADOBECODEBANC";
+        String input = "ADOBANCZ";
         String T = "ABC";
         String result = minWindow(input, T);
         System.out.print(result);
@@ -17,7 +17,6 @@ public class MinimumWindowSubstring_285 {
         if (T.length() > input.length()) {
             return "";
         }
-
         int[] map = new int[128];
         char[] Tchars = T.toCharArray();
         for (char c: Tchars) {
@@ -41,10 +40,8 @@ public class MinimumWindowSubstring_285 {
                 start++;
             }
         }
-
         return len == Integer.MAX_VALUE ? "":input.substring(minStart, minStart+len);
     }
-
 
     public static String minWindowWork(String s, String t) {
         int [] map = new int[128];
@@ -70,30 +67,4 @@ public class MinimumWindowSubstring_285 {
         }
         return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
     }
-
-
-//    public static String minWindowTest(String input, String T) {
-//
-//        int[] map = new int[128];
-//        for (char c: T.toCharArray()) {
-//            map[c]++;
-//        }
-//        int end =0, start =0, minStart =0, minEnd = 0, counter = T.length(), minLen = Integer.MAX_VALUE;
-//        while(end < input.length()) {
-//            char c = input.charAt(end);
-//            if (map[c] > 0) counter--;
-//            map[c]--;
-//            end++;
-//            while (counter == 0) {
-//                if (minLen < end - start) {
-//                    minLen = end - start;
-//                }
-//                char s = input.charAt(start);
-//                map[s]++;
-//                if(map[s] > 0) counter++;
-//                start++;
-//            }
-//        }
-//        return null;
-//    }
 }

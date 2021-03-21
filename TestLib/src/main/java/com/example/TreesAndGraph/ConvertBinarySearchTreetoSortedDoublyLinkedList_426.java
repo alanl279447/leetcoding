@@ -1,9 +1,12 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
 
 public class ConvertBinarySearchTreetoSortedDoublyLinkedList_426 {
@@ -27,31 +30,34 @@ public class ConvertBinarySearchTreetoSortedDoublyLinkedList_426 {
           }
     }
 
+    public static Node helperIterative(Node node) {
+        if( node == null) return node;
+        Node dummy = new Node(0);
+        Node prev = dummy;
+        Stack<Node> stack = new Stack();
+        Node curr = node;
+
+        while(!stack.isEmpty()|| curr != null){
+            while(curr!= null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+
+            curr = stack.pop();
+            prev.right = curr;
+            curr.left = prev;
+            prev = curr;
+            curr = curr.right;
+        }
+        dummy.right.left = prev;
+        prev.right = dummy.right;
+        return dummy.right;
+    }
+
     static Node first = null;
     static Node last = null;
-
-    public static Node treeToDoublyListPrac(Node root) {
-        helperPrac(root);
-        last.right=first;
-        first.left=last;
-        return first;
-    }
-
-    public static void helperPrac(Node node) {
-        if (node == null) return;
-        helperPrac(node.left);
-        if (last != null) {
-            node.left=last;
-            last.right=node;
-        } else {
-
-        }
-    }
-
-
     public static Node treeToDoublyList(Node root) {
         if (root == null) return null;
-
         helper(root);
         // close DLL
         last.right = first;
@@ -90,8 +96,6 @@ public class ConvertBinarySearchTreetoSortedDoublyLinkedList_426 {
         root.right.left = new Node(15);
         root.right.right = new Node(7);
     }
-
-
 
     public static class Node {
         int val;

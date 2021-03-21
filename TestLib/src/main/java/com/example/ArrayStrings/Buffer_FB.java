@@ -1,14 +1,15 @@
 package com.example.ArrayStrings;
 
-//        File file("abcdefghijk"); // File is "abcdefghijk", initially file pointer (fp) points to 'a'
-//        char[] buf = new char[4]; // Create buffer with enough space to store characters
-//        read4(buf); // read4 returns 4. Now buf = "abcd", fp points to 'e'
-//        read4(buf); // read4 returns 4. Now buf = "efgh", fp points to 'i'
-//        read4(buf); // read4 returns 3. Now buf = "ijk", fp points to end of file
+//        Buffer buf = new Buffer(5); // [. . . . .]
+//        buf.write([abc]); // => 3 [abc . .]
+//        buf.write([def]); // => 2 because the buffer is full, you can only write two chars [abcde]
+//        buf.read(3); // => [abc] [. . . de]
+//        buf.write([xyzabc]); // => 3 [xyzde]
+//        buf.read(8); // returns [dexyz] becuase 'de' was written first [. . . . .]
 //https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/
+//https://leetcode.com/discuss/interview-question/354889/Facebook-or-Onsite-or-Buffer
 
 public class Buffer_FB {
-
     static class Buffer {
         int size;
         int start;
@@ -55,7 +56,7 @@ public class Buffer_FB {
         }
     }
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+//        System.out.println("Hello World!");
         Buffer t = new Buffer(5);
         char[] in = {'a','b','c'};
         t.write(in);

@@ -8,7 +8,6 @@ package com.example.ArrayStrings;
 public class ShortestWordDistance_243 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         String[] words = {"practice", "makes", "perfect", "coding", "makes"};
         System.out.println(shortestDistance(words, "makes", "coding"));
     }
@@ -16,7 +15,6 @@ public class ShortestWordDistance_243 {
     public static int shortestDistance(String[] words, String word1, String word2) {
         int i1 = -1, i2 = -1;
         int minDistance = words.length;
-        int currentDistance;
         for (int i = 0; i < words.length; i++) {
             if (words[i].equals(word1)) {
                 i1 = i;

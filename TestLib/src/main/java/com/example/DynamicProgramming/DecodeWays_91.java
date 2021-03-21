@@ -10,17 +10,14 @@ public class DecodeWays_91 {
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int res = numDecodings("226");
-
+        //System.out.println(res);
         System.out.println("234".substring(1,2));
         System.out.println("234".substring(0,2));
         System.out.println("234".substring(0,3));
-
-//        System.out.println(res);
     }
 
     //space complexity 0(n)
     public static int numDecodings(String s) {
-
       int[] dp = new int[s.length()+1];
       dp[0] = 1;
       dp[1] = s.charAt(0) =='0' ? 0:1;
@@ -38,10 +35,6 @@ public class DecodeWays_91 {
       }
       return dp[s.length()];
     }
-
-
-
-
 
 //    public static int numDecodingsOptimized(String s) {
 //

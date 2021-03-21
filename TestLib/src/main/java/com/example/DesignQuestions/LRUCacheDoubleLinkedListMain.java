@@ -24,6 +24,10 @@ public class LRUCacheDoubleLinkedListMain {
         System.out.println(param_1);
     }
 
+
+    //DoublyLinkedList and a HashMap to store the nodes.
+    //constant add and remove the DLL, and easy lookup with the hashMAp
+
     public static class LRUCache {
 
         class DLinkedNode {
@@ -92,7 +96,6 @@ public class LRUCacheDoubleLinkedListMain {
 
             // move the accessed node to the head;
             moveToHead(node);
-
             return node.value;
         }
 

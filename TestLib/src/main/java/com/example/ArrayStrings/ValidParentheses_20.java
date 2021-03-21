@@ -1,10 +1,10 @@
 package com.example.ArrayStrings;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class ValidParentheses_20 {
-
 //    Input: "([)]"
 //    Output: false
 //
@@ -14,8 +14,24 @@ public class ValidParentheses_20 {
 
     public static void main(String[] args) {
 //        String input = "()[]{}";
-        String input = "([)]";
-        System.out.println(isValid(input));
+//        String input = "([)]";
+        String input = "([}}])";
+        System.out.println(isValidTest(input));
+    }
+
+    public static boolean isValidTest(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '{')
+                stack.push('}');
+            else if (c == '[')
+                stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c)
+                return false;
+        }
+        return stack.isEmpty();
     }
 
     public static boolean isValid(String s) {

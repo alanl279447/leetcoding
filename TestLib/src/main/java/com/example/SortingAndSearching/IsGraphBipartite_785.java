@@ -31,7 +31,6 @@ public class IsGraphBipartite_785 {
     public static boolean isBipartite(int[][] graph) {
         int length = graph.length;
         int[] colors = new int[length];
-
         for (int i =0; i <length; i++) {
             if (colors[i] != 0) {
                 continue;
@@ -39,7 +38,6 @@ public class IsGraphBipartite_785 {
             Queue<Integer> queue = new LinkedList<>();
             queue.offer(i);
             colors[i] = 1;
-
             while(!queue.isEmpty()) {
                 int node = queue.poll();
                 for (int neigh: graph[node]) {

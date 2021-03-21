@@ -3,6 +3,7 @@ package com.example.ArrayStrings;
 import com.example.TreesAndGraph.BSTLevelOrderTraversal;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -39,20 +40,16 @@ public class inOrderTraversal {
     }
 
     public static List<Integer> inorderTraversalRecursive(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        inOrderTraversalInner(root, result);
-        return result;
+        if (root == null) return new LinkedList<>();
+        return inOrderTraversalInner(root, new LinkedList<>());
     }
 
-    public static void inOrderTraversalInner(TreeNode current, List<Integer> result){
-        if (current == null) return;
-
-        if (current.left != null)
-           inOrderTraversalInner(current.left, result);
-        result.add(current.val);
-
-        if (current.right !=null)
-         inOrderTraversalInner(current.right, result);
+    public static List<Integer> inOrderTraversalInner(TreeNode node, List<Integer> list) {
+        if (node == null) return list;
+        inOrderTraversalInner(node.left, list);
+        list.add(node.val);
+        inOrderTraversalInner(node.right, list);
+        return list;
     }
 
 

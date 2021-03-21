@@ -23,38 +23,75 @@ public class DeleteNodeinaBST_450 {
 
     public static void main(String[] args) {
         addNode(5);
-        TreeNode result = deleteNode(root, 5);
-          System.out.println(result);
+        TreeNode result = deleteNode(root, 3);
+        System.out.println(result);
     }
+
+    /*
+    One step right and then always left
+    */
+    public static int successor(TreeNode root) {
+        root = root.right;
+        while (root.left != null) root = root.left;
+        return root.val;
+    }
+
+    /*
+    One step left and then always right
+    */
+    public static int predecessor(TreeNode root) {
+        root = root.left;
+        while (root.right != null) root = root.right;
+        return root.val;
+    }
+
+    public static TreeNode deleteNodeTest(TreeNode root, int key) {
+      if (root == null) return root;
+
+      if (key > root.val) {
+         // right subTree
+         root.right = deleteNodeTest(root.right, key);
+      } else if (key < root.val) {
+          root.left = deleteNodeTest(root.left, key);
+      } else {
+          if (root.left == null && root.right == null) return null;
+          else if (root.right != null) {
+              root.val = successor(root);
+              root.right = deleteNodeTest(root.right, root.val);
+          } else {
+              root.val = predecessor(root);
+              root.left = deleteNodeTest(root.left, root.val);
+          }
+      }
+       return root;
+    }
+
+
 
 
     public static TreeNode deleteNode(TreeNode root, int key) {
-        if(root == null){
-            return null;
-        }
-        if(key < root.val){
-            root.left = deleteNode(root.left, key);
-        }else if(key > root.val){
-            root.right = deleteNode(root.right, key);
-        }else{
-            if(root.left == null){
-                return root.right;
-            }else if(root.right == null){
-                return root.left;
-            }
+        if (root == null) return null;
 
-            TreeNode minNode = findMin(root.right);
-            root.val = minNode.val;
-            root.right = deleteNode(root.right, root.val);
+        // delete from the right subtree
+        if (key > root.val) root.right = deleteNode(root.right, key);
+            // delete from the left subtree
+        else if (key < root.val) root.left = deleteNode(root.left, key);
+            // delete the current node
+        else {
+            // the node is a leaf
+            if (root.left == null && root.right == null) root = null;
+                // the node is not a leaf and has a right child
+            else if (root.right != null) {
+                root.val = successor(root);
+                root.right = deleteNode(root.right, root.val);
+            }
+            // the node is not a leaf, has no right child, and has a left child
+            else {
+                root.val = predecessor(root);
+                root.left = deleteNode(root.left, root.val);
+            }
         }
         return root;
-    }
-
-    private static TreeNode findMin(TreeNode node){
-        while(node.left != null){
-            node = node.left;
-        }
-        return node;
     }
 
     public static void addNode(int value) {

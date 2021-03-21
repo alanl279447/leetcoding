@@ -19,34 +19,13 @@ public class TopKFrequentWords_Queue {
 //    Output: ["the", "is", "sunny", "day"]
 //    Explanation: "the", "is", "sunny" and "day" are the four most frequent words,
 //    with the number of occurrence being 4, 3, 2 and 1 respectively.
+//    https://leetcode.com/problems/top-k-frequent-words/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         String[] words = {"i", "love", "leetcode", "i", "love", "coding"};
         System.out.print(topKFrequent(words, 2));
-    }
-
-    public static List<String> topKFrequentTest(String[] words, int k) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String word: words) {
-            map.put(word, map.getOrDefault(word, 0)+1);
-        }
-        PriorityQueue<String> pq = new PriorityQueue<>((a,b) -> map.get(a)== map.get(b) ?
-                a.compareTo(b) : map.get(a)-map.get(b));
-        for (String word: words) {
-            pq.offer(word);
-            if (pq.size() > k) {
-                pq.poll();
-            }
-        }
-
-        List<String> result = new ArrayList<>();
-        for (String item: pq) {
-            result.add(item);
-        }
-        Collections.reverse(result);
-        return result;
     }
 
     public static List<String> topKFrequent(String[] words, int k) {
@@ -69,33 +48,32 @@ public class TopKFrequentWords_Queue {
         return ans;
     }
 
-//    public static List<String> topKFrequent(String[] words, int k) {
-//        Map<String, Integer> count = new HashMap();
-//        for (String word : words) {
-//            count.put(word, count.getOrDefault(word, 0) + 1);
-//        }
-//        List<String> candidates = new ArrayList(count.keySet());
-//        Collections.sort(candidates, (w1, w2) -> count.get(w1).equals(count.get(w2)) ?
-//                w1.compareTo(w2) : count.get(w2) - count.get(w1));
-//
-//        return candidates.subList(0, k);
-//    }
-
-//    public static List<String> topKFrequent(String[] words, int k) {
-//     Map<String, Integer> map = new HashMap<>();
-//     for (String word: words) {
-//         map.put(word, map.getOrDefault(word, 0) +1);
-//     }
-//     List<String>[] bucket = new List[words.length];
-//     for (String element: map.keySet()) {   //list of string
-//         Integer frequency = map.getOrDefault(element, 0);
-//         if(bucket[frequency] == null) {
-//             bucket[frequency] = new ArrayList<>();
-//         }
-//         bucket[frequency].add(element);
-//     }
-//
-//    }
+    // time complexity 0(n)
+    public static List<String> topKFrequentFast(String[] words, int k) {
+        Map<String, Integer> map = new HashMap<>();
+        int max = 0;
+        for (String word: words) {
+            map.put(word, map.getOrDefault(word, 0) +1);
+            max = Math.max(max, map.get(word));
+        }
+        List<String>[] bucket = new ArrayList[max+1];
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+            int freq = entry.getValue();
+            if (bucket[freq] == null) {
+                bucket[freq] = new ArrayList<>();
+            }
+            bucket[freq].add(entry.getKey());
+        }
+        List<String> result = new ArrayList<>();
+        for (int i = max; i>=0 && result.size() < k; i--) {
+             List<String> entries = bucket[i];
+             if (entries != null) {
+                 Collections.reverse(bucket[i]);
+                 result.addAll(bucket[i]);
+             }
+        }
+        return result.subList(0, k);
+    }
 
     // solution with time complexity for O(n)
 //    public static List<Integer> topKFrequentFast(int[] nums, int k) {

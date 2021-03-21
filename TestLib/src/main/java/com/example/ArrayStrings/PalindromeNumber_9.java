@@ -13,24 +13,6 @@ public class PalindromeNumber_9 {
         System.out.println(isPalindrome(number));
     }
 
-    public static boolean isPalindromePractice(int number) {
-        if (number <= 0) {
-            return false;
-        }
-
-        int reverseNumber = 0;
-        while(number < reverseNumber) {
-            reverseNumber = reverseNumber*10+number%10;
-            number = number/10;
-        }
-
-        if (reverseNumber==number || reverseNumber==number/10){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static boolean isPalindrome(int number) {
 
         int reversedNumber = 0;

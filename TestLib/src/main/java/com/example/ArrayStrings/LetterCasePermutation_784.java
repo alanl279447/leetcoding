@@ -16,9 +16,9 @@ public class LetterCasePermutation_784 {
 //    Input: S = "12345"
 //    Output: ["12345"]
 //    https://leetcode.com/problems/letter-case-permutation/
+//    : O(2^{N} * N)
 
     public static void main(String args[]) {
-
         List<String> result = letterCasePermutation("a1b2");
         for(String res: result) {
             System.out.println(res);

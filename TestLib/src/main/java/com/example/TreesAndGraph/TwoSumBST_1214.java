@@ -1,8 +1,10 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
-public class TwoSumBST_1214 {
+public class    TwoSumBST_1214 {
 
 //    Input: root1 = [2,1,4], root2 = [1,0,3], target = 5
 //    Output: true
@@ -19,6 +21,10 @@ public class TwoSumBST_1214 {
         boolean result = twoSumBSTs(root1, root2, 18);
         System.out.println(result);
     }
+
+//public static boolean twoSumBSTs(TreeNode root1, TreeNode root2, int target) {
+//If target > sum,  then move to the inorder successor of the current node of root1,
+//else   move to the inorder predecessor of the current node of root2.
 
     public static boolean twoSumBSTs(TreeNode root1, TreeNode root2, int target) {
         if (root1 == null || root2 == null) {

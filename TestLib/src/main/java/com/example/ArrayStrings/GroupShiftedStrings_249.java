@@ -27,6 +27,26 @@ public class GroupShiftedStrings_249 {
             System.out.println(item.toString());
     }
 
+
+//    public static List<List<String>> groupStringsTest(String[] inputs) {
+//        HashMap<String, List<String>> map = new HashMap<>();
+//
+//        for (String input: inputs) {
+//
+//
+//
+//        }
+//    }
+//
+//    public String getKey(String input) {
+//        int len = input.length();
+//
+//
+//    }
+//
+
+
+
     public static List<List<String>> groupStrings(String[] strings) {
         Map<String, List<String>> map = new HashMap<>();
 
@@ -39,6 +59,7 @@ public class GroupShiftedStrings_249 {
         return new ArrayList<>(map.values());
     }
 
+//    abx -> 122, amo -> 122. Ut didnt cover this. Need splitter to differentiate between them.
     private static String getKey(String s) {
         char[] chars = s.toCharArray();
         StringBuilder key = new StringBuilder();

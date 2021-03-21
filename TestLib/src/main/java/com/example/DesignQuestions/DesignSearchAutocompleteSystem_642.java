@@ -65,7 +65,6 @@ public class DesignSearchAutocompleteSystem_642 {
         TrieNode root;
         String prefix;
 
-
         public AutocompleteSystem(String[] sentences, int[] times) {
             root = new TrieNode();
             prefix = "";

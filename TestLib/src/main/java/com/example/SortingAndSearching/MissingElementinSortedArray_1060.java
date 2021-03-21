@@ -11,8 +11,6 @@ public class MissingElementinSortedArray_1060 {
 //    Explanation:
 //    The missing numbers are [3,5,6,7,...], hence the third missing number is 6.
 //    https://leetcode.com/problems/missing-element-in-sorted-array/
-
-//    public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int[] nums1 = {4,7,9,10};
@@ -27,7 +25,6 @@ public class MissingElementinSortedArray_1060 {
         if (countMissing < k) {
             return nums[len - 1] + k - countMissing;
         }
-
         while (lo < hi - 1) {
             int mid = lo + (hi - lo) / 2;
             int newCountMissing = nums[mid] - nums[lo] - (mid - lo);
@@ -39,7 +36,6 @@ public class MissingElementinSortedArray_1060 {
                 lo = mid;
             }
         }
-
         return nums[lo] + k;
     }
 }

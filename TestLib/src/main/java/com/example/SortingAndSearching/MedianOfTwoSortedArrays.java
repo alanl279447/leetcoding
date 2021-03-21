@@ -29,7 +29,7 @@ public class MedianOfTwoSortedArrays {
     }
 
     public static double findMedianSortedArraysBinarySearch(int input1[], int input2[]) {
-        //if input1 length is greater than switch them so that input1 is smaller than input2.
+        //if input1 length is greater than switch, to faster execution
         if (input1.length > input2.length) {
             return findMedianSortedArraysBinarySearch(input2, input1);
         }
@@ -68,41 +68,6 @@ public class MedianOfTwoSortedArrays {
 
         //Only we we can come here is if input arrays were not sorted. Throw in that scenario.
         throw new IllegalArgumentException();
-    }
-
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int p1 = 0, p2 = 0, m = nums1.length, n = nums2.length;
-        int totalLength = m + n;
-
-        if (totalLength % 2 == 0) {  //odd length
-            return (findKthNumber(nums1, 0, nums2, 0, totalLength/2) +
-                    findKthNumber(nums1, 0, nums2, 0, totalLength/2 + 1))/2;
-        } else {
-            return findKthNumber(nums1, 0, nums2, 0, totalLength/2 +1);
-        }
-    }
-
-    public static int findKthNumber(int[] nums1, int aStart, int[] nums2, int bStart, int k) {
-       if(aStart >= nums1.length) {
-            return nums2[bStart + k -1];
-       } else if (bStart > nums2.length) {
-           return nums1[aStart + k -1];
-       }
-       if (k == 1) {
-           return Math.min(nums1[aStart], nums2[bStart]);
-       }
-
-       int key1Index = aStart + k/2 -1;
-       int key2Index = bStart + k/2 -1;
-
-       int key1 = key1Index < nums1.length ? nums1[key1Index] : Integer.MAX_VALUE;
-       int key2 = key2Index < nums2.length ? nums2[key2Index] : Integer.MAX_VALUE;
-
-       if (key1 < key2) {
-           return findKthNumber(nums1, aStart+k/2, nums2, bStart, k-k/2);
-       } else {
-           return findKthNumber(nums1, aStart, nums2, bStart+k/2, k-k/2);
-       }
     }
 
     public static class TreeNode {

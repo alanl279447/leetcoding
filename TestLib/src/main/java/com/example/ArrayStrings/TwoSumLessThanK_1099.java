@@ -2,6 +2,7 @@ package com.example.ArrayStrings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 //Input: A = [34,23,1,24,75,33,54,8], K = 60
 //        Output: 58

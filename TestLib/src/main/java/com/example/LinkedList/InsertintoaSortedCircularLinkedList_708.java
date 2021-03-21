@@ -24,37 +24,38 @@ public class InsertintoaSortedCircularLinkedList_708 {
         }
         System.out.println("val: "+result.val);
     }
+    
 
+    //is head is null, create node, next pointing to self and return node.
+    //find the maxNode, min = maxNode.next, check if insertval >= max || <= min
+    //loop and find the previos element
     public static Node insert(Node head, int insertVal) {
-       if (head == null) {
-           Node newNode = new Node(insertVal, null);
-           newNode.next = newNode;
-           return newNode;
-       }
-        Node prev = head;
-        Node curr = head.next;
-        boolean toInsertItem = false;
-        do {
-            //item is between two nodes!!
-            if (prev.val <= insertVal  && insertVal<= curr.val) {
-                toInsertItem=true;
+        if (head == null) {    //case 1: empty list, insert at the head
+            Node node = new Node();
+            node.val = insertVal;
+            node.next = node;
+            return node;
+        }
+
+        Node max = head;
+
+        while (max.next != head && max.val <= max.next.val) {
+            max = max.next;
+        }
+
+        //is insertVal is greater than max or less than min, insert after max
+        Node min = max.next, cur = min;
+        if (insertVal >= max.val || insertVal <= min.val) {
+            Node node = new Node(insertVal, min);
+            max.next = node;
+        } else {
+            while (cur.next.val < insertVal) {//find the node less than the insertValue
+                cur = cur.next;
             }
 
-            if (prev.val > curr.val) {
-                if (insertVal > prev.val || insertVal < curr.val) {
-                    toInsertItem=true;
-                }
-            }
-            if (toInsertItem) {
-                prev.next = new Node(insertVal, curr);
-                return head;
-            }
-            prev = curr;
-            curr = curr.next;
-
-        } while (prev != head);
-
-        prev.next = new Node(insertVal, curr);
+            Node node = new Node(insertVal, cur.next);
+            cur.next = node;
+        }
         return head;
     }
 

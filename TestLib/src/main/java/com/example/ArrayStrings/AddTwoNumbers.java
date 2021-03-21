@@ -25,7 +25,7 @@ public class AddTwoNumbers {
         if (carrydigit > 0) {
             sum.next = new ListNode(carrydigit);
         }
-        return sum.next;
+        return dummyHead.next;
     }
 
     public ListNode createNode(int[] vals) {

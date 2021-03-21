@@ -12,9 +12,33 @@ public class calculateStringFromBinary {
 //    So 8 times the above two operations were required in this number.
 //     https://www.geeksforgeeks.org/number-of-steps-required-to-convert-a-binary-number-to-one/
 
+
+    // s is odd +1
+    // s is even /2
+
+    //1000
+    //0100
+    //0010
+    //0001
+
+    //0101
+    //1000
+    //0110
+    //0100
+    //0010
+    //0001
+
+    // if char ==0  count++, i--
+    //if char ==1  count++ i-- until you find a 0, change it to 1
+    //0101         1,2,3,4
+    //0110
+    //1000
+    //
+
     public static void main(String[] args) {
         String s;
-        s = "1010";
+//        s = "1010";
+        s = "0110";
         System.out.println(calculate_(s));
     }
 

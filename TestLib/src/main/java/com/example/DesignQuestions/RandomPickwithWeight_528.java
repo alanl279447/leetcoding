@@ -1,7 +1,5 @@
 package com.example.DesignQuestions;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class RandomPickwithWeight_528 {
@@ -13,69 +11,36 @@ public class RandomPickwithWeight_528 {
     public static void main(String[] args) {
 
         int[] nums = new int[] {1,3,1,5};
-        SolutionPrac minStack = new SolutionPrac(nums);
+        Solution minStack = new Solution(nums);
         System.out.println(minStack.pickIndex());
     }
 
-    public static class SolutionPrac {
-
-        List<Integer> weightedSum = null;
-        int total = 0;
-        Random random = null;
-        public SolutionPrac(int[] ws) {
-            weightedSum = new ArrayList<>();
-            random = new Random();
-           for (int w: ws) {
-               total +=w;
-               weightedSum.add(total);   //1,4,5,10
-           }
-        }
-
-        public int pickIndex() {
-            int index = 7;//andom.nextInt(total);
-            int lo = 0;
-            int high = weightedSum.size() - 1;
-
-            while (lo <= high) {
-                int mid = lo + (high - lo) / 2;
-                if (lo==high) break;
-                if (index > weightedSum.get(mid)) {
-                    lo = mid + 1;
-                } else {
-                    high = mid;
-                }
-            }
-            return lo;
-        }
-    }
-
     public static class Solution {
-
-        List<Integer> psum = new ArrayList<>();
-        int tot = 0;
-        Random rand = new Random();
+        Random random;
+        int[] wSums;
 
         public Solution(int[] w) {
-            for (int x : w) {
-                tot += x;
-                psum.add(tot);
-            }
+            this.random = new Random();
+            for(int i=1; i<w.length; ++i)
+                w[i] += w[i-1];
+            this.wSums = w;
         }
-        // psum 1,4,5,10
+
         public int pickIndex() {
-            int targ = 7;//rand.nextInt(tot);
-            int lo = 0;
-            int hi = psum.size() - 1;
-            while (lo != hi) {
-                int mid = (lo + hi) / 2;
-                if (targ >= psum.get(mid)) {
-                    lo = mid + 1;
-                }
-                else {
-                    hi = mid;
-                }
+            int len = wSums.length;
+            int idx = random.nextInt(wSums[len-1]) + 1;   // +1 is needed to offset 0
+            int left = 0, right = len - 1;
+            // search position
+            while(left < right){
+                int mid = left + (right-left)/2;
+                if(wSums[mid] == idx)
+                    return mid;
+                else if(wSums[mid] < idx)
+                    left = mid + 1;
+                else
+                    right = mid;
             }
-            return lo;
+            return left;
         }
     }
 }

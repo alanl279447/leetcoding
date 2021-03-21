@@ -12,6 +12,8 @@ public class RemoveInvalidParentheses_301 {
 //    Output: ["(a)()()", "(a())()"]
 //    https://leetcode.com/problems/remove-invalid-parentheses/
 //   Time complexity 0(2^N).
+//    because for every parenthesis, there is two option remove or keep
+//    https://leetcode.com/problems/remove-invalid-parentheses/discuss/75027/Easy-Short-Concise-and-Fast-Java-DFS-3-ms-solution
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -21,6 +23,10 @@ public class RemoveInvalidParentheses_301 {
         }
     }
 
+//    Key Points:
+//    Generate unique answer once and only once, do not rely on Set.
+//    Do not need preprocess.
+//    Runtime 3 ms.
     public static List<String> removeInvalidParentheses(String s) {
         List<String> output = new ArrayList<>();
 //        removeHelper(s, output, 0, 0, '(', ')');
@@ -41,7 +47,7 @@ public class RemoveInvalidParentheses_301 {
          if (closeParenCount > openParenCount) {
              for (int j = jStart; j < i; j++) {
                  if (s.charAt(j) == closedParen && (j == jStart || s.charAt(j-1) != closedParen)) {
-                     removeHelper(s.substring(0, j) + s.substring(j+1, s.length()), output, i, j, openPren, closedParen);
+                     removeHelper(s.substring(0, j) + s.substring(j+1), output, i, j, openPren, closedParen);
                  }
              }
              return;
@@ -54,8 +60,5 @@ public class RemoveInvalidParentheses_301 {
         } else {
             output.add(reverseString);
         }
-
     }
-
-
 }

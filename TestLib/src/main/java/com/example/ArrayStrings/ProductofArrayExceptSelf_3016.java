@@ -18,6 +18,28 @@ public class ProductofArrayExceptSelf_3016 {
         }
     }
 
+//    1  1  2  6   leftSum
+//    1  2  3  4
+//   24 12  4  1    rightSum
+//   24  12 8  6
+
+
+    public static int[] productExceptSelfTest(int[] inputs) {
+        if (inputs == null || inputs.length == 0) return new int[]{0};
+        int len = inputs.length;
+        int[] output = new int[len];
+        output[0] =1;
+        for (int i=1; i < len; i++) {
+            output[i] = output[i-1]*inputs[i-1];  //leftSum
+        }
+        int R = 1;
+        for (int j = len-1; j >=0;j--) {
+            output[j] = output[j] * R;
+            R = R * inputs[j];
+        }
+        return output;
+    }
+
 
 //   24 12 4  1  rightSum
 //
@@ -27,43 +49,30 @@ public class ProductofArrayExceptSelf_3016 {
 //
 //    24 12 8 6   result
 
-    public static int[] productExceptSelf(int[] inputs) {
-        int[] leftSum = new int[inputs.length];
-//        int[] rightSum = new int[inputs.length];
-//        int[] result = new int[inputs.length];
+    public static int[] productExceptSelf(int[] nums) {
+        int length = nums.length;
+        int[] output = new int[length];
+//        int[] left_positions = new int[length];
+//        int[] right_positions = new int[length];
+//
+//        left_positions[0]=1;
+//        right_positions[length-1]=1;
 
-        leftSum[0] = 1;
-        for (int i = 1; i < inputs.length; i++) {
-            leftSum[i] =  leftSum[i-1] * inputs[i-1];
+        output[0]=1;
+        for (int i=1; i < nums.length; i++) {
+            output[i] = nums[i-1] * output[i-1];
         }
 
-//        rightSum[inputs.length-1] = 1;
-        int rightSum = 1;
-        for (int i = inputs.length-1; i >=0; i--) {
-//            rightSum[i] = rightSum[i+1] * inputs[i+1];
-
-            leftSum[i]  *= rightSum;
-             rightSum *= inputs[i];
+        int R = 1;
+        for (int j = length-1; j >= 0; j--) {
+            output[j] = output[j] * R;
+            R = R * nums[j];
         }
 
-        return leftSum;
+//        for (int i=0; i < length; i++) {
+//         output[i] = left_positions[i] * right_positions[i];
+//        }
+
+        return output;
     }
-
-
-//    public static int[] productExceptSelf(int[] nums) {
-//        int length = nums.length;
-//        int[] output = new int[length];
-//
-//        output[0]=1;
-//        for (int i=1; i < nums.length; i++) {
-//            output[i] = nums[i-1] * output[i-1];
-//        }
-//
-//        int R = 1;
-//        for (int j = length-1; j >= 0; j--) {
-//            output[j] = output[j] * R;
-//            R = R * nums[j];
-//        }
-//        return output;
-//    }
 }

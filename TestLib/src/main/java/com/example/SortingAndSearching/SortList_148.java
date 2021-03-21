@@ -1,40 +1,35 @@
 package com.example.SortingAndSearching;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SortList_148 {
-
 //    Input: -1->5->3->4->0
 //    Output: -1->0->3->4->5
 //    https://leetcode.com/problems/sort-list/
+//    time complexity 0(NlogN)
 
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(1);
+        ListNode node1 = new ListNode(-1);
         node1.next = new ListNode(5);
         node1.next.next = new ListNode(3);
         node1.next.next.next = new ListNode(4);
         node1.next.next.next.next = new ListNode(0);
         ListNode result = sortList(node1);
     }
-
     // 1,5,3,4,0
-    // 1,5   3,4   0
-
+    // 1,5  3,4  0
     public static ListNode sortList(ListNode head) {
         if (head == null || head.next == null)
             return head;
 
         // step 1. cut the list to two halves
-        ListNode prev = null, slow = head, fast = head;
+        ListNode slow = head, fast = head;
 
         while (fast != null && fast.next != null) {
-            prev = slow;
+//            prev = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        prev.next = null;
+//        prev.next = null;
 
         // step 2. sort each half
         ListNode l1 = sortList(head);

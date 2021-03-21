@@ -14,6 +14,27 @@ public class GoatLatin_824 {
         System.out.println(res);
     }
 
+//    public String toGoatLatin(String S) {
+//        if (S==null || S.length() ==0) return S;
+//        String[] splits = S.split(" ");
+//        StringBuilder sb= new StringBuilder();
+//        String aa = "a";
+//        String[] vowels= {"a","e","i","o","u"};
+//        for (int i=0;i<splits.length;i++) {
+//            String inner = null;
+//            if (splits[i].startsWith(vowels)) {
+//                inner = splits[i]+"ma";
+//            } else {
+//                inner = splits[i].subString(1)+splits[i].charAt[0]+"ma";
+//
+//            }
+//            inner = inner+aa;
+//            sb.append(inner);
+//            aa = aa+'a';
+//        }
+//        return sb.toString();
+//    }
+
     public static String toGoatLatin(String S) {
         List<Character>list=new ArrayList<Character>(Arrays.asList('a','e','i','o','u','A','E','I','O','U'));
         String arr[]=S.split(" ");

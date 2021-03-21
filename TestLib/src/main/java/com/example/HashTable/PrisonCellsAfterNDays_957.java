@@ -32,7 +32,6 @@ public class PrisonCellsAfterNDays_957 {
         }
     }
 
-
     public static int[] prisonAfterNDays(int[] cells, int N) {
         int[] firstSimulation = new int[8];
         for (int i = 1; i < 7; i++)

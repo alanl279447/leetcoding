@@ -17,6 +17,11 @@ public class LargestBSTSubtree_333 {
 //    The return value is the subtree's size, which is 3.
 //    https://leetcode.com/problems/largest-bst-subtree/
 
+    // return array for each node:
+    //     [0] --> min
+    //     [1] --> max
+    //     [2] --> largest BST in its subtree(inclusive)
+
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -25,8 +30,21 @@ public class LargestBSTSubtree_333 {
     }
 
     public static int largestBSTSubtree(TreeNode root) {
-       return 0;
+        int[] ret = largestBST(root);
+        return ret[2];
+    }
 
+    private static int[] largestBST(TreeNode node){
+        if(node == null){
+            return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
+        }
+        int[] left = largestBST(node.left);
+        int[] right = largestBST(node.right);
+        if(node.val > left[1] && node.val < right[0]){
+            return new int[]{Math.min(node.val, left[0]), Math.max(node.val, right[1]), left[2] + right[2] + 1};
+        }else{
+            return new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE, Math.max(left[2], right[2])};
+        }
     }
 
     public static void addNode() {

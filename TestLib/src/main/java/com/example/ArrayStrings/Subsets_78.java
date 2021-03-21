@@ -31,11 +31,11 @@ public class Subsets_78 {
 
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        backtrack(result, new ArrayList<Integer>(), nums, 0);
+        backtrack(result, new ArrayList(), nums, 0);
         return result;
     }
 
-    private static void backtrack(List<List<Integer>> list , List<Integer> tempList, int [] nums, int start){
+    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start){
         list.add(new ArrayList<>(tempList));
         for(int i = start; i < nums.length; i++){
 //            if (i >start && nums[i] == nums[i-1]) {

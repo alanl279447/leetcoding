@@ -12,18 +12,23 @@ public class NumberofIslandsII_305 {
 //    Input: m = 3, n = 3, positions = [[0,0], [0,1], [1,2], [2,1]]
 //    Output: [1,1,2,3]
 //    https://leetcode.com/problems/number-of-islands-ii/
+//    https://leetcode.com/problems/number-of-islands-ii/discuss/75470/Easiest-Java-Solution-with-Explanations
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
 //        addNode();
-        //int[][] input = {{0,0}, {0,1}, {1,2}, {2,1}};
-        int[][] input = {{0,0}, {0,1}, {1,0}, {1,1}};
+        int[][] input = {{0,0}, {0,1}, {1,2}, {2,1}};
+        //int[][] input = {{0,0}, {0,1}, {1,0}, {1,1}};
         List<Integer> result = numIslands2(3,3, input);
         for (Integer res: result)
             System.out.println(result);
     }
 
+    //setup roots equal to the number of points
+    //Initially assume every cell are in non-island set {-1}. When point A is added, we create a new root, i.e., a new island.
+    // Then, check if any of its 4 neighbors belong to the same island.
+    // If not, union the neighbor by setting the root to be the same. Remember to skip non-island cells.
     public static List<Integer> numIslands2(int m, int n, int[][] positions) {
         List<Integer> result = new ArrayList<>();
         if (positions == null || positions.length == 0) {
@@ -71,16 +76,10 @@ public class NumberofIslandsII_305 {
 
     private static int findRoot(int[] root, int index) {
         while (index != root[index]) {
-            root[index] = root[root[index]];
+            root[index] = root[root[index]];  //path compression
             index = root[index];
         }
         return index;
-    }
-
-
-    static public int findIsland(int[] roots, int id) {
-        while(id != roots[id]) id = roots[id];
-        return id;
     }
 
     public static void addNode() {

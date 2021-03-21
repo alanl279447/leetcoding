@@ -15,8 +15,6 @@ public class MergeIntervals_56 {
 //    Output: [[1,5]]
 //    Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
-//    public static TreeNode root = null;
-//    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int[][] nums1 = {{1,3},{8,10}, {2,6},{15,18}};
         int[][] result = mergeWithoutSort(nums1);

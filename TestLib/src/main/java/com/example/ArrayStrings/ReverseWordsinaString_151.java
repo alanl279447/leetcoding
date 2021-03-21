@@ -6,7 +6,8 @@ public class ReverseWordsinaString_151 {
 //    Explanation: Your reversed string should not contain leading or trailing spaces.
 //    https://leetcode.com/problems/reverse-words-in-a-string/
     public static void main(String args[]) {
-        String input = "hello world!";
+        //String input = "hello world!";
+        String input = " the sky is blue";
         String res = reverseWords(input);
         System.out.println(res);
     }

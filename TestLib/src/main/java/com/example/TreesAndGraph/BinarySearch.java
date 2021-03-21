@@ -14,7 +14,22 @@ public class BinarySearch {
     public static void main(String[] args) {
 //        addNode(1);
         int[] nums = {-1,0,3,5,9,12};
-        System.out.print(search(nums, 2));
+        System.out.print(searchTest(nums, 9));
+    }
+
+    public static int searchTest(int[] nums, int target) {
+        int start = 0, end = nums.length;
+        while (start <= end) {
+            int midpoint = start + (end-start)/2;
+            if (nums[midpoint]>target) {
+                end = midpoint-1;
+            } else if (nums[midpoint]<target) {
+                start = midpoint+1;
+            } else {
+                return midpoint;
+            }
+        }
+        return -1;
     }
 
     public static int search(int[] nums, int target) {

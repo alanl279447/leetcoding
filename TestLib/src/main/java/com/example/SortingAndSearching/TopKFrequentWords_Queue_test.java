@@ -8,7 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
+
+import javafx.scene.layout.Priority;
 
 public class TopKFrequentWords_Queue_test {
 
@@ -26,6 +29,7 @@ public class TopKFrequentWords_Queue_test {
 //    competitors: ['Google', 'Apple', 'Netflix', 'Microsoft']
 //    topNCompetitors: 2
 //    time complexity (0nlogn)
+//    https://leetcode.com/discuss/interview-question/542597/Amazon-or-OA-2020-or-Top-K-Frequently-Mentioned-Keywords
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -35,8 +39,7 @@ public class TopKFrequentWords_Queue_test {
                 "Apple products are great", "I love Microsoft"};
         String[] competitors = {"Google", "Apple", "Netflix", "Microsoft"};
         int topNCompetitors = 2;
-        List<String> result = topKFrequent(reviews, competitors, 2);
-
+        List<String> result = topKFrequent(reviews, competitors, topNCompetitors);
         for (String res: result) {
             System.out.print(res);
         }
@@ -44,7 +47,6 @@ public class TopKFrequentWords_Queue_test {
 
     public static List<String> topKFrequent(String[] reviews, String[] competitors, int k) {
         List<String> result = new ArrayList<>();
-
         Map<String, Integer> map = new HashMap<>();
         Set<String> visitedWords = new HashSet<>();
         List<String> competitorsList = Arrays.asList(competitors);
@@ -59,7 +61,6 @@ public class TopKFrequentWords_Queue_test {
            }
            visitedWords.clear();
         }
-
         PriorityQueue<String> queue = new PriorityQueue<>((w1,w2) -> map.get(w1).equals(map.get(w2)) ? w1.compareTo(w2):
                 map.get(w1) - map.get(w2));
 
@@ -75,7 +76,6 @@ public class TopKFrequentWords_Queue_test {
         }
         return result;
     }
-
 //    public static List<String> topKFrequent(String[] words, int k) {
 //        Map<String, Integer> count = new HashMap();
 //        for (String word : words) {
@@ -88,21 +88,6 @@ public class TopKFrequentWords_Queue_test {
 //        return candidates.subList(0, k);
 //    }
 
-//    public static List<String> topKFrequent(String[] words, int k) {
-//     Map<String, Integer> map = new HashMap<>();
-//     for (String word: words) {
-//         map.put(word, map.getOrDefault(word, 0) +1);
-//     }
-//     List<String>[] bucket = new List[words.length];
-//     for (String element: map.keySet()) {   //list of string
-//         Integer frequency = map.getOrDefault(element, 0);
-//         if(bucket[frequency] == null) {
-//             bucket[frequency] = new ArrayList<>();
-//         }
-//         bucket[frequency].add(element);
-//     }
-//
-//    }
 
     // solution with time complexity for O(n)
 //    public static List<Integer> topKFrequentFast(int[] nums, int k) {

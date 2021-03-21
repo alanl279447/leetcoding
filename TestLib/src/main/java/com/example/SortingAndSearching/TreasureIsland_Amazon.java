@@ -1,10 +1,15 @@
 package com.example.SortingAndSearching;
 
+import com.example.DesignQuestions.DesignHitCounter_362;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import sun.util.CoreResourceBundleControl;
+import sun.util.resources.cldr.or.CalendarData_or_IN;
 
 public class TreasureIsland_Amazon {
 
@@ -18,17 +23,20 @@ public class TreasureIsland_Amazon {
 //    Explanation: Route is (0, 0), (0, 1), (1, 1), (2, 1), (2, 0), (3, 0) The minimum route takes 5 steps.
 //    https://leetcode.com/discuss/interview-question/347457
 
-//    public static TreeNode root = null;
+    public static void main(String[] args) {
+        char[][] island = {{'O','O','O','O'}, {'D','O','D','O'}, {'O','O','O','O'},{'X','D','D','O'}};
+        int result = treasureIsland(island);
+        System.out.println(result);
+    }
+
     public static int treasureIsland(char[][] island) {
         if (island == null || island.length == 0) return 0;
-
         int steps = 0;
         Queue<Coordinate> queue = new LinkedList<>();
         queue.add(new Coordinate(0, 0));
         boolean[][] visited = new boolean[island.length][island[0].length];
         visited[0][0] = true;
         int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
         // bfs
         while (!queue.isEmpty()) {
 
@@ -38,7 +46,6 @@ public class TreasureIsland_Amazon {
                 int x = coordinate.x;
                 int y = coordinate.y;
                 if (island[x][y] == 'X') return steps;
-
                 for (int[] dir : dirs) {
                     int newX = x + dir[0];
                     int newY = y + dir[1];

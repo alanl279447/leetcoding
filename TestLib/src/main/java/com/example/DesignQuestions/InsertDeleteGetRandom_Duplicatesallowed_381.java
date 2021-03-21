@@ -3,9 +3,11 @@ package com.example.DesignQuestions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class InsertDeleteGetRandom_Duplicatesallowed_381 {
 //    // Init an empty collection.
@@ -43,64 +45,44 @@ public class InsertDeleteGetRandom_Duplicatesallowed_381 {
     }
 
     public static class RandomizedCollection {
-        ArrayList<Integer> result;
-        HashMap<Integer, LinkedHashSet<Integer>> map;
+        ArrayList<Integer> lst;
+        HashMap<Integer, Set<Integer>> idxMap;
+        java.util.Random rand = new java.util.Random();
+        /** Initialize your data structure here. */
 
         public RandomizedCollection() {
-            result = new ArrayList<Integer>();
-            map = new HashMap<Integer, LinkedHashSet<Integer>>();
+            lst = new ArrayList<Integer>();
+            idxMap = new HashMap<Integer, Set<Integer>>();
         }
+
+//        lst  list<Integer
+//        map <val>  index of list
 
         /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
         public boolean insert(int val) {
-            // Add item to map if it doesn't already exist.
-            boolean alreadyExists = map.containsKey(val);
-            if(!alreadyExists) {
-                map.put(val, new LinkedHashSet<Integer>());
-            }
-            map.get(val).add(result.size());
-            result.add(val);
-            return !alreadyExists;
+            if (!idxMap.containsKey(val)) idxMap.put(val, new LinkedHashSet<Integer>());
+            idxMap.get(val).add(lst.size());
+            lst.add(val);
+            return idxMap.get(val).size() == 1;
         }
 
         /** Removes a value from the collection. Returns true if the collection contained the specified element. */
         public boolean remove(int val) {
-            if(!map.containsKey(val)) {
-                return false;
-            }
-            // Get arbitary index of the ArrayList that contains val
-            LinkedHashSet<Integer> valSet = map.get(val);
-            int indexToReplace = valSet.iterator().next();
+            if (!idxMap.containsKey(val) || idxMap.get(val).size() == 0) return false;
+            int remove_idxMap = idxMap.get(val).iterator().next();
+            idxMap.get(val).remove(remove_idxMap);
+            int last = lst.get(lst.size() - 1);
+            lst.set(remove_idxMap, last);
+            idxMap.get(last).add(remove_idxMap);
+            idxMap.get(last).remove(lst.size() - 1);
 
-            // Obtain the set of the number in the last place of the ArrayList
-            int numAtLastPlace = result.get(result.size() - 1);
-            LinkedHashSet<Integer> replaceWith = map.get(numAtLastPlace);
-
-            // Replace val at arbitary index with very last number
-            result.set(indexToReplace, numAtLastPlace);
-
-            // Remove appropriate index
-            valSet.remove(indexToReplace);
-
-            // Don't change set if we were replacing the removed item with the same number
-            if(indexToReplace != result.size() - 1) {
-                replaceWith.remove(result.size() - 1);
-                replaceWith.add(indexToReplace);
-            }
-            result.remove(result.size() - 1);
-
-            // Remove map entry if set is now empty, then return
-            if(valSet.isEmpty()) {
-                map.remove(val);
-            }
+            lst.remove(lst.size() - 1);
             return true;
         }
 
         /** Get a random element from the collection. */
         public int getRandom() {
-            // Get linearly random item
-            return result.get((int)(Math.random() * result.size()));
+            return lst.get(rand.nextInt(lst.size()));
         }
     }
-
 }

@@ -11,14 +11,14 @@ import java.util.List;
 //        [-1, -1, 2]
 //        ]
 //        https://leetcode.com/problems/3sum/
+//        time complexity is 0(n^2).
 
-public class ThreeSum {
+public class    ThreeSum {
 
     public static void main(String[] args) {
         int nums[] = {-1, 0, 1, 2, -1, -4};
         System.out.println("Start main " +threeSum(nums));
     }
-
 
     public static List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();

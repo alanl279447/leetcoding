@@ -27,12 +27,11 @@ public class DiagonalTraverse_498 {
         int[][] input = {{1,2,3}, {4,5,6}, {7,8,9}};
         int[] result = findDiagonalOrder(input);
          for(int res: result)
-          System.out.println(result);
+          System.out.println(res);
     }
 
-
-    // r = d < M: 0: d-M-1
-    // c = d < M: d: M-1
+    // r = d < cols: 0: d-cols-1
+    // c = d < cols: d: cols-1
     public static int[] findDiagonalOrder(int[][] matrix) {
         // Check for empty matrices
         if (matrix == null || matrix.length == 0) {

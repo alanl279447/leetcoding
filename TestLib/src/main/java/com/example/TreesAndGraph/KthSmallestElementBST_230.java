@@ -27,28 +27,19 @@ public class KthSmallestElementBST_230 {
     }
 
     public static int findSecondMinimumValue(TreeNode root) {
-         if (root == null) {
-             return -1;
-         }
-         Queue<TreeNode> queue = new LinkedList<>();
-         queue.offer(root);
-         Integer secondMin = null;
-
-         while(!queue.isEmpty()) {
-             TreeNode curr = queue.poll();
-             if (curr.left != null) {
-                 queue.offer(curr.left);
-             }
-             if (curr.right != null) {
-                 queue.offer(curr.right);
-             }
-             if (curr != root) {
-                 if (secondMin== null) secondMin=curr.val;
-                 else {
-                     secondMin=Math.min(secondMin, curr.val);
-                 }
-             }
-         }
+        if(root==null || root.right==null || root.left==null) return -1;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        Integer secondMin = null;
+        while(!q.isEmpty()) {
+            TreeNode curr = q.poll();
+            if(curr.right!=null) q.offer(curr.right);
+            if(curr.left!=null) q.offer(curr.left);
+            if(curr.val!=root.val) {
+                if(secondMin==null) secondMin = curr.val;
+                else secondMin = Math.min(secondMin, curr.val);
+            }
+        }
         return secondMin==null? -1 : secondMin;
     }
 

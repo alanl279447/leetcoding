@@ -14,9 +14,6 @@ public class MaximumProductSubarray_152 {
         System.out.println(maxProduct(nums));
     }
 
-    // currentMin, currentMax, finalMax
-    //
-
     public static int maxProduct(int[] nums) {
       if (nums == null) return 0;
       int currentMin = nums[0]; //2

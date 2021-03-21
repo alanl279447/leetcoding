@@ -31,20 +31,21 @@ public class MaximumDifferenceBetweenNodeandAncestor_1026 {
 //        }
     }
 
+    static int res = 0;
     public static int maxAncestorDiff(TreeNode root) {
-         if (root == null) return 0;
-         return dfs(root, root.val, root.val);
+        if (root == null) return 0;
+        dfs(root, root.val, root.val);
+        return res;
     }
 
-    public static int dfs(TreeNode node, int min, int max) {
-        if (node == null) return 0;
-        min = Math.min(min, node.val);
-        max = Math.max(max, node.val);
-        int left = dfs(node.left, min, max);
-        int right = dfs(node.right, min, max);
-        return Math.max(max-min, Math.max(left, right));
+    private static void dfs(TreeNode node, int min, int max) {
+        if (node == null) return;
+        min = Math.min(node.val, min);
+        max = Math.max(node.val, max);
+        res = Math.max(res, max - min);
+        dfs(node.left, min, max);
+        dfs(node.right, min, max);
     }
-
 
     public static void addNode(int value) {
         if (root == null)

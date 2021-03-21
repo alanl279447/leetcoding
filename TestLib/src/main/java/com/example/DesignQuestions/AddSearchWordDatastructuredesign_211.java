@@ -1,8 +1,5 @@
 package com.example.DesignQuestions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddSearchWordDatastructuredesign_211 {
     //    addWord("bad")
 //    addWord("dad")
@@ -51,7 +48,6 @@ public class AddSearchWordDatastructuredesign_211 {
                 }
                 cur = cur.children[index];
             }
-
             cur.isWord = true;
         }
         /** Adds a word into the data structure. */

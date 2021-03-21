@@ -42,12 +42,24 @@ public class QuickSort_MergeSort {
       if (low >= high) {
           return;
       }
-      int pivot = getPartitionId(A, low, high);
+      int pivot = partionWork(A, low, high);
       quickSort(A, low, pivot-1);
       quickSort(A, pivot+1, high);
     }
 
-    private static int getPartitionId(int[] A, int low, int high) {
+    private static int partionWork(int[] nums, int start, int end) {
+        int pivot = start;
+        while (start <= end) {
+            while (start <= end && nums[start] <= nums[pivot]) start++;
+            while (start <= end && nums[end] > nums[pivot]) end--;
+            if (start > end) break;
+            swap(nums, start, end);
+        }
+        swap(nums, end, pivot);
+        return end;
+    }
+
+    private static int getPartitionIdWork(int[] A, int low, int high) {
         int pivot = getPivot(low, high);
         swap(A, pivot, low);
 

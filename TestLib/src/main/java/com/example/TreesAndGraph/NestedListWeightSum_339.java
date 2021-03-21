@@ -1,10 +1,9 @@
 package com.example.TreesAndGraph;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class NestedListWeightSum_339 {
 //    Input: [[1,1],2,[1,1]]
@@ -17,7 +16,6 @@ public class NestedListWeightSum_339 {
 
     public static void main(String[] args) {
         List<NestedInteger> nestedList = new ArrayList<>();
-
         NestedInteger item1 = new NestedInteger();
         List<NestedInteger> itemArray1 = new ArrayList<>();
         NestedInteger item1sub = new NestedInteger();
@@ -45,34 +43,28 @@ public class NestedListWeightSum_339 {
         nestedList.add(item1);
         nestedList.add(item3);
 
-
-        int result = depthSumInverse(nestedList);
+        int result = depthSum(nestedList);
         System.out.println(result);
     }
 
-//    unweighted = Running sum of all numbers
-//
-//            weighted = Running sum OF above sum
-//
-//    e.g.                                   unweighted        weighted
-//    level 1 - integers = [2]     sum = 2     2                2      =2
-//    level 2 - integers = [1,3]   sum = 4     2 + 4            2 +  2+4  =8
-//    level 3 - integers = [2,2] sum = 4     2 + 4 + 4       2 +  2+4 +  2+4+4  = 18
-
-    public static int depthSumInverse(List<NestedInteger> nestedList) {
-        int unweighted = 0, weighted = 0;
-        while (!nestedList.isEmpty()) {
-            List<NestedInteger> nextLevel = new ArrayList<>();
-            for (NestedInteger ni : nestedList) {
-                if (ni.isInteger())
-                    unweighted += ni.getInteger();
-                else
-                    nextLevel.addAll(ni.getList());
-            }
-            weighted += unweighted;
-            nestedList = nextLevel;
+    //BFS approach
+    public static int depthSum(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() == 0) return 0;
+        int total = 0, depth = 1;
+        Deque<NestedInteger> queue = new LinkedList(nestedList);
+        while (!queue.isEmpty()) {
+           int size  = queue.size();
+           for (int i=0; i < size; i++) {
+               NestedInteger item = queue.poll();
+               if(item.isInteger()) {
+                   total += item.integer * depth;
+               } else {
+                   queue.addAll(item.list);
+               }
+           }
+            depth++;
         }
-        return weighted;
+        return total;
     }
 
     static class NestedInteger {

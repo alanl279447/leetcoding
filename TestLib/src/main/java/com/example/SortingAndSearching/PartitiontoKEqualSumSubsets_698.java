@@ -19,23 +19,6 @@ public class PartitiontoKEqualSumSubsets_698 {
         System.out.println(canPartitionKSubsets(nums, 3));
     }
 
-    //(2,4), (1,5), (6)
-//    public static boolean canPartitionKSubsetsPrac(int[] nums, int k) {
-//        int sum = 0;
-//        for (int num: nums) {
-//            sum +=num;
-//        }
-//        if (k<=0 || sum/k != 0) {
-//            return false;
-//        }
-//        int[] visited = new int[nums.length];
-//        return canPartitionPrac(nums, visited, k,0, 0, sum/k);
-//    }
-//
-//    private static boolean canPartitionPrac(int[] nums, int[] visited, int k, int startIndex, int curr_sum, int target) {
-//
-//    }
-
      // (6), (5,1), (2,4)
     public static boolean canPartitionKSubsets(int[] nums, int k) {
         int sum = 0;
@@ -49,6 +32,7 @@ public class PartitiontoKEqualSumSubsets_698 {
         return canPartition(nums, visited, 0, k, 0,sum/k);
     }
 
+    //backtracking, dfs process
     public static boolean canPartition(int[] nums, int[] visited, int start_index, int k, int cur_sum, int target){
         if(k==1){
             return true;

@@ -9,15 +9,14 @@ public class TargetSum_494 {
 //    Input: nums is [1, 1, 1, 1, 1], S is 3.
 //    Output: 5
 //    Explanation:
-//
 //            -1+1+1+1+1 = 3
 //            +1-1+1+1+1 = 3
 //            +1+1-1+1+1 = 3
 //            +1+1+1-1+1 = 3
 //            +1+1+1+1-1 = 3
-//
 //    There are 5 ways to assign symbols to make the sum of nums be target 3.
 //    https://leetcode.com/problems/target-sum/
+//    https://leetcode.com/problems/target-sum/discuss/97334/Java-(15-ms)-C%2B%2B-(3-ms)-O(ns)-iterative-DP-solution-using-subset-sum-with-explanation
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -29,21 +28,42 @@ public class TargetSum_494 {
     //sumP - sumN = target
     //sumP - sumN + sumP+sumN = target + sum
     // sumP = (target+sum)/2
+//    Find a subset P of nums such that sum(P) = (target + sum(nums)) / 2
 
     public static int findTargetSumWays(int[] nums, int S) {
-        Map<Integer, Integer> dp = new HashMap();
-        dp.put(0, 1);
-        for (int num : nums) {
-            Map<Integer, Integer> dp2 = new HashMap();
-            for (int tempSum : dp.keySet()) {
-                int key1 = tempSum + num;
-                dp2.put(key1, dp2.getOrDefault(key1, 0) + dp.get(tempSum));
-                int key2 = tempSum - num;
-                dp2.put(key2, dp2.getOrDefault(key2, 0) + dp.get(tempSum));
-            }
-            dp = dp2;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
         }
-        return dp.getOrDefault(S, 0);
+        if(S > sum || (sum + S) % 2 == 1)   return 0;
+        return subsetSum(nums, (sum + S) / 2);
+    }
+
+    private static int subsetSum(int[] nums, int S){
+        int[] dp = new int[S + 1];
+        dp[0] = 1;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = S; j >= nums[i]; j--) {
+                dp[j] += dp[j - nums[i]];
+            }
+        }
+        return dp[S];
+    }
+
+    private static int subsetSumDP(int[] nums, int S){
+        int[][]dp = new int[nums.length+1][S+1];
+        dp[0][0]=1;
+        for (int i = 1; i < nums.length; i++) {
+            int curr = nums[i-1];
+            for (int j=0; j <= S; j++) {
+                if (j < curr) {
+                    dp[i][j] = dp[i-1][j];
+                } else {
+                    dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-curr]);
+                }
+            }
+        }
+        return dp[nums.length][S];
     }
 
     public static class TreeNode {

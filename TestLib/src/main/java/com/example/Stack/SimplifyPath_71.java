@@ -1,7 +1,9 @@
 package com.example.Stack;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
@@ -16,6 +18,7 @@ public class SimplifyPath_71 {
     public static void main(String[] args) {
         System.out.print(simplifyPath("/a//b////c/d//././/.."));
     }
+
 
     public static String simplifyPath(String path) {
         // Handle empty string

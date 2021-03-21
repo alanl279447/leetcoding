@@ -1,7 +1,10 @@
 package com.example.Stack;
 
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,7 +18,7 @@ public class DecodeString_394 {
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        System.out.print(decodeString("3[a2[c]]"));
+        System.out.print(decodeString("3687567[a2[c]]"));
     }
 
     //3[a2[c]]

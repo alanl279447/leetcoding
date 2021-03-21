@@ -9,9 +9,11 @@ public class ExpressionAddOperators_282 {
 //    Output: ["1+2+3", "1*2*3"]
 //    https://leetcode.com/problems/expression-add-operators/
 //   Time complexity 0(4^N).
+//    https://leetcode.com/problems/expression-add-operators/discuss/71895/Java-Standard-Backtrace-AC-Solutoin-short-and-clear
 
     public static void main(String args[]) {
-        List<String> res = addOperators("123", 6);
+//        List<String> res = addOperators("123", 6);
+        List<String> res = addOperators("105", 5);
         for(String re: res) {
             System.out.println(re);
         }
@@ -24,6 +26,10 @@ public class ExpressionAddOperators_282 {
         return rst;
     }
 
+//    overflow: we use a long type once it is larger than Integer.MAX_VALUE or minimum, we get over it.
+//    0 sequence: because we can't have numbers with multiple digits started with zero, we have to deal with it too.
+//    a little trick is that we should save the value that is to be multiplied in the next recursion.
+//    (1 + 2 + 3) - 3 + (3 * 4).
     public static void helper(List<String> rst, String path, String num, int target, int pos, long eval, long multed){
         if(pos == num.length()){
             if(target == eval)
@@ -33,17 +39,15 @@ public class ExpressionAddOperators_282 {
         for(int i = pos; i < num.length(); i++){
             if(i != pos && num.charAt(pos) == '0') break;
             long cur = Long.parseLong(num.substring(pos, i + 1));
+            //System.out.println("cur is: +"+cur);
             if(pos == 0){
                 helper(rst, path + cur, num, target, i + 1, cur, cur);
             }
             else{
                 helper(rst, path + "+" + cur, num, target, i + 1, eval + cur , cur);
-
                 helper(rst, path + "-" + cur, num, target, i + 1, eval -cur, -cur);
-
                 helper(rst, path + "*" + cur, num, target, i + 1, eval - multed + multed * cur, multed * cur );
             }
         }
     }
-
 }

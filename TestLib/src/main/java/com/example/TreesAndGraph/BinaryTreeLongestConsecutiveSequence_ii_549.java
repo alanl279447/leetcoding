@@ -2,9 +2,9 @@ package com.example.TreesAndGraph;
 
 public class BinaryTreeLongestConsecutiveSequence_ii_549 {
 //    Input:
-//             2
+//             1
 //            / \
-//           1   3
+//           2   3
 //    Output: 2
 //    Explanation: The longest consecutive path is [1, 2] or [2, 1].
 //    https://leetcode.com/problems/binary-tree-longest-consecutive-sequence-ii/

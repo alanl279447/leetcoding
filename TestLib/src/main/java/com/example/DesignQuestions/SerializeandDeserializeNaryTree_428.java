@@ -64,15 +64,6 @@ public class SerializeandDeserializeNaryTree_428 {
         }
     }
 
-
-//    public static void addNode(int value) {
-//        root = new TreeNode(value);
-//        root.left = new TreeNode(2);
-//        root.right = new TreeNode(3);
-//        root.right.left = new TreeNode(4);
-//        root.right.right = new TreeNode(5);
-//    }
-
     static class Node {
         public int val;
         public List<Node> children;

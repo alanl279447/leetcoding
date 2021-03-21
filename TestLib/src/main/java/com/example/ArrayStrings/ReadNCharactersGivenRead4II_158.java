@@ -6,6 +6,7 @@ package com.example.ArrayStrings;
 //        read4(buf); // read4 returns 4. Now buf = "efgh", fp points to 'i'
 //        read4(buf); // read4 returns 3. Now buf = "ijk", fp points to end of file
 //https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/
+//   go over ReadNCharactersGivenRead4_157 first
 
 public class ReadNCharactersGivenRead4II_158 {
 
@@ -15,7 +16,7 @@ public class ReadNCharactersGivenRead4II_158 {
         // System.out.println("Palindrome result:  " + isPalindrome(input));
     }
 
-        // File file("abcdefghijk");
+//    Input: file = "abc", queries = [1,2,1]
     char[] temp = new char[4];    //prev buffer
     int tmpPtr = 0;               //chars read
     int tmpCount = 0;             //total chars
@@ -23,7 +24,7 @@ public class ReadNCharactersGivenRead4II_158 {
         int total = 0;
         while (total < n) {
             if (tmpPtr ==0) {
-//                tmpCount = read4(temp);
+                tmpCount = 0;//read4(temp);
             }
             if (tmpCount == 0) break;
             while (total < n && tmpPtr < tmpCount) {

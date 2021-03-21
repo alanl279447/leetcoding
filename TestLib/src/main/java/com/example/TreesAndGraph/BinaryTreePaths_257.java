@@ -17,8 +17,7 @@ public class BinaryTreePaths_257 {
 //           2     3
 //            \
 //            5
-//           / \
-//          4  6
+
 //    Output: ["1->2->5", "1->3"]
 //
 //    Explanation: All root-to-leaf paths are: 1->2->5, 1->3
@@ -27,12 +26,7 @@ public class BinaryTreePaths_257 {
     public static TreeNode root;
     private static TreeNode ans = null;
 
-    public static void main(String[] args) {
-        addNode(1);
-        List<String> result = binaryTreePaths(root);
-        for (String res : result)
-            System.out.println(res.toString());
-    }
+
 
     public static List<String> binaryTreePaths(TreeNode root) {
         LinkedList<String> paths = new LinkedList();

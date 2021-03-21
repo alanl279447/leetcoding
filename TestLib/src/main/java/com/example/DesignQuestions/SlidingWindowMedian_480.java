@@ -39,11 +39,23 @@ public class SlidingWindowMedian_480 {
                 max.add(min.poll());
             }
             if (max.size() + min.size() == k) {
-                result[j]=max.size()==min.size()?(double)((long) max.peek()+(long)min.peek())/2:(double) max.peek();
-                if (!max.remove(nums[j])) {
-                    min.remove(nums[j]);
+                double median;
+                if(max.size() == min.size()) {
+                    median = (double) ((long)max.peek() + (long)min.peek()) / 2;
+                } else {
+                    median = (double) max.peek();
                 }
-                j++;
+
+                int start = i - k + 1;
+                result[start] = median;
+                if (nums[start]<= max.peek()) {
+                    max.remove(nums[start]);
+                } else {
+                    min.remove(nums[start]);
+                }
+                // if(!left.remove(nums[start])) {
+                //     right.remove(nums[start]);
+                // }
             }
         }
         return result;

@@ -20,9 +20,7 @@ public class MinimumCostForTickets_983 {
         System.out.print(mincostTickets(days, cost));
     }
 
-
     //int n = days[days.length-1];
-    //
     public static int mincostTickets(int[] days, int[] costs) {
         int n = days[days.length-1];
         //the dag is dp[i] = min{ dp[i-1] + cost[0], dp[i-7] + cost[1], dp[i-30] + cost[2] }

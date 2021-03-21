@@ -17,9 +17,21 @@ public class IntersectionThreeSortedArrays_1213 {
         System.out.println(arraysIntersection(ip1, ip2, ip3));
     }
 
+    public List<Integer> arraysIntersectionExpandable(int[] arr1, int[] arr2, int[] arr3) {
+        int a=0,b=0,c=0;
+        List<Integer> res = new ArrayList<>();
+        while(a<arr1.length && b<arr2.length && c<arr3.length) {
+            int min = Math.min(arr1[a],Math.min(arr2[b],arr3[c]));
+            if(arr1[a] == min && arr2[b] == min && arr3[c] == min) res.add(min);
+            if(arr1[a] == min) a++;
+            if(arr2[b] == min) b++;
+            if(arr3[c] == min) c++;
+        }
+        return res;
+    }
+
     public static List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
         List<Integer> result = new ArrayList<>();
-
         int i = 0;
         int j = 0;
         int k = 0;
@@ -36,9 +48,6 @@ public class IntersectionThreeSortedArrays_1213 {
                 j++;
             } else k++;
         }
-
         return result;
-
-
     }
 }

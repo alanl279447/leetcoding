@@ -5,6 +5,7 @@ public class ReverseNodeinKList {
 //    Given this linked list: 1->2->3->4->5
 //    For k = 2, you should return: 2->1->4->3->5
 //    For k = 3, you should return: 3->2->1->4->5
+//    https://leetcode.com/problems/reverse-nodes-in-k-group/
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
@@ -21,10 +22,8 @@ public class ReverseNodeinKList {
         System.out.println("val: "+result.val);
     }
 
-
     //1-2-3-4-5
     //1-2-4-3-5
-
     public static ListNode reverseKGroup(ListNode head, int k) {
         //1. test weather we have more then k node left, if less then k node left we just return head
         ListNode node = head;
@@ -38,8 +37,8 @@ public class ReverseNodeinKList {
             count ++;
         }
 
-        ListNode pre = reverseKGroup(node, k);
-
+        ListNode pre = reverseKGroup(node, k);  //5-null,   4-3-5
+                                                //head 3-4,  1-2
         while(count > 0) {
          ListNode headNext = head.next;
          head.next = pre;
@@ -55,5 +54,4 @@ public class ReverseNodeinKList {
       ListNode next;
       public ListNode(int x) { val = x; }
   }
-
 }

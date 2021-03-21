@@ -50,8 +50,8 @@ public class DesignCircularQueue_622 {
         public MyCircularQueue(int k) {
             this.capacity = k;
             this.queue = new int[k];
-            this.headIndex = 0;
-            this.count = 0;
+            this.headIndex = 0;   //points to the first element in the queue.
+            this.count = 0;       //number of eleements in the queue.
         }
 
         /** Insert an element into the circular queue. Return true if the operation is successful. */
@@ -78,6 +78,7 @@ public class DesignCircularQueue_622 {
                 return -1;
             return this.queue[this.headIndex];
         }
+
 
         /** Get the last item from the queue. */
         public int Rear() {

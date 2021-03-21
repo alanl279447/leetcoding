@@ -11,7 +11,7 @@ public class ReverseLinkedList {
         node1.next = new ListNode(2);
         node1.next.next = new ListNode(3);
         node1.next.next.next = new ListNode(4);
-//        node1.next.next.next.next = new ListNode(5);
+        node1.next.next.next.next = new ListNode(5);
 
         ListNode result = reverseList(node1);
         while (result.next != null) {
@@ -21,23 +21,10 @@ public class ReverseLinkedList {
         System.out.println("val: "+result.val);
     }
 
-    public static ListNode reverseListTest(ListNode head) {
-        ListNode prev = null;
-        ListNode current = head;
-        while(current != null) {
-            ListNode temp = head.next;
-            head.next = prev;
-            prev = head;
-            head = temp;
-        }
-        return prev;
-    }
-
-
+    //1-2-3-4-5
     public static ListNode reverseList(ListNode head) {
         ListNode current = head;
         ListNode prev = null;
-
         while(current != null) {
             ListNode tempNext = current.next;
             current.next = prev;

@@ -1,7 +1,6 @@
 package com.example.ArrayStrings;
 
 public class StringCompression_443 {
-
 //    Input:
 //            ["a","a","b","b","c","c","c"]
 //
@@ -11,7 +10,7 @@ public class StringCompression_443 {
 //    Explanation:
 //            "aa" is replaced by "a2". "bb" is replaced by "b2". "ccc" is replaced by "c3".
     public static void main(String[] args) {
-        char[] input = {'a','a','b','b','c'};
+        char[] input = {'a','a','a', 'b','b','c'};
         int result = compress(input);
         System.out.println(result);
     }
@@ -32,5 +31,4 @@ public class StringCompression_443 {
         }
         return indexAns;
     }
-
 }

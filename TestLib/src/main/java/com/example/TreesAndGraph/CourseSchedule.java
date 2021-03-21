@@ -1,10 +1,12 @@
 package com.example.TreesAndGraph;
 
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class CourseSchedule {
 
@@ -23,42 +25,38 @@ public class CourseSchedule {
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
 
-        int[][] prerequisites = {{1, 0}, {2, 1}, {2,3}};
+        int[][] prerequisites = {{1, 0}, {2, 1}, {2,3}, {3,4}};
 //        int[][] prerequisites = {{1, 0}, {0, 1}};
-        System.out.print(canFinishSort(4, prerequisites));
+        System.out.print(canFinishSort(5, prerequisites));
     }
 
     //topological sort
     public static boolean canFinishSort(int numCourses, int[][] prerequisites) {
-        if (numCourses <= 0)
-            return false;
-        int[] inDegree = new int[numCourses];
+        int[] degree = new int[numCourses], res = new int[numCourses];
+        List<Integer>[] graph = new ArrayList[numCourses];
+        for (int i = 0; i < numCourses; i++) graph[i] = new ArrayList<>();
         for (int i = 0; i < prerequisites.length; i++) {
-            inDegree[prerequisites[i][0]]++;
+            degree[prerequisites[i][0]]++;
+            graph[prerequisites[i][1]].add(prerequisites[i][0]);
         }
-        LinkedList<Integer> stack = new LinkedList<>();
-
-        for (int i =0; i < inDegree.length; i++) {
-            if (inDegree[i] == 0) {
-                stack.push(i);
+        int index = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (degree[i] == 0) {
+                q.offer(i);
+                res[index++] = i;
             }
         }
-
-        int count = 0;
-        while(!stack.isEmpty()) {
-            int curr = stack.pop();
-            count++;
-            for (int i = 0; i < prerequisites.length; i++) {
-                if (prerequisites[i][1] == curr) {
-                    inDegree[prerequisites[i][0]]--;
-
-                    if (inDegree[prerequisites[i][0]] == 0) {
-                        stack.push(prerequisites[i][0]);
-                    }
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            for (int nei : graph[cur]) {
+                if (--degree[nei] == 0) {
+                    q.offer(nei);
+                    res[index++] = nei;
                 }
             }
         }
-        return numCourses == count;
+        return index == numCourses ? true : false;
     }
 
 }

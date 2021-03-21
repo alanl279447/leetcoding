@@ -15,12 +15,13 @@ public class MeetingRooms2 {
 //
 //    Input: [[7,10],[2,4]]
 //    Output: 1
+//    https://leetcode.com/problems/meeting-rooms-ii/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        //int[][] nums1 = {{0,30}, {5, 10}, {15,20}};
-        int[][] nums1 = {{13,15},{1,13}};
+        int[][] nums1 = {{0,30}, {5, 10}, {15,20}};
+//        int[][] nums1 = {{13,15},{1,13}};
         System.out.print(minMeetingRooms(nums1));
     }
 
@@ -57,50 +58,6 @@ public class MeetingRooms2 {
         }
         return queue.size();
     }
-
-
-
-
-
-
-
-
-//    public static int[][] kClosest(int[][] points, int K) {
-//
-//        int length = points.length;
-//        int[] distances = new int[length];
-//
-//        int i=0;
-//        for (int[] point: points) {
-//            distances[i++] = dist(point);
-//        }
-//        Arrays.sort(distances);
-//        int distK = distances[K-1];    //distance threshold is distK
-//
-//        int[][] ans = new int[K][2];
-//        int t =0;
-//        for (i = 0; i < length; i++) {
-//            if (dist(points[i]) <= distK) {
-//              ans[t++] = points[i];
-//            }
-//        }
-//        return ans;
-//    }
-//
-//    public static int dist(int[] point) {
-//        if (point.length ==2) {
-//            return point[0] * point[0] + point[1] * point[1];
-//        }
-//        return -1;
-//    }
-
-
-
-
-
-
-
-
 
     public static class TreeNode {
         int val;

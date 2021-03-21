@@ -14,7 +14,6 @@ public class VerifyinganAlienDictionary_953 {
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-
         String[] words = {"hello", "leetcode"};
         System.out.print(isAlienSorted(words, "hlabcdefgijkmnopqrstuvwxyz"));
     }

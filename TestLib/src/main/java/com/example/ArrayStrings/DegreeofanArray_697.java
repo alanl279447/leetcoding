@@ -20,6 +20,24 @@ public class DegreeofanArray_697 {
             System.out.println(result);
     }
 
+    // 0(n) time complexity
+    public static int findShortestSubArrayFast(int[] nums) {
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        HashMap<Integer, Integer> firstMap = new HashMap<>();
+        int res = 0, degree = 0;
+        for (int i=0;i<nums.length;i++) {
+            firstMap.putIfAbsent(nums[i], i);
+            countMap.put(nums[i], countMap.getOrDefault(nums[i], 0) +1);
+            if (countMap.get(nums[i]) > degree) {
+                res = i - firstMap.get(nums[i])+1;
+                degree = countMap.get(nums[i]);
+            } else if (countMap.get(nums[i])==degree) {
+                res = Math.min(res, i-firstMap.get(nums[i])+1);
+            }
+        }
+        return res;
+    }
+
     public static int findShortestSubArray(int[] nums) {
         Map<Integer, Integer> left = new HashMap<>(), right = new HashMap<>(), count = new HashMap<>();
 

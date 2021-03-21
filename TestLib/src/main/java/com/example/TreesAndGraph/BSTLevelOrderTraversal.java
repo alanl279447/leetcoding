@@ -1,7 +1,9 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BSTLevelOrderTraversal {
@@ -21,7 +23,7 @@ public class BSTLevelOrderTraversal {
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         addNode(3);
-        List<List<Integer>> output = levelOrder(root);
+        List<List<Integer>> output = levelOrderTest(root);
         for (List<Integer> item: output) {
           for (Integer it: item) {
               System.out.print(it);
@@ -29,6 +31,35 @@ public class BSTLevelOrderTraversal {
             System.out.println();
         }
     }
+
+    public static List<List<Integer>> levelOrderTest(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root == null) return result;
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> subItem = new ArrayList<>();
+            for (int i=0; i < count; i++) {
+                TreeNode item = queue.poll();
+                subItem.add(item.val);
+
+                if (item.left!= null) {
+                    queue.offer(item.left);
+                }
+                if (item.right!=null) {
+                    queue.offer(item.right);
+                }
+            }
+            result.add(subItem);
+        }
+        return result;
+    }
+
+
+
+
 
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();

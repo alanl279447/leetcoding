@@ -1,6 +1,7 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,7 +22,7 @@ public class AllNodesDistanceKinBinaryTree_863 {
 //    Note that the inputs "root" and "target" are actually TreeNodes.
 //    The descriptions of the inputs above are just serializations of these objects.
 //    https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
-//   time complexity 0(2^N).
+//   time complexity 0(N).
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -33,6 +34,8 @@ public class AllNodesDistanceKinBinaryTree_863 {
         }
     }
 
+    //DFS to get all parent mapping
+    // and then BFS queue starting from the target until the distance is K
     static Map<TreeNode, TreeNode> parentMapping = null;
     public static List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
 

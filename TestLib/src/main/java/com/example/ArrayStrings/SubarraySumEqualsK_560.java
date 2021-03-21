@@ -15,7 +15,15 @@ public class SubarraySumEqualsK_560 {
         System.out.println(res);
     }
 
-    //map (sum, position), (0,1), (23,1), (25,1), ()
+//    I see ...After spending some time on the analysis,
+//    I found the reason behind having initialize preSum.put(0,1)....it is for those (sum - k) == 0
+//    calculations which are valid subarrays but need to get counted. e.g. if k = 7 and sum = 7
+//    (at second element for array is : 3, 4, 3, 8) at some iteration.....then sum - k = 0....this 0
+//    will get counted in statement result += preSum.get(sum - k);
+
+    //(0, 1), (1, 23), (2,25), (3, 29), (4,31), (5, 37)
+    // 23-6, 25-6, 29-6 =23, 36-6
+
     public static int subarraySum(int[] nums, int k) {
         int result = 0, sum =0;
         Map<Integer, Integer> map = new HashMap<>();

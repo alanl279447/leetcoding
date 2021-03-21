@@ -7,7 +7,8 @@ public class InorderSuccessorinBST_285 {
 
 //    Input: root = [5,3,6,2,4,null,null,1], p = 3
 //    Output: 4
-//    Explanation: There is no in-order successor of the current node, so the answer is null.//    https://leetcode.com/problems/inorder-successor-in-bst/
+//    Explanation: There is no in-order successor of the current node, so the answer is null.//
+//    https://leetcode.com/problems/inorder-successor-in-bst/
 
     public static TreeNode root;
     private static TreeNode ans = null;

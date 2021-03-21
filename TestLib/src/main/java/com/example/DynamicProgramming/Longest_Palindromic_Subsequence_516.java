@@ -3,13 +3,11 @@ package com.example.DynamicProgramming;
 public class Longest_Palindromic_Subsequence_516 {
 
 //    "bbbab"
-//            4
+//    4
 //    One possible longest palindromic subsequence is "bbbb".
 //    https://leetcode.com/problems/longest-palindromic-subsequence/
 
-
     public static void main(String[] args) {
-        //int[][] nums1 = {{1,3}, {-2,2}};
         System.out.print(LongestPalindromeSubseq("agbdba"));
     }
 

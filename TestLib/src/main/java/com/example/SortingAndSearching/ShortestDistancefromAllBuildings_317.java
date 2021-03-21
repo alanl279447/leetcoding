@@ -20,14 +20,17 @@ public class ShortestDistancefromAllBuildings_317 {
 //    the point (1,2) is an ideal empty land to build a house, as the total
 //    travel distance of 3+3+1=7 is minimal. So return 7.
 //    https://leetcode.com/problems/shortest-distance-from-all-buildings/
+//    https://leetcode.com/problems/shortest-distance-from-all-buildings/discuss/76891/Java-solution-with-explanation-and-time-complexity-analysis
 //alculate distance at each empty space(0)"(which is O(m * n))
 // inside of " mn time to find all 1's "(which is O(m * n )), so it will be O(m ^ 2 * n ^ 2)...
-    public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int[][] input = {{1,0,2,0,1},{0,0,0,0,0},{0,0,1,0,0}};
         System.out.print(shortestDistance(input));
     }
+
+    //start from the buildings and store the buildingNum, total distance for each 0 and the reach(no of building accessible)
+    //BFS from each building
 
     public static int shortestDistance(int[][] grid) {
         if (grid == null || grid[0].length == 0) return 0;
@@ -83,41 +86,38 @@ public class ShortestDistancefromAllBuildings_317 {
                 }
             }
         }
-
         return shortest == Integer.MAX_VALUE ? -1 : shortest;
-
-
     }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
-    public static void addNode(int value) {
-        root = addNodeRecursive(root, value);
-        root.left = new TreeNode(9);
-        root.right = new TreeNode(20);
-        root.right.left = new TreeNode(15);
-        root.right.right = new TreeNode(7);
-    }
-
-    public static TreeNode addNodeRecursive(TreeNode node, int value) {
-//        TreeNode newNode = null;
-        if (node == null) {
-            node = new TreeNode(value);
-            return node;
-        }
-
-        if (value < node.val) {
-            node.left = addNodeRecursive(node.left, value);
-        } else if (value > node.val){
-            node.right = addNodeRecursive(node.right, value);
-        } else {
-            return node;
-        }
-        return node;
-    }
+//    public static class TreeNode {
+//        int val;
+//        TreeNode left;
+//        TreeNode right;
+//        TreeNode(int x) { val = x; }
+//    }
+//
+//    public static void addNode(int value) {
+//        root = addNodeRecursive(root, value);
+//        root.left = new TreeNode(9);
+//        root.right = new TreeNode(20);
+//        root.right.left = new TreeNode(15);
+//        root.right.right = new TreeNode(7);
+//    }
+//
+//    public static TreeNode addNodeRecursive(TreeNode node, int value) {
+////        TreeNode newNode = null;
+//        if (node == null) {
+//            node = new TreeNode(value);
+//            return node;
+//        }
+//
+//        if (value < node.val) {
+//            node.left = addNodeRecursive(node.left, value);
+//        } else if (value > node.val){
+//            node.right = addNodeRecursive(node.right, value);
+//        } else {
+//            return node;
+//        }
+//        return node;
+//    }
 }

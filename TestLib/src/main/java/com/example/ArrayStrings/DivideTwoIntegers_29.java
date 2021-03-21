@@ -22,15 +22,15 @@ public class DivideTwoIntegers_29 {
          * for the reasons explained above.
          * Also, we count the number of negatives signs. */
         // int negatives = 2;
-        int div = Math.abs(dividend);
+        int dividendMod = Math.abs(dividend);
         int divis = Math.abs(divisor);
 
         /* Count how many times the divisor has to be added
          * to get the dividend. This is the quotient. */
         int quotient = 0;
-        while (div - divis >= 0) {
+        while (dividendMod - divis >= 0) {
             quotient++;
-            div -= divis;
+            dividendMod -= divis;
         }
 
         quotient = dividend>0==divisor>0?quotient:-quotient;

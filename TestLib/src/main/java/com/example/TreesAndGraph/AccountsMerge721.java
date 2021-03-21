@@ -21,13 +21,14 @@ public class AccountsMerge721 {
 //            ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
 //    https://leetcode.com/problems/accounts-merge/
 //    O(n * log(n)) Time and O(n) Space
+//    Without the log factor, this is the complexity to build the graph and search for each component.
+//    The log factor is for sorting each component at the end.
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
 //        addNode();
-
-        String[][] input = {{"John", "johnsmith@mail.com", "john00@mail.com"},
+        String[][] input = {{"John", "johnsmith@mail.com", "john00@mail.com", "johnTest@mail.com"},
                 {"John", "johnnybravo@mail.com"},
                 {"John", "johnsmith@mail.com", "john_newyork@mail.com"},
                 {"Mary", "mary@mail.com"}};
@@ -38,12 +39,31 @@ public class AccountsMerge721 {
         }
     }
 
-    //graph
-    // map key email, adjacent emails
-    // mail,names
-    //dfs keySet
-    //
 
+//    public static List<List<String>> accountsMergeTest(List<List<String>> accounts) {
+//        HashMap<String, Set<String>> map = new HashMap();
+//        HashMap<String, String> emailToName = new HashMap<>();
+//        buildGraphTest(map, accounts, emailToName);
+//
+//    }
+//
+//    public static void buildGraphTest(HashMap<String, Set<String>> map, List<List<String>>  accounts,
+//                                      HashMap<String, String> emailToName) {
+//        for (List<String> account: accounts) {
+//          String name = account.get(0);
+//          for (int i =1; i < account.size(); i++) {
+//              map.putIfAbsent(account.get(1), new HashSet());
+//              if(i ==1) continue;
+//              map.get(account.get(i-1)).add()
+//
+//          }
+//
+//        }
+//    }
+
+    //build graph map key email and other emails
+    //another map of email,name loop all the keys
+    //dfs keySet(unique emails)
     public static List<List<String>> accountsMerge(List<List<String>> accounts) {
         List<List<String>> res = new ArrayList<>();
         if (accounts.size() == 0) return res;
@@ -62,7 +82,6 @@ public class AccountsMerge721 {
                 res.add(mails);
             }
         }
-
         return res;
     }
 
@@ -91,30 +110,6 @@ public class AccountsMerge721 {
         }
     }
 
-//    private static void buildGraph(Map<String, Set<String>> map, Map<String, String> emailToName, List<List<String>> accounts) {
-//        for (List<String> account: accounts) {
-//            String name = account.get(0);
-//            for (int i = 1; i < account.size(); i++) {
-//                String currentMail = account.get(i);
-//                emailToName.put(currentMail, name);
-//                map.putIfAbsent(currentMail, new HashSet<>());
-//                if (i == 1) continue;
-//                String prev = account.get(i-1);
-//                map.get(prev).add(currentMail);
-//                map.get(currentMail).add(prev);
-//            }
-//        }
-//    }
-//
-//    private static void dfs(Map<String, Set<String>> map, String mail, List<String> mails, List<String> visited) {
-//        mails.add(mail);
-//        if (map.get(mail).size() == 0) return;
-//        for (String neigh: map.get(mail)) {
-//            if (visited.add(neigh)) {
-//                dfs(map, neigh, mails, visited);
-//            }
-//        }
-//    }
 
     public static void addNode() {
         root = addNodeRecursive(root, 10);

@@ -1,8 +1,5 @@
 package com.example.TreesAndGraph;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ClosestBinarySearchTreeValue_270 {
 //    Input: root = [4,2,5,1,3], target = 3.714286
 //
@@ -17,12 +14,12 @@ public class ClosestBinarySearchTreeValue_270 {
 
     public static TreeNode root = null;
     public static void main(String[] args) {
+        addNode(4);
         int result = closestValue(root, 3.714286);
         System.out.print(result);
     }
 
     public static int closestValue(TreeNode root, double target) {
-
         if (root == null) return 0;
         int closest = root.val;
         while(root != null) {

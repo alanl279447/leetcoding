@@ -1,6 +1,7 @@
 package com.example.ArrayStrings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MissingRanges_163 {
@@ -9,37 +10,19 @@ public class MissingRanges_163 {
 //    https://leetcode.com/problems/missing-ranges/
 
     public static void main(String args[]) {
-
         int[] nums = {0, 1, 3, 50, 75};
+        //int[] nums = {};
         List<String> result  = findMissingRanges(nums, 0,99);
         for (String res:result)
           System.out.println(res);
     }
 
-    public static List<String> findMissingRangesPrac(int[] nums, int lower, int upper) {
-        List<String> result = new ArrayList<>();
-        for (int i=0; i < nums.length; i++) {
-         int lt = i==0?lower:nums[i-1]+1;
-         int gt = i==nums.length?upper:nums[i]-1;
-         addRangePrac(result, lt, gt);
-        }
-        return result;
-    }
-
-    public static void addRangePrac(List<String> result, int lower, int higher) {
-        if (lower > higher) {
-            return;
-        }
-        if (lower==higher) {
-            result.add(String.valueOf(lower));
-        } else {
-            result.add(lower+"->" +higher);
-        }
-    }
-
-
-
-
+    //0,1,3,50,75      0, 99
+    // i==0 0  -  1    lower > higher return
+    //1+1  3-1   2,2  2
+    //3+1  50-1  4->49
+    //50+1  75-1  51->74
+    //i==n 76     99    76-99
     public static List<String> findMissingRanges(int[] nums, int lower, int upper) {
         List<String> list = new ArrayList<String>();
         if(nums == null) return list;

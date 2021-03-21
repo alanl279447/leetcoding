@@ -17,7 +17,6 @@ public class MedianFinderMain {
 //    findMedian() -> 2
 
     public static void main(String[] args) {
-
         MedianFinder obj = new MedianFinder();
         obj.addNum(41);
         obj.addNum(35);
@@ -30,18 +29,17 @@ public class MedianFinderMain {
         System.out.println(param_2);
     }
 
-    //maxHeap   41
-    //minHeap
-    //median   41
     //41,35,62,5,97,108
+    //maxHeap  41,35,5
+    //minHeap  62,97,108
     public static class MedianFinder {
         // max queue is always larger or equal to min queue
         PriorityQueue<Integer> min = new PriorityQueue();
-        PriorityQueue<Integer> max = new PriorityQueue(1000, Collections.reverseOrder());
+        PriorityQueue<Integer> max = new PriorityQueue(Collections.reverseOrder());
         // Adds a number into the data structure.
         public void addNum(int num) {
-            max.add(num);
-            min.add(max.remove());
+            max.add(num);               //41, 35, 5
+            min.add(max.remove());      //62, 41
             if (max.size() < min.size()){
                 max.add(min.poll());
             }

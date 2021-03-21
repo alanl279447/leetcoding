@@ -20,7 +20,6 @@ public class MinimumPathSum_64 {
     }
 
     public static int minPathSum(int[][] grid) {
-
         if (grid == null || grid.length < 1) {
             return 0;
         }

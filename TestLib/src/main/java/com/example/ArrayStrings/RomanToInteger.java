@@ -1,49 +1,44 @@
 package com.example.ArrayStrings;
 
+import java.util.HashMap;
+
 public class RomanToInteger {
 
+//    Symbol       Value
+//    I             1
+//    V             5
+//    X             10
+//    L             50
+//    C             100
+//    D             500
+//    M             1000
+//
     public static void main(String[] args) {
-        System.out.println("Start main " +myromanToInteger("MCMXCIV"));
+        System.out.println("Start main " +myromanToInteger("MCMXCIV")); //MCMXCIV
     }
 
-    private static int myromanToIntegerPractice(String input) {
-      int currentValue = 0, prevValue=0, totalValue = 0;
-      int length = input.length();
+    private static int myromanToIntegerTest(String input) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
 
-      for (int i = length-1; i >=0; i--) {
-          char c = input.charAt(i);
-          switch(c) {
-              case 'I':
-                  currentValue = 1;
-                  break;
-              case 'V':
-                  currentValue = 5;
-                  break;
-              case 'X':
-                  currentValue = 10;
-                  break;
-              case 'L':
-                  currentValue = 50;
-                  break;
-              case 'C':
-                  currentValue = 100;
-                  break;
-              case 'D':
-                  currentValue = 500;
-                  break;
-              case 'M':
-                  currentValue = 1000;
-                  break;
-          }
-         if (prevValue>0 && currentValue < prevValue) {
-             totalValue -=currentValue;
-         } else {
-             totalValue += currentValue;
-         }
-         prevValue=currentValue;
-      }
-
-     return totalValue;
+        int result = 0;
+        char prevC = '\0';
+        for (int i = input.length()-1; i >=0; i++) {
+            char currC = input.charAt(i);
+            if (prevC != '\0' && map.get(prevC) > map.get(currC)) {
+                result -= map.get(currC);
+            } else {
+                result += map.get(currC);  //5
+            }
+            prevC = currC;
+        }
+       return result;
     }
 
     //need to improve of time complexity

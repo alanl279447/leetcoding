@@ -1,5 +1,6 @@
 package com.example.SortingAndSearching;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,7 +48,6 @@ public class TopKFrequentElements {
         return res;
     }
 
-
 //    Time complexity : \mathcal{O}(N \log(k))O(Nlog(k)).
 //    The complexity of Counter method is \mathcal{O}(N)O(N).
 //    To build a heap and output list takes \mathcal{O}(N \log(k))O(Nlog(k)).
@@ -60,13 +60,7 @@ public class TopKFrequentElements {
             count.put(num, count.getOrDefault(num, 0)+1);
         }
 
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer i1, Integer i2) {
-                return count.get(i1) - count.get(i2);
-            }
-        });
-
+        PriorityQueue<Integer> queue = new PriorityQueue<>((i1,i2)-> count.get(i1) - count.get(i2));
         for (int i: count.keySet()) {
             queue.add(i);
             if (queue.size() > k) {

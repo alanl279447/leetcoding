@@ -15,7 +15,6 @@ public class Pattern132_456 {
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        //List<String> nums1 = Arrays.asList("0:start:0","1:start:2","1:end:5","0:end:6");
         int[] nums1={3,1,4,2};
         System.out.print(find132pattern(nums1));
     }
@@ -30,9 +29,9 @@ public class Pattern132_456 {
             min[i] = Math.min(min[i - 1], nums[i]);
         for (int j = nums.length - 1; j >= 0; j--) {
             if (nums[j] > min[j]) {
-                while (!stack.isEmpty() && stack.peek() <= min[j])
+                while (!stack.isEmpty() && stack.peek() <= min[j]) // i > k pop() the stack
                     stack.pop();
-                if (!stack.isEmpty() && stack.peek() < nums[j])
+                if (!stack.isEmpty() && stack.peek() < nums[j])  // k < j
                     return true;
                 stack.push(nums[j]);
             }

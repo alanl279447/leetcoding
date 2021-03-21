@@ -14,10 +14,18 @@ public class BackspaceStringCompare_844 {
         System.out.println(backspaceCompare(s, T));
     }
 
+    /**
+     - Start from back to front
+     - if count > 0 && !#, skip
+     - if count == 0 && different, return false
+     - if #, count++
+     - if one ends, the other count == 0 && has any char return false
+     - else return true
+     */
+
     public static boolean backspaceCompare(String S, String T) {
         if (S == null || T == null) return S == T;
-        int m = S.length(), n = T.length();
-        int i = m - 1, j = n - 1;
+        int i = S.length() - 1, j =  T.length() - 1;
         int cnt1 = 0, cnt2 = 0;//number of '#';
         while (i >= 0 || j >= 0) {
             while (i >= 0 && (S.charAt(i) == '#' || cnt1 > 0)) {
@@ -39,5 +47,4 @@ public class BackspaceStringCompare_844 {
         }
         return true;
     }
-
 }

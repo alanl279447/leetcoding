@@ -34,19 +34,17 @@ public class WordBreak_II_140 {
 //
 //    https://leetcode.com/problems/word-break-ii/
 //   s O(n * 2^n) (Time and memory).
+//    https://salonikaurone.medium.com/leetcode-word-break-ii-explained-d41ecfbe8fc5
 
     public static void main(String[] args) {
         List<String> wordDict = Arrays.asList("cat", "cats", "and", "sand", "dog");
         List<String> result = wordBreak("catsanddog", wordDict);
-
         for (String res: result) {
             System.out.println(res);
         }
     }
 
-    //start with catsanddog
-    //nextString sanddog
-
+    //map for the string and List<String>
     public static List<String> wordBreak(String s, List<String> wordDict) {
         return backtrack(s,wordDict,new HashMap<String, List<String>>());
     }

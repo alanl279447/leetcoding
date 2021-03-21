@@ -32,8 +32,11 @@ public class DesignHashMap_706 {
         hashMap.get(2);            // returns 1
         hashMap.remove(2);          // remove the mapping for 2
         hashMap.get(2);            // returns -1 (not found)
-
     }
+
+
+    //LinkedList is used for colision handling
+    //
 
     static class MyHashMap {
         final ListNode[] nodes = new ListNode[10000];
@@ -52,8 +55,8 @@ public class DesignHashMap_706 {
             int i = idx(key);
             if (nodes[i] == null)
                 return -1;
-            ListNode node = find(nodes[i], key);
-            return node.next == null ? -1 : node.next.val;
+            ListNode prev = find(nodes[i], key);
+            return prev.next == null ? -1 : prev.next.val;
         }
 
         public void remove(int key) {
