@@ -1,7 +1,7 @@
 package com.example.DesignQuestions;
 
 public class AddSearchWordDatastructuredesign_211 {
-    //    addWord("bad")
+//    addWord("bad")
 //    addWord("dad")
 //    addWord("mad")
 //    search("pad") -> false
@@ -21,6 +21,9 @@ public class AddSearchWordDatastructuredesign_211 {
         System.out.println("Next :" +obj.search(".ad"));
         System.out.println("Next :" +obj.search("b.."));
     }
+
+//    O(M) for the "well-defined" words without dots, where MM is the key length, and NN is a number of keys,
+//    {O}(N  * 26 ^ M)O(N⋅26M) for the "undefined" words.
 
     public static class WordDictionary {
 

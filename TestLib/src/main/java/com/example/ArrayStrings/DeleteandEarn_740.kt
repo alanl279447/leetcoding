@@ -13,10 +13,22 @@ fun main(args: Array<String>) {
     System.out.println(deleteAndEarn(intArrayOf(3,2,4)))
 }
 
-//take[i] = skip[i-1] + values[i];
-//skip[i] = Math.max(skip[i-1], take[i-1]);
-//take[i] can only be derived from: if you skipped the [i-1]th bucket, and you take bucket[i].
-//skip[i] through, can be derived from either take[i-1] or skip[i-1], whatever the bigger;
+//https://leetcode.com/problems/delete-and-earn/discuss/109895/JavaC%2B%2B-Clean-Code-with-Explanation
+
+fun deleteAndEarnDP(nums: IntArray): Int {
+    val buckets = IntArray(10001)
+    for (num in nums) {
+        buckets[num] += num
+    }
+    val dp = IntArray(10001)
+    dp[0] = buckets[0]
+    dp[1] = buckets[1]
+    for (i in 2 until buckets.size) {
+        dp[i] = Math.max(buckets[i] + dp[i - 2], dp[i - 1])
+    }
+    return dp[10000]
+}
+
 
 fun deleteAndEarn(nums: IntArray): Int {
     val n = 10001

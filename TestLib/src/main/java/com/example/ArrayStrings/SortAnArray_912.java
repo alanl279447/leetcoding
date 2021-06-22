@@ -70,7 +70,6 @@ public class SortAnArray_912 {
         nums[i] ^= nums[j];
     }
 
-
     private static void selectionSort(int[] nums){
         for (int i = 0; i < nums.length; i++){
             int minIndex = i;

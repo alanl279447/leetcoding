@@ -1,5 +1,7 @@
 package com.example.ArrayStrings;
 
+import com.sun.org.apache.xpath.internal.operations.String;
+
 public class StringCompression_443 {
 //    Input:
 //            ["a","a","b","b","c","c","c"]

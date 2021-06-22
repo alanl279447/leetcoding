@@ -13,7 +13,6 @@ public class ValidPalindrome_125 {
         System.out.println("Palindrome result:  " + isPalindrome(input));
     }
 
-
     public static boolean isPalindrome(String s) {
         int length = s.length();
         int left = 0;
@@ -35,28 +34,4 @@ public class ValidPalindrome_125 {
         }
         return true;
     }
-
-
-
-//    public static boolean isPalindrome(String s) {
-////        boolean result = false;
-//        int length = s.length();
-//        int i = 0, j = length-1;
-//        char[] sChars = s.toCharArray();
-//
-//        while (i < length && j >= 0 && i < j) outer : {
-//            while (!Character.isLetterOrDigit(sChars[i])) {
-//                i++;
-//                if (i ==length) break outer;
-//            }
-//            while (!Character.isLetterOrDigit(sChars[j])) {
-//                j--;
-//                if (j ==0) break outer;
-//            }
-//            if (Character.toLowerCase(sChars[i]) != Character.toLowerCase(sChars[j])) return false;
-//            i++;
-//            j--;
-//        }
-//        return true;
-//    }
 }

@@ -18,36 +18,21 @@ public class ProductofArrayExceptSelf_3016 {
         }
     }
 
-//    1  1  2  6   leftSum
-//    1  2  3  4
-//   24 12  4  1    rightSum
-//   24  12 8  6
-
-
-    public static int[] productExceptSelfTest(int[] inputs) {
-        if (inputs == null || inputs.length == 0) return new int[]{0};
-        int len = inputs.length;
-        int[] output = new int[len];
-        output[0] =1;
-        for (int i=1; i < len; i++) {
-            output[i] = output[i-1]*inputs[i-1];  //leftSum
-        }
-        int R = 1;
-        for (int j = len-1; j >=0;j--) {
-            output[j] = output[j] * R;
-            R = R * inputs[j];
-        }
-        return output;
-    }
-
-
-//   24 12 4  1  rightSum
-//
-//    1 2  3  4
-//
-//    1 1  2  6  leftSum
-//
-//    24 12 8 6   result
+//    public static int[] productExceptSelfTest(int[] inputs) {
+//        if (inputs == null || inputs.length == 0) return new int[]{0};
+//        int len = inputs.length;
+//        int[] output = new int[len];
+//        output[0] =1;
+//        for (int i=1; i < len; i++) {
+//            output[i] = output[i-1]*inputs[i-1];  //leftSum
+//        }
+//        int R = 1;
+//        for (int j = len-1; j >=0;j--) {
+//            output[j] = output[j] * R;
+//            R = R * inputs[j];
+//        }
+//        return output;
+//    }
 
     public static int[] productExceptSelf(int[] nums) {
         int length = nums.length;
@@ -75,4 +60,12 @@ public class ProductofArrayExceptSelf_3016 {
 
         return output;
     }
+
+//        R = 1
+//   24 12 4  1  rightSum
+//    1 2  3  4
+//
+//    1 1  2  6  leftSum
+//
+//    24 12 8 6   result
 }

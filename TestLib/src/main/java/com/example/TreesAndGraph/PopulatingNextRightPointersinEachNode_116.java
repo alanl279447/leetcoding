@@ -1,5 +1,6 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +29,6 @@ public class PopulatingNextRightPointersinEachNode_116 {
         if (root == null) {
             return root;
         }
-
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
         while(!queue.isEmpty()) {

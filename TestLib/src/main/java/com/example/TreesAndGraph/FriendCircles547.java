@@ -66,7 +66,7 @@ public class FriendCircles547 {
         public int findCircleNumUF(int[][] M) {
             int n = M.length;
             UF uf = new UF(n);
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n-1; i++)
                 for (int j = i + 1; j < n; j++)
                     if (M[i][j] == 1)
                         uf.union(i, j);

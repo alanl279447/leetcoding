@@ -41,14 +41,6 @@ public class AlienDictionary_269 {
 //        buildGraphTest(map, inDegree, words);
 //        bfsTest(map, inDegree, words);
 //    }
-//
-//    public static void buildGraphTest(HashMap<Character, Set<Character>>  map, int[] inDegree, String[] words) {
-//
-//    }
-//
-//    public static String bfsTest(HashMap<Character, Set<Character>>  map, int[] inDegree, String[] words) {
-//
-//    }
 
     public static String alienOrder(String[] words) {
         Map<Character, Set<Character>> graph = new HashMap<>();
@@ -61,7 +53,7 @@ public class AlienDictionary_269 {
         StringBuilder sb = new StringBuilder();
         Queue<Character> queue = new LinkedList<>();
         for (char c: map.keySet()) {
-           if (inDegree[c -'a'] == 0)   {
+           if (inDegree[c -'a'] == 0) {
                queue.offer(c);
            }
         }
@@ -86,13 +78,12 @@ public class AlienDictionary_269 {
                 graph.putIfAbsent(c, new HashSet<>());   //creating a graph for all the charaters.
             }
         }
-
         for (int i=1; i < words.length; i++) {
             String first = words[i-1];
             String second = words[i];
 
             int len = Math.min(first.length(), second.length());
-            for (int j = 0; j < len; j ++) {
+            for (int j = 0; j < len; j++) {
                char out = first.charAt(j);
                char in = second.charAt(j);
                if (out != in) {
@@ -105,51 +96,4 @@ public class AlienDictionary_269 {
             }
         }
     }
-
-//    private static void buildGraph(Map<Character, Set<Character>> graph, int[] inDegree, String[] words) {
-//        for (String s : words) {
-//            for (char c : s.toCharArray()) {
-//                graph.putIfAbsent(c, new HashSet<>());
-//            }
-//        }
-//
-//        for (int i = 1; i < words.length; i++) {
-//            String first = words[i - 1];
-//            String second = words[i];
-//            int len = Math.min(first.length(), second.length());
-//            for (int j = 0; j < len; j++) {
-//                char out = first.charAt(j);
-//                char in = second.charAt(j);
-//                if (out != in) {
-//                    if (!graph.get(out).contains(in)) {
-//                        graph.get(out).add(in);
-//                        inDegree[in - 'a']++;
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-//    }
-//
-//    private static String bfs(Map<Character, Set<Character>> graph, int[] inDegree) {
-//        StringBuilder sb = new StringBuilder();
-//        Queue<Character> q = new LinkedList<>();
-//        for (char c : graph.keySet()) {
-//            if (inDegree[c - 'a'] == 0) {
-//                q.offer(c);
-//            }
-//        }
-//
-//        while (!q.isEmpty()) {
-//            char out = q.poll();
-//            sb.append(out);
-//            for (char in : graph.get(out)) {
-//                inDegree[in - 'a']--;
-//                if (inDegree[in - 'a'] == 0) {
-//                    q.offer(in);
-//                }
-//            }
-//        }
-//        return sb.length() == graph.size() ? sb.toString() : "";
-//    }
 }

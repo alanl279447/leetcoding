@@ -28,7 +28,7 @@ public class RandomPickwithWeight_528 {
 
         public int pickIndex() {
             int len = wSums.length;
-            int idx = random.nextInt(wSums[len-1]) + 1;   // +1 is needed to offset 0
+            int idx = 7;//random.nextInt(wSums[len-1]) + 1;   // +1 is needed to offset 0
             int left = 0, right = len - 1;
             // search position
             while(left < right){

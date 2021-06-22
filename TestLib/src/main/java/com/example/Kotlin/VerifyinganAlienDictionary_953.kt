@@ -5,6 +5,8 @@ package com.example.Kotlin
 //        Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
 //        https://leetcode.com/problems/verifying-an-alien-dictionary/
 
+   //TC 0(M+N)
+
 fun main (args: Array<String>) {
     println(isAlienSorted(arrayOf("hello","leetcode"), "hlabcdefgijkmnopqrstuvwxyz"))
 }

@@ -2,6 +2,7 @@ package com.example.DesignQuestions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,17 +48,16 @@ public class InsertDeleteGetRandom_Duplicatesallowed_381 {
     public static class RandomizedCollection {
         ArrayList<Integer> lst;
         HashMap<Integer, Set<Integer>> idxMap;
-        java.util.Random rand = new java.util.Random();
+        Random rand = new Random();
         /** Initialize your data structure here. */
 
         public RandomizedCollection() {
-            lst = new ArrayList<Integer>();
-            idxMap = new HashMap<Integer, Set<Integer>>();
+            lst = new ArrayList<>();
+            idxMap = new HashMap<>();
         }
 
 //        lst  list<Integer
-//        map <val>  index of list
-
+//        map <val>  index of list indexes
         /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
         public boolean insert(int val) {
             if (!idxMap.containsKey(val)) idxMap.put(val, new LinkedHashSet<Integer>());
@@ -73,8 +73,8 @@ public class InsertDeleteGetRandom_Duplicatesallowed_381 {
             idxMap.get(val).remove(remove_idxMap);
             int last = lst.get(lst.size() - 1);
             lst.set(remove_idxMap, last);
-            idxMap.get(last).add(remove_idxMap);
             idxMap.get(last).remove(lst.size() - 1);
+            idxMap.get(last).add(remove_idxMap);
 
             lst.remove(lst.size() - 1);
             return true;

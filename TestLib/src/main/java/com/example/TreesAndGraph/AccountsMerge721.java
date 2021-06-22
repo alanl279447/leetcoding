@@ -39,28 +39,6 @@ public class AccountsMerge721 {
         }
     }
 
-
-//    public static List<List<String>> accountsMergeTest(List<List<String>> accounts) {
-//        HashMap<String, Set<String>> map = new HashMap();
-//        HashMap<String, String> emailToName = new HashMap<>();
-//        buildGraphTest(map, accounts, emailToName);
-//
-//    }
-//
-//    public static void buildGraphTest(HashMap<String, Set<String>> map, List<List<String>>  accounts,
-//                                      HashMap<String, String> emailToName) {
-//        for (List<String> account: accounts) {
-//          String name = account.get(0);
-//          for (int i =1; i < account.size(); i++) {
-//              map.putIfAbsent(account.get(1), new HashSet());
-//              if(i ==1) continue;
-//              map.get(account.get(i-1)).add()
-//
-//          }
-//
-//        }
-//    }
-
     //build graph map key email and other emails
     //another map of email,name loop all the keys
     //dfs keySet(unique emails)
@@ -109,7 +87,6 @@ public class AccountsMerge721 {
             }
         }
     }
-
 
     public static void addNode() {
         root = addNodeRecursive(root, 10);

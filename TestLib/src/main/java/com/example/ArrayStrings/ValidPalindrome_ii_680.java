@@ -12,12 +12,11 @@ public class ValidPalindrome_ii_680 {
         System.out.println("Palindrome result:  " + isPalindrome(input));
     }
 
+    //abca  left = 0, 1 right = len-1 (3),2
     public static boolean isPalindrome(String s) {
-      boolean result = false;
       int length = s.length();
       int i = 0, j = length-1;
       char[] sChars = s.toCharArray();
-      int count =0;
 
       while(i<j) {
           if (sChars[i] != sChars[j]) {
@@ -30,7 +29,6 @@ public class ValidPalindrome_ii_680 {
     }
 
     public static boolean isHelperPalindrome(String s, int start, int end) {
-
         while(start <= end) {
             if (s.charAt(start) != s.charAt(end)) {
                 return false;

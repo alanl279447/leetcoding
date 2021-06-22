@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class ShortestDistancefromAllBuildings_317 {
-//    Input: [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]
+public class    ShortestDistancefromAllBuildings_317 {
+    //    Input: [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]
 //
 //            1 - 0 - 2 - 0 - 1
 //            |   |   |   |   |
@@ -29,9 +29,12 @@ public class ShortestDistancefromAllBuildings_317 {
         System.out.print(shortestDistance(input));
     }
 
+    //starting from 1's do a BFS to all 0's and capture the cummulative min-distance & count of buildings reachable
+    //loop and find the min-distance from a 0 which reached all buildings.
+    //distance[1][0] = 9   , reach[1][0] = 3
+
     //start from the buildings and store the buildingNum, total distance for each 0 and the reach(no of building accessible)
     //BFS from each building
-
     public static int shortestDistance(int[][] grid) {
         if (grid == null || grid[0].length == 0) return 0;
         final int[] shift = new int[] {0, 1, 0, -1, 0};
@@ -77,7 +80,6 @@ public class ShortestDistancefromAllBuildings_317 {
                 }
             }
         }
-
         int shortest = Integer.MAX_VALUE;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -88,36 +90,4 @@ public class ShortestDistancefromAllBuildings_317 {
         }
         return shortest == Integer.MAX_VALUE ? -1 : shortest;
     }
-
-//    public static class TreeNode {
-//        int val;
-//        TreeNode left;
-//        TreeNode right;
-//        TreeNode(int x) { val = x; }
-//    }
-//
-//    public static void addNode(int value) {
-//        root = addNodeRecursive(root, value);
-//        root.left = new TreeNode(9);
-//        root.right = new TreeNode(20);
-//        root.right.left = new TreeNode(15);
-//        root.right.right = new TreeNode(7);
-//    }
-//
-//    public static TreeNode addNodeRecursive(TreeNode node, int value) {
-////        TreeNode newNode = null;
-//        if (node == null) {
-//            node = new TreeNode(value);
-//            return node;
-//        }
-//
-//        if (value < node.val) {
-//            node.left = addNodeRecursive(node.left, value);
-//        } else if (value > node.val){
-//            node.right = addNodeRecursive(node.right, value);
-//        } else {
-//            return node;
-//        }
-//        return node;
-//    }
 }

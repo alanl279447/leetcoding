@@ -12,11 +12,6 @@ import java.util.*
         System.out.println(numTeams(intArrayOf(3,2,1,2,3,4,3,4,5,9,10,11)))
     }
 
-//fun isPossibleDivide(nums: IntArray, k: Int): Boolean {
-//
-//
-//}
-
 //create a map item, count
 //create a PQ(minHeap) of the items or sort the array
 //get the count of first item, and check if i+k items satisfy the times check
@@ -26,8 +21,12 @@ fun isPossibleDivide(nums: IntArray, k: Int): Boolean {
     if (len % k !== 0) return false
     val map: MutableMap<Int, Int> = HashMap()
     val pq: PriorityQueue<Int> = PriorityQueue()
-    for (n in nums) map[n] = map.getOrDefault(n, 0) + 1
-    for (n in map.keys) pq.add(n)
+    for (n in nums) {
+        map[n] = map.getOrDefault(n, 0) + 1
+    }
+    for (n in map.keys) {
+        pq.add(n)
+    }
     while (!pq.isEmpty()) {
         val cur = pq.poll()
         if (map[cur] == 0) continue

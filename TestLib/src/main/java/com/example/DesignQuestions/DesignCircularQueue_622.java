@@ -25,16 +25,20 @@ public class DesignCircularQueue_622 {
 //        addNode(1);
         MyCircularQueue obj = new MyCircularQueue(3);
         boolean param_1 = obj.enQueue(1);
-        boolean param_2 = obj.enQueue(2);
-        boolean param_3 = obj.enQueue(3);
+//        boolean param_2 = obj.enQueue(2);
+//        boolean param_3 = obj.enQueue(3);
 //        boolean param_4 = obj.enQueue(4);
         boolean param_5 = obj.deQueue();
         boolean param_4 = obj.enQueue(4);
+        boolean param_10 = obj.enQueue(5);
+        boolean param_11 = obj.enQueue(6);
+
         int param_6 = obj.Front();
         int param_7 = obj.Rear();
         boolean param_8 = obj.isEmpty();
         boolean param_9 = obj.isFull();
     }
+
 
     //int[] queue
     //int head
@@ -51,7 +55,7 @@ public class DesignCircularQueue_622 {
             this.capacity = k;
             this.queue = new int[k];
             this.headIndex = 0;   //points to the first element in the queue.
-            this.count = 0;       //number of eleements in the queue.
+            this.count = 0;       //number of elements in the queue.
         }
 
         /** Insert an element into the circular queue. Return true if the operation is successful. */
@@ -78,7 +82,6 @@ public class DesignCircularQueue_622 {
                 return -1;
             return this.queue[this.headIndex];
         }
-
 
         /** Get the last item from the queue. */
         public int Rear() {

@@ -63,12 +63,10 @@ public class CopyListWithRandomPointer {
         return null;
     }
 
-
     public static Node copyRandomList(Node head) {
       if (head == null) {
           return null;
       }
-
       Node oldNode = head;
       Node newNode = new Node(oldNode.val);
       visited.put(oldNode, newNode);
@@ -82,5 +80,4 @@ public class CopyListWithRandomPointer {
       }
       return visited.get(head);
     }
-
 }

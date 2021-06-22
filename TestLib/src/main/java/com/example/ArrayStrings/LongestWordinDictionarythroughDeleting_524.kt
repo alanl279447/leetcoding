@@ -1,13 +1,9 @@
 package com.example.ArrayStrings;
 
-import com.example.ArrayStrings.IsSubsequence_392.isSubsequence
-
-
-
-
 //Input: s = "abpcplea", dictionary = ["ale","apple","monkey","plea"]
 //Output: "apple"
 //https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/
+// 0(nk) n - n is the length of s, k - no of words
 
 //class LastSubstringLexicographicalOrder_1163 {
 fun main(args: Array<String>) {

@@ -12,6 +12,15 @@ public class SingleNumberIII_260 {
         System.out.println(singleNumber(input));
     }
 
+
+    //No XOR No = 0
+    //No XOR 0 = No
+    //3 ^ 5 = 0011 ^ 0101 = 0110  = 6
+    // 6 & -6
+    //0110 &
+    //1010
+    //0010
+
     //first find the XOR of all the nums
     //find the lowest bit (x & -x)
     //bucket the numbers in two sets

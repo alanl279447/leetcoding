@@ -24,21 +24,20 @@ public class OddEvenLinkedList_328 {
 
 //    1->2->3->4->5->NULL
 //    1->3->2->3->4->5->Nul
-
     public static ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
 
-       ListNode odd = head;
-       ListNode even = head.next;
-       ListNode evenHead = even;
-
-       while (even != null && even.next!= null) {
-           odd.next = even.next; //head.next.next -> odd
-           odd = odd.next;
-           even.next = odd.next;
-           even = even.next;
-       }
-       odd.next = evenHead;
-       return head;
+        while (even != null && even.next!= null) {
+            odd.next = even.next; //head.next.next -> odd
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
     }
 
     public static class ListNode {

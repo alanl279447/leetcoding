@@ -20,11 +20,8 @@ public class MaximumSizeSubarraySumEqualsk_325 {
         System.out.println(res);
     }
 
-    //preSum and HashMap
-    //0,1,0,5,3,6
-    //-3, -2, -3, 2, 0
-    //(0,0),(1,0),(0,2),(5,3),(3,4),(6,5)
-//    {1, -1, 5, -2, 3};
+//    input: 1, -1, 5, -2, 3  k = 3   0/p = 4
+
     public static int maxSubArrayLen(int[] arr, int k) {
         int n = arr.length;
         int[] prefixSum = new int[n+1];

@@ -11,6 +11,13 @@ public class MaximumSwap_670 {
         System.out.println(maximumSwap(8745));
     }
 
+    //8745
+    //indexMap  -1,-1,-1,2,3,-1,1,0,-1
+
+    //Integer.toString().toCharArray  2,7,3,6
+    //int[] positions[10]  -1,-1,0,2,-1,-1,3,1,-1,-1
+    // index(2) > index(7) --
+    //7,2,3,6
     public static int maximumSwap(int num) {
         char[] digits = Integer.toString(num).toCharArray();
         int[] buckets = new int[10];

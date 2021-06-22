@@ -10,10 +10,11 @@ public class AngleBetweenHandsofClock_1344 {
 
     public static double angleClock(int hour, int minutes) {
         // Degree covered by hour hand (hour area + minutes area)
-        double h = (hour%12 * 30) + ((double)minutes/60 * 30);
+//        double h = (hour%12)/12 * 360 + ((double)minutes/60 * 30);
+         double h = (hour%12 + (double)minutes/60) *360/12;
 
         // Degree covered by minute hand (Each minute = 6 degree)
-        double m = minutes * 6;
+        double m = minutes * 360/60;
 
         // Absolute angle between them
         double angle = Math.abs(m - h);

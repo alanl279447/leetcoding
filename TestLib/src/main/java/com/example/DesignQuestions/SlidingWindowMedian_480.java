@@ -3,7 +3,6 @@ package com.example.DesignQuestions;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
-
 public class SlidingWindowMedian_480 {
 
 //    For example,
@@ -17,7 +16,7 @@ public class SlidingWindowMedian_480 {
 //        1  3  -1  -3 [5  3  6] 7       5
 //        1  3  -1  -3  5 [3  6  7]      6
 //    https://leetcode.com/problems/sliding-window-median/
-//Time complexity: O(2 \cdot n \log k) + O(n-k) \approx O(n \log k)O(2⋅nlogk)+O(n−k)≈O(nlogk).
+//Time complexity: O(2 n log k) + O(n-k)  ≈ O(nlogk).
 
     public static void main(String[] args) {
         int[] nums = {1,3,-1,-3,5,3,6,7};
@@ -29,7 +28,7 @@ public class SlidingWindowMedian_480 {
 
     public static double[] medianSlidingWindow(int[] nums, int k) {
         double[] result = new double[nums.length - k + 1];
-        int j=0;
+        int j= 0;
         PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
         PriorityQueue<Integer> min = new PriorityQueue<>();
         for (int i = 0; i < nums.length; i++) {
@@ -53,9 +52,6 @@ public class SlidingWindowMedian_480 {
                 } else {
                     min.remove(nums[start]);
                 }
-                // if(!left.remove(nums[start])) {
-                //     right.remove(nums[start]);
-                // }
             }
         }
         return result;

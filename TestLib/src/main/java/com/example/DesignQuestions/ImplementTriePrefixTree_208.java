@@ -28,14 +28,10 @@ public class ImplementTriePrefixTree_208 {
     }
 
     public static class Trie {
-
         class TrieNode {
-
             // R links to node children
             private TrieNode[] links;
-
             private final int R = 26;
-
             private boolean isEnd;
 
             public TrieNode() {
@@ -105,8 +101,6 @@ public class ImplementTriePrefixTree_208 {
             return node != null;
         }
     }
-
-
 
     public static void addNode(int value) {
         root = new TreeNode(value);

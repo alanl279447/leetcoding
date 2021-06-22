@@ -1,15 +1,10 @@
 package com.example.DesignQuestions;
 
-
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 public class SerializeDeserializeBinaryTree_297 {
-
 //    You may serialize the following tree:
 //
 //              1
@@ -54,7 +49,6 @@ public class SerializeDeserializeBinaryTree_297 {
         private TreeNode deserialize(String serialize) {
             TreeNode root = null;
             String[] nodeVals = serialize.split(spliter);
-
             List<String> queue = new LinkedList<>(Arrays.asList(nodeVals));
             root = deserializeTree(queue);
             return root;
@@ -70,43 +64,6 @@ public class SerializeDeserializeBinaryTree_297 {
             node.right = deserializeTree(lists);
             return node;
         }
-
-
-//        public static String serialize(TreeNode root) {
-//            StringBuilder sb = new StringBuilder();
-//            buildString(root, sb);
-//            return sb.toString();
-//        }
-//
-//        private static void buildString(TreeNode node, StringBuilder sb) {
-//            if (node == null) {
-//                sb.append(NN).append(spliter);
-//            } else {
-//                sb.append(node.val).append(spliter);
-//                buildString(node.left, sb);
-//                buildString(node.right,sb);
-//            }
-//        }
-
-//        public static TreeNode deserialize(String data) {
-//            String[] nodes = data.split(spliter);
-//            List<String> nodesList = new LinkedList<>(Arrays.asList(nodes));
-//            TreeNode node = buildDeserailTree(nodesList);
-//            return node;
-//        }
-//
-//        private static TreeNode buildDeserailTree(List<String> nodeStrings) {
-//            String currentNodeString = nodeStrings.remove(0);
-//            if (currentNodeString.equalsIgnoreCase(NN)) {
-//                return null;
-//            }
-//            TreeNode node = new TreeNode(Integer.parseInt(currentNodeString));
-//            node.left = buildDeserailTree(nodeStrings);
-//            node.right = buildDeserailTree(nodeStrings);
-//            return node;
-//        }
-
-
     }
 
     public static void addNode(int value) {
@@ -123,7 +80,4 @@ public class SerializeDeserializeBinaryTree_297 {
         TreeNode right;
         TreeNode(int x) { val = x; }
     }
-
-
-
 }

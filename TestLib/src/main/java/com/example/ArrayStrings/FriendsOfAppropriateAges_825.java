@@ -17,23 +17,24 @@ public class FriendsOfAppropriateAges_825 {
 //    age[B] > 100 && age[A] < 100
 
     public static void main(String[] args) {
-        int[] ages = {16,17, 18};
+        int[] ages = {16,17,18};
         System.out.println(numFriendRequests(ages));
     }
 
     //binary search
-    public static int numFriendRequestsTest(int[] ages) {
-        int result =0;
-        for (int i=0; i <ages.length;i++) {
-           int age = ages[i];
-           int lower = findFirstIdx(ages, age/2-7);
-           int upper = findFirstIdx(ages, age);
-           result += Math.max(0, upper-lower-1);
+    public static int numFriendRequestsBS(int[] ages) {
+        int res = 0;
+        Arrays.sort(ages);
+        for (int i = 0; i < ages.length; ++i) {
+            int age = ages[i];
+            int lower = firstIdx(ages, age/2+7);
+            int upper = firstIdx(ages, age);
+            res += Math.max(upper-lower-1, 0);
         }
-        return result;
+        return res;
     }
 
-    public static int findFirstIdx(int[] ages, int target) {
+    private static int firstIdx(int[] ages, int target) {
         int beg = 0;
         int end = ages.length-1;
         while (beg <= end) {
@@ -44,23 +45,21 @@ public class FriendsOfAppropriateAges_825 {
         return beg;
     }
 
-   //fixed based on ages
+     //fixed based on ages
     public static int numFriendRequests(int[] ages) {
-        int[] map = new int[121];
+        int res = 0;
+        int[] numInAge = new int[121], sumInAge = new int[121];
+        for(int i : ages)
+            numInAge[i]++;
 
-        for(int age:ages){
-            map[age]++;
+        for(int i = 1; i <= 120; ++i)
+            sumInAge[i] = numInAge[i] + sumInAge[i - 1];
+
+        for(int i = 15; i <= 120; ++i) {
+            if(numInAge[i] == 0) continue;
+            int count = sumInAge[i] - sumInAge[i / 2 + 7];
+            res += count * numInAge[i] - numInAge[i]; //people will not friend request themselves, so  - numInAge[i]
         }
-
-        for(int i=1;i<map.length;i++){
-            map[i] += map[i-1];
-        }
-
-        int fr = 0;
-        for(int age:ages){
-            fr += Math.max(0,map[age] - map[(age/2)+7] - 1);
-        }
-
-        return fr;
+        return res;
     }
 }

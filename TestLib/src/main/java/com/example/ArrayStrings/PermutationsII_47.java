@@ -23,6 +23,7 @@ public class PermutationsII_47 {
         }
     }
 
+
     public static List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         boolean[] used = new boolean[nums.length];
@@ -30,6 +31,13 @@ public class PermutationsII_47 {
         backtrack(list, new ArrayList<>(), nums, used);
         return list;
     }
+
+//    The difficulty is to handle the duplicates.
+//    With inputs as [1a, 1b, 2a],
+//    If we don't handle the duplicates, the results would be: [1a, 1b, 2a], [1b, 1a, 2a]...,
+//    so we must make sure 1a goes before 1b to avoid duplicates
+//    By using nums[i-1]==nums[i] && !used[i-1], we can make sure that 1b cannot be choosed before 1a
+//    https://leetcode.com/problems/permutations-ii/discuss/18594/Really-easy-Java-solution-much-easier-than-the-solutions-with-very-high-vote
 
     public static void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, boolean[] used) {
         if (tempList.size() == nums.length) {

@@ -12,8 +12,8 @@ public class ConstructBinaryTreefromString_536 {
 
     public static void main(String[] args) {
         String s = "4(2(3)(1))(6(5)(7))";
-        System.out.println(str2tree(s));
-    }
+        System.out.println(str2tree(s)); }
+
 
     //use a stack to store all the TreeNode
     // pop from the stack onnce you encounter a ( bracket

@@ -2,6 +2,7 @@ package com.example.SortingAndSearching;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -24,14 +25,24 @@ public class MergeIntervals_56 {
         }
     }
 
+    // 1 +1, 2 +1, 3 -1, 6 -1, 8 +1, 10 -1, 15 +1, 18 -1
+    // 1 - 6, 8 - 10, 15 - 18
+
+//    dm = DownloadManager(11)
+//        dm.add([10, 11]) -> false
+//        dm.add([7, 8]) -> false
+//        dm.add([2, 5]) -> false
+//        dm.add([0, 3]) -> false
+//        dm.add([6, 9]) -> true
+
     public static int[][] mergeWithoutSort(int[][] intervals) {
         if (intervals.length == 0) return new int[0][0];
         List<int[]> list = new ArrayList<>();
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        for(int[] itv : intervals){
-            map.put(itv[0], map.getOrDefault(itv[0], 0)+1);
-            map.put(itv[1], map.getOrDefault(itv[1], 0)-1);
-        }
+            for(int[] itv : intervals){
+                map.put(itv[0], map.getOrDefault(itv[0], 0)+1);
+                map.put(itv[1], map.getOrDefault(itv[1], 0)-1);
+            }
         int count = 0, start = Integer.MAX_VALUE, end = Integer.MIN_VALUE;
         for (int k : map.keySet()){
             count+=map.get(k);

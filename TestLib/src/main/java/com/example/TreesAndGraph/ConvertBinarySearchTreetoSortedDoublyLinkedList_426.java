@@ -39,6 +39,7 @@ public class ConvertBinarySearchTreetoSortedDoublyLinkedList_426 {
 
         while(!stack.isEmpty()|| curr != null){
             while(curr!= null){
+
                 stack.push(curr);
                 curr = curr.left;
             }

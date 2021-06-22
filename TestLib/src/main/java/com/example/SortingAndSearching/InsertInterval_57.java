@@ -39,8 +39,7 @@ public class InsertInterval_57 {
         while(i<n){
             ans.add(intervals[i++]);
         }
-
+//        return ans.toArray(new int[ans.size()][]);
         return ans.toArray(new int[ans.size()][]);
     }
-
 }

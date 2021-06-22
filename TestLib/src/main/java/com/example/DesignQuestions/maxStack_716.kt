@@ -34,8 +34,7 @@ fun main(args: Array<String>) {
 
 
 
-class MaxStack() {
-
+class MaxStack {
     class Node {
         var prev: Node? = null
         var next: Node?=null
@@ -87,7 +86,6 @@ class MaxStack() {
         treeMap = TreeMap<Int, ArrayList<Node>>()
     }
 
-
     fun push(x: Int) {
         var node = ddl.addNode(x)
         if (!treeMap.containsKey(x)) {
@@ -119,7 +117,7 @@ class MaxStack() {
     fun popMax(): Int {
         var key = peekMax()
         var list = treeMap.get(key)
-        var node = list?.removeAt(list.size-1)
+        var node: Node ?= list?.removeAt(list.size-1)
         ddl.deleteNode(node)
         if (list?.isEmpty()!!)  {
             treeMap.remove(node?.value)

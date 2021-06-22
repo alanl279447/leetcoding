@@ -14,7 +14,6 @@ public class RobotRoomCleaner_489 {
     public static Node root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-//        addNode(3);
 //        System.out.print();
     }
 
@@ -49,7 +48,7 @@ public class RobotRoomCleaner_489 {
     static class Robot {
         public void clean() {}
         public static boolean move(){return true;}
-        public void moveLeft() {}
+        public void turnLeft() {}
         public void turnRight() {}
     }
 

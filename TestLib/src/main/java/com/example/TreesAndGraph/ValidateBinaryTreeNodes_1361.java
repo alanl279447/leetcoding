@@ -22,11 +22,9 @@ public class ValidateBinaryTreeNodes_1361 {
         System.out.println(validateBinaryTreeNodes(4, leftChild, rightChild));
     }
 
-
      //inDegree for each node (no of incoming edges)
      //inDegree for root = 0 (only one), all other nodes = 1 (not more)
      //one connected component
-
     public static boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
         int[] inDegree = new int[n];    //no of edges going into a node
         for (int i = 0; i < n; i++) {

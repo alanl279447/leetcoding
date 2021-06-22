@@ -11,9 +11,10 @@ public class StrobogrammaticNumberII_247 {
 //    https://leetcode.com/problems/strobogrammatic-number-ii/
 
     public static void main(String[] args) {
-        System.out.println(findStrobogrammatic(4));
+        System.out.println(findStrobogrammatic(6));
     }
 
+    //0 (n * 5 ^ n/2)  (after iteration we reduce n by 2)
     public static List<String> findStrobogrammatic(int n) {
         List<String> cur, ans;
         ans = new ArrayList<String>((n & 1) == 0 ? Arrays.asList("") : Arrays.asList("0", "1", "8"));
@@ -23,14 +24,16 @@ public class StrobogrammaticNumberII_247 {
             cur = ans;
             ans = new ArrayList<String>();
             for (String i : cur) {
-                if (n > 3) ans.add('0' + i + '0');
+                if (n > 3) {
+                    ans.add('0' + i + '0');
+                }
                 ans.add('1' + i + '1');
                 ans.add('8' + i + '8');
                 ans.add('6' + i + '9');
                 ans.add('9' + i + '6');
             }
         }
-
+        System.out.println(ans.size());
         return ans;
     }
 }

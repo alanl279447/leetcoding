@@ -29,6 +29,11 @@ public class MedianFinderMain {
         System.out.println(param_2);
     }
 
+   //41,35,62,5,97,108
+   //minHeap     62, 97, 108
+   // maxHeap    41,35, 5
+
+
     //41,35,62,5,97,108
     //maxHeap  41,35,5
     //minHeap  62,97,108

@@ -23,6 +23,9 @@ public class GenerateParentheses_22 {
         }
     }
 
+    //max - 2n  (n = 3, 2n = 6)
+    //open <= n, closing <= open
+    //((()))
     public static List<String> generateParenthesis(int n) {
         List<String> ans = new ArrayList();
         backtrack(ans, "", 0, 0, n);

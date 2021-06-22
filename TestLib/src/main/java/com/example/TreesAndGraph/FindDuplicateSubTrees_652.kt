@@ -1,5 +1,8 @@
 package com.example.TreesAndGraph
 
+import java.util.*
+import kotlin.collections.HashMap
+
 //Input: root = [1,2,3,4,null,2,4,null,null,4]
 //Output: [[2,4],[4]]
 //https://leetcode.com/problems/find-duplicate-subtrees/
@@ -18,24 +21,32 @@ class FindDuplicateSubTrees_652 {
             System.out.println(res)
         }
     }
-
-    fun findDuplicateSubtrees(root: TreeNode?): List<TreeNode?> {
-       map = HashMap()
-       countMap = HashMap()
-       result = ArrayList()
-       countInner(root)
-       return result
+    companion object {
+        var curId = 1
     }
 
-    fun countInner(node: TreeNode?):Int {
-      if (node == null) return 0
-      var value:String = node.`val`.toString() +"," +countInner(node.leftNode) + ","+countInner(node.rightNode)
-      var uid = map.computeIfAbsent(value, {value->t++})
-      countMap.put(uid, countMap.getOrDefault(uid, 0)+1)
-      if (countMap.get(uid)==2) {
-          result.add(node)
-      }
-      return uid
+    //map(String, Int)
+    //map(Int, Int)
+
+    fun findDuplicateSubtrees(root: TreeNode): List<TreeNode> {
+        val serialToId: MutableMap<String, Int> = HashMap()
+        val idToCount: MutableMap<Int, Int> = HashMap()
+        val res: MutableList<TreeNode> = LinkedList()
+        postorder(root, serialToId, idToCount, res)
+        return res
+    }
+
+    private fun postorder(root: TreeNode, serialToId: MutableMap<String, Int>, idToCount: MutableMap<Int, Int>, res: MutableList<TreeNode>): Int {
+        if (root == null) return 0
+        val leftId = postorder(root.leftNode!!, serialToId, idToCount, res)
+        val rightId = postorder(root.rightNode!!, serialToId, idToCount, res)
+        val curSerial = leftId.toString() + "," + root.`val` + "," + rightId
+        val serialId = serialToId.getOrDefault(curSerial, curId)
+        if (serialId == curId) curId++
+        serialToId[curSerial] = serialId
+        idToCount[serialId] = idToCount.getOrDefault(serialId, 0) + 1
+        if (idToCount[serialId] == 2) res.add(root)
+        return serialId
     }
 
     fun addNode(value: Int) {

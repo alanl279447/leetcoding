@@ -1,6 +1,8 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -28,7 +30,7 @@ public class FlattenBinaryTreetoLinkedList_114 {
          Stack<TreeNode> stack = new Stack<>();
          stack.push(root);
 
-         while(!stack.isEmpty()){
+         while(!stack.isEmpty()) {
             TreeNode currentNode = stack.pop();
 
             if(currentNode.right != null) {

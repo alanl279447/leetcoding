@@ -30,6 +30,12 @@ public class BSTzigzagLevelOrderTraversal {
         }
     }
 
+    //result - List
+    //queue FIFO
+    //3
+    //9 20
+    //result  - 3, 20, 9, 15, 7
+
     public static List<List<Integer>> zigzagLevelOrderIterative(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;

@@ -5,14 +5,13 @@ package com.example.ArrayStrings;
 //        https://leetcode.com/problems/reverse-vowels-of-a-string/
 
 public class ReverseVowelsofaString_345 {
-
     public static void main(String[] args) {
         System.out.println(reverseVowels("leetcode"));
     }
 
     public static String vowels = "aeiouAEIOU";
     public static String reverseVowels(String s) {
-        int i=0, start =0, end = s.length()-1;
+        int start =0, end = s.length()-1;
         char[] arr = s.toCharArray();
         while (start < end) {
             while(start<end && vowels.indexOf(arr[start]) == -1) {

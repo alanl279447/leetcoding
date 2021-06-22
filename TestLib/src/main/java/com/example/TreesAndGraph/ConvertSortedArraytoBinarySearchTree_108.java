@@ -11,26 +11,31 @@ import java.util.List;
 //        /   /
 //        -10  5
 //        https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+//https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/solution/
 public class ConvertSortedArraytoBinarySearchTree_108 {
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         int[] nums = {-10,-3,0,5,9};
         TreeNode result = sortedArrayToBST(nums);
+        System.out.println(result);
+    }
+
+    static int[] numbers;
+    public static TreeNode helper(int left, int right) {
+        if (left > right) return null;
+        // always choose left middle node as a root
+        int p = (left + right) / 2;    //0
+        // preorder traversal: node -> left -> right
+        TreeNode root = new TreeNode(numbers[p]);
+        root.left = helper(left, p - 1);
+        root.right = helper(p + 1, right);
+        return root;
     }
 
     public static TreeNode sortedArrayToBST(int[] nums) {
-           if (nums == null) return null;
-           return helper(nums, 0, nums.length-1);
-    }
-
-    public static TreeNode helper(int[] nums, int left, int right) {
-        if (left > right) return null;
-        int mid = left + (right-left)/2;
-        TreeNode node = new TreeNode(nums[mid]);
-        node.left = helper(nums, left, mid-1);
-        node.right = helper(nums, mid+1, right);
-        return node;
+        numbers = nums;
+        return helper(0, nums.length - 1);    //0-4
     }
 
     public static void addNode() {

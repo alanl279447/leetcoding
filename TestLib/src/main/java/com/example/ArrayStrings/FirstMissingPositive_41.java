@@ -17,7 +17,6 @@ public class FirstMissingPositive_41 {
         //int[] input = {1,2,0};
         int res = firstMissingPositive(input);
         System.out.println(res);
-
     }
 
     public static int firstMissingPositive(int[] nums) {

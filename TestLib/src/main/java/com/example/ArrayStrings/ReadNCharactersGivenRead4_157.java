@@ -16,7 +16,6 @@ public class ReadNCharactersGivenRead4_157 {
 //        System.out.println("Palindrome result:  " + isPalindrome(input));
     }
 
-
     public static int read(char[] buf, int n) {
         int total = 0;
         boolean eof = false;

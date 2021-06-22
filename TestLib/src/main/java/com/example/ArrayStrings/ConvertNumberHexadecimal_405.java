@@ -20,4 +20,17 @@ public class ConvertNumberHexadecimal_405 {
         }
         return result;
     }
+
+//
+//    public static String toHexSB(int num) {
+//        StringBuilder sb = new StringBuilder();
+//        do {
+//            int n = num & 0xf;      //0xf == 15 (1111)
+//            int temp = n < 0xa ? '0' : 'a' - 10;   //convert to ascii
+//            n += temp;
+//
+//            sb.append((char)n);
+//        } while ((num >>>= 4) != 0);   //shift 4 bits to the right
+//        return sb.reverse().toString();
+//    }
 }

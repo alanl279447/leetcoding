@@ -17,7 +17,6 @@ public class UniquePathsII_63 {
 //    https://leetcode.com/problems/unique-paths-ii/
 
     public static void main(String[] args) {
-
         int[][] paths = {{0,0,0}, {0,1,0}, {0,0,0}};
         int res = uniquePathsWithObstacles(paths);
         System.out.println(res);

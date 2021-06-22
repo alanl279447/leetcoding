@@ -16,6 +16,26 @@ public class MinimumAreaRectangle_939 {
         System.out.println(minAreaRect(input));
     }
 
+    public static int minAreaRectHS(int[][] points) {
+       Set<String> set = new HashSet<>();
+       for (int[] point: points) {
+           set.add(point[0]+"#"+point[1]);
+       }
+       int minArea = Integer.MAX_VALUE;
+      for (int i = 0; i < points.length; i++) {
+          for (int j = i+1; j < points.length; j++) {
+              if (points[j][0] == points[i][0] || points[j][1] == points[i][1]) continue;
+
+              String point3 = points[i][0]+"#"+points[j][1];
+              String point4 = points[j][0]+"#"+points[i][1];
+              if (set.contains(point3) && set.contains(point4)) {
+                 minArea = Math.min(minArea, Math.abs(points[i][0] - points[j][0]) * Math.abs(points[i][1] - points[j][1]));
+              }
+          }
+      }
+       return minArea;
+    }
+
     public static int minAreaRect(int[][] points) {
        HashMap<Integer, Set<Integer>> map = new HashMap<>();
        for (int[] point: points) {

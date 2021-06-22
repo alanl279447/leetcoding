@@ -20,10 +20,8 @@ public class NthFibonnaciNumber {
     }
 
     private static int nthFibonnaciNumber(int n) {
-
         int first = 0;
-      int second = 1;
-
+        int second = 1;
         int res = 0;
 
         for (int i = 2; i <= n; i++) {
@@ -31,7 +29,6 @@ public class NthFibonnaciNumber {
             first = second;
             second = res;
         }
-
         return res;
     }
 

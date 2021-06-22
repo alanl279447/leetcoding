@@ -53,7 +53,7 @@ public class VerticalOrderTraversalBinaryTree_987 {
         Collections.sort(locations, (a,b)-> {
              if (a[0] != b[0]) {
                  return Integer.compare(a[0], b[0]);
-             } else if (a[1] != b[0]) {
+             } else if (a[1] != b[1]) {
                  return Integer.compare(a[1], b[1]);
              } else {
                  return Integer.compare(a[2], b[2]);
@@ -78,44 +78,9 @@ public class VerticalOrderTraversalBinaryTree_987 {
     public static void dfs1(TreeNode node, int x, int y, List<int[]> locations) {
         if (node == null) return;
         locations.add(new int[] {x,y, node.val});
-        dfs1(node.left, x+1, y-1, locations);
+        dfs1(node.left, x-1, y+1, locations);
         dfs1(node.left, x+1, y+1, locations);
     }
-
-    static List<int[]> locationsTest = new ArrayList();
-    public static List<List<Integer>> verticalTraversalTest(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) return result;
-        dfsTest(root, 0,0);
-
-        Collections.sort(locationsTest, (a,b)-> {
-            if (a[0] != b[0]) {
-                return Integer.compare(a[0], b[0]);
-            } else if (a[1] != b[1]) {
-                return Integer.compare(a[1], b[1]);
-            } else {
-                return Integer.compare(a[2], b[2]);
-            }
-        });
-        result.add(new ArrayList<>());
-        int[] prev = locationsTest.get(0);
-        for (int i=0; i < locationsTest.size(); i++) {
-            if (prev[0] != locationsTest.get(i)[0]) {
-                result.add(new ArrayList<>());
-                prev = locationsTest.get(i);
-            }
-            result.get(result.size()-1).add(locationsTest.get(i)[2]);
-        }
-        return result;
-    }
-
-    public static void dfsTest(TreeNode node, int x, int y) {
-        if (node == null) return;
-        locationsTest.add(new int[] {x,y, node.val});
-        dfsTest(node.left, x-1, y-1);
-        dfsTest(node.right, x+1, y-1);
-    }
-
 
    // (-2,+2)(-1,+1)(0,0),(+1,+1), (+2,+2)
     static List<Location> locations;

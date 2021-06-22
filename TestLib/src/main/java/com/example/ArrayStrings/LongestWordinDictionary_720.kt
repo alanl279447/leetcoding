@@ -13,14 +13,6 @@ fun main (args: Array<String>) {
     println(longestWord(arrayOf("a", "banana", "app", "appl", "ap", "apply", "apple")))
 }
 
-//fun longestWordTest(words: Array<String>): String {
-//    Arrays.sort(words)
-//    for (i in words.size-1 downTo 0) {
-//        var word = words[i]
-//        if (word.start)
-//    }
-//}
-
 fun longestWord(words: Array<String>): String {
     Arrays.sort(words)
     val built: MutableSet<String> = HashSet()

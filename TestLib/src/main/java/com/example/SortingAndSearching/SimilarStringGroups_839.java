@@ -10,7 +10,7 @@ public class SimilarStringGroups_839 {
 //    Input: A = ["tars","rats","arts","star"]
 //    Output: 2
 //    https://leetcode.com/problems/similar-string-groups/
-
+    //time complexity 0(n^2 * k)
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -44,6 +44,15 @@ public class SimilarStringGroups_839 {
                 diff++;
         return  diff == 2 || diff == 0;
     }
+
+
+
+
+
+
+
+
+
 
     public static class TreeNode {
         int val;

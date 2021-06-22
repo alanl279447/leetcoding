@@ -1,7 +1,6 @@
 package com.example.DynamicProgramming;
 
 public class MinimumDifficultyJobSchedule_1335 {
-
 //    Input: jobDifficulty = [6,5,4,3,2,1], d = 2
 //    Output: 7
 //    Explanation: First day you can finish the first 5 jobs, total difficulty = 6.

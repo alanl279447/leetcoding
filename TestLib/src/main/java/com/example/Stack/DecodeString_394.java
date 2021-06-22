@@ -14,20 +14,23 @@ public class DecodeString_394 {
 //    s = "3[a2[c]]", return "accaccacc".
 //    s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 //    https://leetcode.com/problems/decode-string/
+//   0(maxK ^ countK * n)
+//    s = 20[a10[bc]], \text{maxK}maxK is 2020, \text{countK}countK is 22 as there are 22 nested kk values (20 and 10) .
+//    Also, there are 22 encoded strings a and bc with maximum length of encoded string ,nn as 22
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        System.out.print(decodeString("3687567[a2[c]]"));
+//        System.out.print(decodeString("3687567[a2[c]]"));
+        System.out.print(decodeString("3[a2[c]]"));
     }
 
     //3[a2[c]]
-    // 3 countStack   (3, )
-    // [  push to resStack("", a,
-    // ]  a append 2 * res
-    // String res = a
-    // 2[abc]3[cd]ef
-    public static String decodeString(String s) {
+    //countStack
+    //resStack  ""
+    //res  "acc"
+    //temp = ""accaccacc
+    public static String decodeString(String s) {  //3[a2[c]]
         String res = "";
         Stack<Integer> countStack = new Stack<>();
         Stack<String> resStack = new Stack<>();

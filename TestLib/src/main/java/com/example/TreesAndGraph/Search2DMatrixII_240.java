@@ -28,10 +28,8 @@ public class Search2DMatrixII_240 {
 
     public static boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length ==0) return false;
-
         int curRow = 0;
         int curColumn = matrix[0].length-1;
-
         while(curRow>0 && curColumn>0 && curRow<matrix.length && curColumn<matrix[0].length) {
             if (matrix[curRow][curColumn] == target) return true;
             else if (matrix[curRow][curColumn] < target){
@@ -41,7 +39,6 @@ public class Search2DMatrixII_240 {
             }
         }
         return false;
-
     }
 
 //    private static int[][] localMatrix;

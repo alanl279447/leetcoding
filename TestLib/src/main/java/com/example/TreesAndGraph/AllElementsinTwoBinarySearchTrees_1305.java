@@ -44,7 +44,7 @@ public class AllElementsinTwoBinarySearchTrees_1305 {
             // Add the smallest value into output,
             // pop it from the stack,
             // and then do one step right
-            if (stack2.isEmpty() || !stack1.isEmpty() && stack1.peek().val <= stack2.getFirst().val) {
+            if (stack2.isEmpty() || !stack1.isEmpty() && stack1.peek().val <= stack2.peek().val) {
                 root1 = stack1.pop();
                 output.add(root1.val);
                 root1 = root1.right;

@@ -17,37 +17,13 @@ public class RomanToInteger {
         System.out.println("Start main " +myromanToInteger("MCMXCIV")); //MCMXCIV
     }
 
-    private static int myromanToIntegerTest(String input) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        map.put('I', 1);
-        map.put('V', 5);
-        map.put('X', 10);
-        map.put('L', 50);
-        map.put('C', 100);
-        map.put('D', 500);
-        map.put('M', 1000);
-
-        int result = 0;
-        char prevC = '\0';
-        for (int i = input.length()-1; i >=0; i++) {
-            char currC = input.charAt(i);
-            if (prevC != '\0' && map.get(prevC) > map.get(currC)) {
-                result -= map.get(currC);
-            } else {
-                result += map.get(currC);  //5
-            }
-            prevC = currC;
-        }
-       return result;
-    }
-
     //need to improve of time complexity
     private static int myromanToInteger(String input) {
       int totalValue = 0;
       int currValue = 0;
       int prevValue = 0;
 
-      for(int i =input.length() -1; i>=0; i--) {
+      for(int i =input.length()-1; i>=0; i--) {
           char c = input.charAt(i);
           switch(c) {
               case 'I':

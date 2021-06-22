@@ -10,6 +10,8 @@ public class LongestArithmeticSequence_1027 {
 //    Explanation:
 //    The whole array is an arithmetic sequence with steps of length = 3.
 //    https://leetcode.com/problems/longest-arithmetic-sequence/
+//    https://leetcode.com/problems/longest-arithmetic-subsequence/discuss/274701/Java-DP-O(n2)-solution-with-explanation
+//    time complexity 0(n^2)
 
     public static void main(String args[]) {
         int[] input = {3,6,9,12};
@@ -17,7 +19,12 @@ public class LongestArithmeticSequence_1027 {
         System.out.println(res);
     }
 
+    //create a hashMap for every index from 0 to len-1
+    //Obtain the maximum chain length already seen so far at index i
+    //for the given differene d;
     public static int longestArithSeqLength(int[] A) {
+        if (A.length <= 1) return A.length;
+//        {3,6,9,12};
         int res = 2, n = A.length;
         HashMap<Integer, Integer>[] dp = new HashMap[n];
         for (int j = 0; j < A.length; j++) {
@@ -30,5 +37,4 @@ public class LongestArithmeticSequence_1027 {
         }
         return res;
     }
-
 }

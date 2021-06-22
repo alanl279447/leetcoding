@@ -43,25 +43,4 @@ public class CombinationSumIII_216 {
             }
         }
     }
-
-//    public static List<List<Integer>> combinationSum3(int k, int n) {
-//        List<List<Integer>> result = new ArrayList<>();
-//        backTracking(result, new ArrayList<>(), k, n, 1);
-//        return result;
-//    }
-//
-//    public static void backTracking(List<List<Integer>> result, List<Integer> temp, int k, int target, int start) {
-//       if (temp.size() == k) {
-//           if (target == 0) {
-//               result.add(new ArrayList<>(temp));
-//           }
-//           return;
-//       }
-//       for (int i=start; i <=target && i <10; i++) {
-//           temp.add(i);
-////           System.out.println(temp.toString());
-//           backTracking(result, temp, k, target-i, i +1);
-//           temp.remove(temp.size()-1);
-//       }
-//    }
 }

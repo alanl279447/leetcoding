@@ -12,12 +12,16 @@ public class SummaryRanges_228 {
 //    time complexity 0(n).
 
     public static void main(String args[]) {
-
-        int[] input = {0,2,3,4,6,8,9};
+        int[] input = {0, 2, 3, 4, 6, 8, 9};
         List<String> result = summaryRanges(input);
-        for (String res:result)
-         System.out.println(res);
+        for (String res : result)
+            System.out.println(res);
     }
+
+    //i = 0, j = 0
+    //j = i
+    //while(i+1) < nums.len i++
+    //if (nums[i] == nums[j])
 
     public static List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<>();

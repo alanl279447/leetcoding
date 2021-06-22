@@ -1,7 +1,4 @@
 package com.example.LinkedList;
-
-import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 
 public class MergeKSortedLists {
@@ -57,43 +54,9 @@ public class MergeKSortedLists {
         return head.next;
     }
 
-//    public static ListNode mergeKLists(ListNode[] lists) {
-//        if (lists == null || lists.length < 1) return null;
-//        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(lists.length, new Comparator<ListNode>() {
-//            @Override
-//            public int compare(ListNode l1, ListNode l2) {
-//                if (l1.val < l2.val)
-//                 return -1;
-//                else if (l1.val == l2.val)
-//                    return 0;
-//                else
-//                    return 1;
-//            }
-//        });
-//
-//        for (ListNode node: lists) {
-//            if (node != null)
-//                priorityQueue.add(node);
-//        }
-//        ListNode dummyNode = new ListNode(0);
-//        ListNode start = dummyNode;
-//
-//        while(!priorityQueue.isEmpty()) {
-//           start.next = priorityQueue.poll();
-//           start = start.next;
-//
-//           if (start.next != null)
-//            priorityQueue.add(start.next);
-//        }
-//       return dummyNode.next;
-//    }
-
-
-
     public static class ListNode {
       int val;
       ListNode next;
       public ListNode(int x) { val = x; }
   }
-
 }

@@ -9,6 +9,7 @@ public class ConstructBinaryTreefromInorderandPreorderTraversal_105 {
 //    preorder = [3,9,20,15,7]
 //    inorder = [9,3,15,20,7]
 //    https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+//    https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34538/My-Accepted-Java-Solution
 
     public static TreeNode root = null;
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -20,10 +21,13 @@ public class ConstructBinaryTreefromInorderandPreorderTraversal_105 {
         System.out.print(result.val);
     }
 
+    //preOrder 3,9,20,15,7   node,left,right
+    //inOrder  9,3,15,20,7   left,node,right
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
         return helper(0, 0, inorder.length - 1, preorder, inorder);
     }
 
+    //preOrder start, inOrder start, inOrder end, preOrder, inOrder
     public static TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
         if (preStart > preorder.length - 1 || inStart > inEnd) {
             return null;
@@ -39,7 +43,7 @@ public class ConstructBinaryTreefromInorderandPreorderTraversal_105 {
 
         // goal is to find right node position in pre-order traversal
         // root position + no of nodes left + 1  (right position in pre-order)..
-        // on of nodes left (inIndex - inStart)
+        // on of nodes left (inIndex - inStart)    inIndex - index of root, inStart - start of inOrder traversal
         root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
         return root;
     }

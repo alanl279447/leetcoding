@@ -1,5 +1,7 @@
 package com.example.SortingAndSearching;
 
+import com.example.TreesAndGraph.SmallestSubtreewithalltheDeepestNodes_865;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,25 +23,26 @@ public class LowestCommonAncestorofDeepestLeaves_1123 {
         System.out.print(result.val);
     }
 
-    static int deepest = 0;
-    static TreeNode lca;
-
+    static int deepestLevel = 0;
+    static TreeNode result = null;
     public static TreeNode lcaDeepestLeaves(TreeNode root) {
-        helper(root, 0);
-        return lca;
+        dfs(root, 0);
+        return result;
     }
 
-    private static int helper(TreeNode node, int depth) {
-        deepest = Math.max(deepest, depth);
+    private static int dfs(TreeNode node, int level) {
         if (node == null) {
-            return depth;
+            return level;
         }
-        int left = helper(node.left, depth + 1);
-        int right = helper(node.right, depth + 1);
-        if (left == deepest && right == deepest) {
-            lca = node;
+        int left = dfs(node.left, level+1);
+        int right = dfs(node.right, level+1);
+        int currentMax = Math.max(left, right);
+        deepestLevel = Math.max(deepestLevel, currentMax);
+
+        if (left == deepestLevel && right == deepestLevel) {
+            result = node;
         }
-        return Math.max(left, right);
+        return currentMax;
     }
     public static class TreeNode {
         int val;

@@ -1,20 +1,17 @@
 package com.example.ArrayStrings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class StrobogrammaticNumber_246 {
-
 //    Input:  "69"
 //    Output: true
 //    https://leetcode.com/problems/strobogrammatic-number/
 
     public static void main(String[] args) {
-        System.out.println(isStrobogrammatic("9696"));
+//        System.out.println(isStrobogrammatic("9696"));
+        System.out.println(isStrobogrammatic("969"));
     }
-
 
     //0,1,8,00,11,88,69,96
     public static boolean isStrobogrammatic(String num) {

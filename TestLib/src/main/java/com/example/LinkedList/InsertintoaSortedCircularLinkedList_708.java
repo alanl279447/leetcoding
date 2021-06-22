@@ -11,20 +11,19 @@ public class InsertintoaSortedCircularLinkedList_708 {
 //    https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/
 
     public static void main(String[] args) {
-        Node node1 = new Node(1);
-        node1.next = new Node(2);
-        node1.next.next = new Node(3);
-        node1.next.next.next = new Node(4);
-//        node1.next.next.next.next = new Node(5);
+        Node node1 = new Node(3);
+        node1.next = new Node(1);
+        node1.next.next = new Node(4);
+        //node1.next.next.next = new Node(4);
+        node1.next.next.next = node1;
 
-        Node result = null;//reverseList(node1);
+        Node result = insert(node1, 2);
         while (result.next != null) {
             System.out.println("val: "+result.val);
             result = result.next;
         }
         System.out.println("val: "+result.val);
     }
-    
 
     //is head is null, create node, next pointing to self and return node.
     //find the maxNode, min = maxNode.next, check if insertval >= max || <= min
@@ -36,9 +35,7 @@ public class InsertintoaSortedCircularLinkedList_708 {
             node.next = node;
             return node;
         }
-
         Node max = head;
-
         while (max.next != head && max.val <= max.next.val) {
             max = max.next;
         }
@@ -52,7 +49,6 @@ public class InsertintoaSortedCircularLinkedList_708 {
             while (cur.next.val < insertVal) {//find the node less than the insertValue
                 cur = cur.next;
             }
-
             Node node = new Node(insertVal, cur.next);
             cur.next = node;
         }

@@ -42,15 +42,19 @@ public class All0oneDataStructure_432 {
             map = new HashMap<>();
         }
 
-        //if map contains key
-        // - get the Node, remove element form node,
-        // node.next == null (create the next element & add key)
-        // else check if node.next freq = node.freq+1, if yes, node.next.keys.add(String)
-        //
+        //existing node increment
+        //nextNode existing
+        //freq == freq+1
+        //create new with freq+1
+        //create next node
+        //head not exists create head
+        //head exists
+        //head freq = 1
+        //head freq > 1
+        //add to map
 
         /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
         public void inc(String key) {
-
             if (map.containsKey(key)) {
                 Node node = map.get(key);
                 int freq = node.freq;
@@ -142,7 +146,6 @@ public class All0oneDataStructure_432 {
                 removeNode(node);
             }
         }
-
 
         /** Returns one of the keys with maximal value. */
         public String getMaxKey() {

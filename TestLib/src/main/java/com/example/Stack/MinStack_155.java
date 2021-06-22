@@ -1,6 +1,8 @@
 package com.example.Stack;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
@@ -38,8 +40,12 @@ public class MinStack_155 {
         System.out.println(minParam2);
     }
 
+    //  -2,0, -3
+    //   getMin()  -3
+    //   pop()     remove -3
+    //   top()       0
+    //   getMin()   -2
     static class MinStack {
-
         /** initialize your data structure here. */
         int min = Integer.MAX_VALUE;
         Stack<Integer> stack = new Stack<Integer>();

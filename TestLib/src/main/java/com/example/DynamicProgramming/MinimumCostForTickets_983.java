@@ -2,6 +2,8 @@ package com.example.DynamicProgramming;
 
 import java.util.Arrays;
 
+import javax.swing.Icon;
+
 public class MinimumCostForTickets_983 {
 
 //    Input: days = [1,4,6,7,8,20], costs = [2,7,15]

@@ -39,18 +39,25 @@ public class WordBreak_II_140 {
     public static void main(String[] args) {
         List<String> wordDict = Arrays.asList("cat", "cats", "and", "sand", "dog");
         List<String> result = wordBreak("catsanddog", wordDict);
+
+//        List<String> wordDict = Arrays.asList("a", "aa", "aaa", "aaaa");
+//        List<String> result = wordBreak("aaaa", wordDict);
+
         for (String res: result) {
             System.out.println(res);
         }
     }
 
+//    s = "pineapplepenapple"
+//    wordDict = ["apple", "pen", "applepen", "pine", "pineapple"]
+
     //map for the string and List<String>
     public static List<String> wordBreak(String s, List<String> wordDict) {
-        return backtrack(s,wordDict,new HashMap<String, List<String>>());
+        return DFS(s,wordDict,new HashMap<String, List<String>>());
     }
 
     // backtrack returns an array including all substrings derived from s.
-    public static List<String> backtrack(String s, List<String> wordDict, Map<String,List<String>> mem){
+    public static List<String> DFS(String s, List<String> wordDict, Map<String,List<String>> mem){
         if(mem.containsKey(s)) {
             return mem.get(s);
         }
@@ -61,7 +68,7 @@ public class WordBreak_II_140 {
                 if (next.length() == 0) {
                     result.add(word);
                 } else {
-                    List<String> subs = backtrack(next, wordDict, mem);
+                    List<String> subs = DFS(next, wordDict, mem);
                     for (String sub : subs) {
                         result.add(word + " " + sub);
                     }

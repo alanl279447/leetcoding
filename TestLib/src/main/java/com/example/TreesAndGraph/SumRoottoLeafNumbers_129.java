@@ -1,5 +1,4 @@
 package com.example.TreesAndGraph;
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -44,13 +43,36 @@ public class SumRoottoLeafNumbers_129 {
         helper(node.left, sum);
     }
 
+    public int sumNumbersIterative(TreeNode root) {
+        if (root == null) return 0;
+        int rootToLeafSum = 0;
+        Deque<Pair<TreeNode, Integer>> stack = new ArrayDeque();
+        stack.offer(new Pair(root, 0));
+        while (!stack.isEmpty()) {
+            Pair<TreeNode, Integer> p = stack.poll();
+            int value = p.getValue();
+            TreeNode curr = p.getKey();
+            value += value*10+curr.val;
+            if (curr.left==null && curr.right == null) {
+                rootToLeafSum += value;
+            }
+            if (curr.left != null) {
+                stack.offer(new Pair<>(curr.left, value));
+            }
+            if (curr.right != null) {
+                stack.offer(new Pair<>(curr.right, value));
+            }
+        }
+        return rootToLeafSum;
+    }
+
     public static void addNode(int value) {
         root = new TreeNode(value);
-        root.left = new TreeNode(2);
-        root.left.right = new TreeNode(5);
-        root.left.right.left = new TreeNode(4);
-        root.left.right.right = new TreeNode(6);
-        root.right = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.left.right = new TreeNode(1);
+        root.left.left = new TreeNode(5);
+        //root.left.right.right = new TreeNode(6);
+        root.right = new TreeNode(0);
     }
 
     public static class Node {

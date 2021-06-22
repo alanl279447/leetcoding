@@ -29,7 +29,6 @@ public class RemoveSubFoldersfromtheFilesystem_1233 {
             }
             curr.word = folder;
         }
-
         parentFolders.clear();
         getResults(root);
         return parentFolders;

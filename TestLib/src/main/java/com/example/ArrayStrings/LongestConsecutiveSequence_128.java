@@ -12,7 +12,7 @@ public class LongestConsecutiveSequence_128 {
 //    Time complexity 0(n)
 
     public static void main(String args[]) {
-        int[] input = {100, 4, 200, 1, 3, 2};
+        int[] input = {100, 3, 200, 1, 4, 2};
         int res = longestConsecutive(input);
         System.out.println(res);
     }
@@ -22,7 +22,6 @@ public class LongestConsecutiveSequence_128 {
         for (int num:nums) {
             set.add(num);
         }
-
         int maxLength = Integer.MIN_VALUE;
         for(int i = 0; i < nums.length; i++) {
             int currentNum = nums[i];

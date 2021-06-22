@@ -1,6 +1,8 @@
 package com.example.TreesAndGraph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -25,6 +27,26 @@ public class KthSmallestElementBST_230 {
         int result = findSecondMinimumValue(root);
         System.out.println(result);
     }
+
+    public int kthSmallest(TreeNode root, int k) {
+        if (root == null) return -1;
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode curr = root;
+
+        while (!stack.isEmpty() || curr != null) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            if (--k == 0) {
+                return curr.val;
+            }
+            curr = curr.right;
+        }
+        return -1;
+    }
+
 
     public static int findSecondMinimumValue(TreeNode root) {
         if(root==null || root.right==null || root.left==null) return -1;

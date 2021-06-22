@@ -4,10 +4,12 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 import javafx.util.Pair;
 
@@ -22,8 +24,8 @@ public class WordLadder {
 //
 //    Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
 //            return its length 5.
-//   time complexity 0(M^2xN) m - length of words, n no of words.
-//   where MM is the length of each word and NN is the total number of words in the input word list.
+//   time complexity 0(M^2 * N) m - length of words, n no of words.
+//   where M is the length of each word and N  is the total number of words in the input word list.
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
 
@@ -41,18 +43,15 @@ public class WordLadder {
 
         // Dictionary to hold combination of words that can be formed,
         // from any given word. By changing one letter at a time.
-        HashMap<String, ArrayList<String>> allComboDict = new HashMap<String, ArrayList<String>>();
-
+        HashMap<String, ArrayList<String>> allComboDict = new HashMap<>();
         for (int j = 0; j < wordList.size(); j++) {
             String word = wordList.get(j);
             for (int i = 0; i < L; i++) {
                 // Key is the generic word
                 // Value is a list of words which have the same intermediate generic word.
                 String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
-                ArrayList<String> transformations =
-                        allComboDict.getOrDefault(newWord, new ArrayList<>());
-                transformations.add(word);
-                allComboDict.put(newWord, transformations);
+                allComboDict.putIfAbsent(newWord, new ArrayList<>());
+                allComboDict.get(newWord).add(word);
             }
         }
 

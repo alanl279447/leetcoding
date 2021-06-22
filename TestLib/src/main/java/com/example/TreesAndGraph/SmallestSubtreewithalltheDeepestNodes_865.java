@@ -1,5 +1,7 @@
 package com.example.TreesAndGraph;
 
+import com.example.SortingAndSearching.KSimilarStrings_854;
+
 public class SmallestSubtreewithalltheDeepestNodes_865 {
 //    Input: [3,5,1,6,2,0,8,null,null,7,4]
 //    Output: [2,7,4]
@@ -9,6 +11,7 @@ public class SmallestSubtreewithalltheDeepestNodes_865 {
 //    The output "[2, 7, 4]" is a serialization of the subtree rooted at the node with value 2.
 //    Both the input and output have TreeNode type.
 //    https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
+//    https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/   similar
 
     public static TreeNode root = null;
     public static void main(String[] args) {
@@ -16,6 +19,12 @@ public class SmallestSubtreewithalltheDeepestNodes_865 {
         TreeNode result = subtreeWithAllDeepest(root);
         System.out.print(result.val);
     }
+
+    //start from root pass level as 0
+    //dfs(root, 0)
+    // left root.left, level+1
+    // right root.right level+1
+    //currentMax =
 
     static int deepestLevel = 0;
     static TreeNode result = null;

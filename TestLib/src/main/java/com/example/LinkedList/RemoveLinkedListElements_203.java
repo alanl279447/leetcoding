@@ -5,7 +5,6 @@ package com.example.LinkedList;
 //https://leetcode.com/problems/remove-linked-list-elements/
 
 public class RemoveLinkedListElements_203 {
-
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
         node1.next = new ListNode(2);
@@ -28,7 +27,7 @@ public class RemoveLinkedListElements_203 {
        sentinel.next = head;
        ListNode curr = head;
 
-       while(curr != null) {
+       while(curr != null) {  //1->2->6->3->4->5->6
            if(curr.val == val) {
                prev.next = curr.next;
            } else {
@@ -44,5 +43,4 @@ public class RemoveLinkedListElements_203 {
       ListNode next;
       public ListNode(int x) { val = x; }
   }
-
 }

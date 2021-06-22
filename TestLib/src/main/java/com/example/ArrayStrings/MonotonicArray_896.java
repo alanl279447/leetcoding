@@ -10,6 +10,7 @@ public class MonotonicArray_896 {
         System.out.println(isMonotonic(s));
     }
 
+    //1,3,2
     public static boolean isMonotonic(int[] A) {
         boolean decreasing = true, increasing = true;
 

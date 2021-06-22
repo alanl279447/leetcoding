@@ -21,7 +21,7 @@ public class ReorganizeString_767 {
            for (char c: chars) {
                map.put(c, map.getOrDefault(c, 0) +1);
            }
-           PriorityQueue<Character> pq = new PriorityQueue<>((a, b)-> map.get(b) - map.get(a));
+           PriorityQueue<Character> pq = new PriorityQueue<>((a, b)-> map.get(b) - map.get(a)); //desc order of count
            pq.addAll(map.keySet());
 
            StringBuilder sb = new StringBuilder();

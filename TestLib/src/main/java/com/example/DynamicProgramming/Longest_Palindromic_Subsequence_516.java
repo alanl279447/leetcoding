@@ -11,6 +11,7 @@ public class Longest_Palindromic_Subsequence_516 {
         System.out.print(LongestPalindromeSubseq("agbdba"));
     }
 
+//    https://www.youtube.com/watch?v=_nCsPn7_OgI
     public static int LongestPalindromeSubseq(String s)
     {
         int n = s.length();
@@ -30,17 +31,15 @@ public class Longest_Palindromic_Subsequence_516 {
             for (int i = 0, j = len - 1; j < n; i++, j++)
             {
                 // better of without left or without right
-                int max = Math.max(dp[i][j-1], dp[i+1][j]);
+                int max = Math.max(dp[i][j-1], dp[i+1][j]); ////agbdba  for 2-4 (bdb)  max b/w bd or db
                 if (s.charAt(i) == s.charAt(j))
                 {
                     // now check 2 plus without left and without right
-                    max = Math.max(max, 2 + dp[i+1][j-1]);
+                    max = Math.max(max, 2 + dp[i+1][j-1]);   //agbdba  for 0-5(agbda)  max b/w(1-4) + 2 (corner a's)
                 }
                 dp[i][j] = max;
             }
         }
-
         return dp[0][n-1];
     }
-
 }

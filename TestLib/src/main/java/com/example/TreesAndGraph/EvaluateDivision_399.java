@@ -28,6 +28,11 @@ public class EvaluateDivision_399 {
         }
     }
 
+    //a/b = 2.0
+    //b/a = 1/2.0
+    // a  b, 2.0
+    // b  a, 1/2
+
     public static double[] calcEquation(String[][] eq, double[] vals, String[][] q) {
         Map<String, Map<String, Double>> m = new HashMap<>();
         for (int i = 0; i < vals.length; i++) {

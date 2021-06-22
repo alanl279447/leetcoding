@@ -35,8 +35,8 @@ public class PathSumIV_666 {
      public static int pathSum(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         for (int num : nums) {
-            int key = num / 10;
-            int value = num % 10;
+            int key = num / 10;  //DP
+            int value = num % 10; //V
             tree.put(key, value);
         }
         traverse(nums[0] / 10, 0);   //key is depthPos - val

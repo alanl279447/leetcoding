@@ -30,47 +30,56 @@ public class MinimumHeightTrees_310 {
         System.out.print(findMinHeightTrees(4, edges));
     }
 
+    //check if n < 2, then return this as centroids
+    //
     public static List<Integer> findMinHeightTreesTest(int n,int[][] edges) {
-        List<Integer> result= new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        if (n <= 0) return res;
+        //this is needed...since when there is only 1 vertex...
+        // the indegree of it will be 0..this case is not included in the following discussion...
 
-        if(n<=0) return result;
-        if(n ==1){
-            result.add(0);
-            return result;
+        if (n < 2) {
+            ArrayList<Integer> centroids = new ArrayList<>();
+            for (int i = 0; i < n; i++)
+                centroids.add(i);
+            return centroids;
         }
-        List<Integer>[] adj = new ArrayList[n];
-        for(int i=0;i<n;i++){
-            adj[i] = new ArrayList<>();
+
+        List<Integer>[] graph = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
         }
-        for (int[] edge: edges) {
-         adj[edge[0]].add(edge[1]);
-         adj[edge[1]].add(edge[0]);
+
+        for (int[] e : edges) {
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
         }
+
         int[] indegree = new int[n];
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i=0;i<n;i++) {
-            indegree[i] = adj[i].size();
-            if (indegree[i]==1){
-                queue.offer(i);
+        int cnt = n;
+        Queue<Integer> leaves = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            indegree[i] = graph[i].size();
+            if (indegree[i] == 1) {
+                leaves.add(i);
             }
         }
-        while(n>2) {
-            int size = queue.size();
-            n -= size;
-            for (int i=0; i<size;i++) {
-                int node = queue.poll();
-                for(int w: adj[node]) {
-                   indegree[w]--;
-                   if (indegree[w]==1) {
-                       queue.offer(w);
-                   }
+        while (cnt > 2) {
+            int size = leaves.size();
+            cnt -= size;
+            for (int i = 0; i < size; i++) {
+                int v = leaves.poll();
+                for (int w : graph[v]) {
+                    indegree[w]--;
+                    if (indegree[w] == 1) {
+                        leaves.add(w);
+                    }
                 }
             }
         }
-        result.addAll(queue);
-        return result;
+        res.addAll(leaves);
+        return res;
     }
-
 
 
 

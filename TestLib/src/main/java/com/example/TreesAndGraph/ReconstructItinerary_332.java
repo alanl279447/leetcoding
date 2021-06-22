@@ -29,10 +29,25 @@ public class ReconstructItinerary_332 {
            System.out.print(res1);
     }
 
+//    Map<String, PriorityQueue<String>>
+//    JFK, {SFO, ATL}  SFO, {ATL},  ATL, {JFK, SFO}
+//    BFS queue start from JFK
+
+//    public static List<String> findItineraryTest(String[][] tickets) {
+//        Map<String, PriorityQueue<String>> targetMap = new HashMap<>();
+//        for (String[] ticket: tickets) {
+//           targetMap.computeIfAbsent(ticket[0], k-> new PriorityQueue<>()).add(ticket[1]);
+//        }
+//
+//
+//    }
+
+
     public static List<String> findItinerary(String[][] tickets) {
         Map<String, PriorityQueue<String>> targets = new HashMap<>();
         for (String[] ticket : tickets)
             targets.computeIfAbsent(ticket[0], k -> new PriorityQueue()).add(ticket[1]);
+
         List<String> route = new LinkedList();
         Stack<String> stack = new Stack<>();
         stack.push("JFK");

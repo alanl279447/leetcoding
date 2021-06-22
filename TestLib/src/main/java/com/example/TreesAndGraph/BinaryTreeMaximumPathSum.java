@@ -23,7 +23,6 @@ public class BinaryTreeMaximumPathSum {
         System.out.print(maxPathSum(root));
     }
 
-
     static int max_sum = Integer.MIN_VALUE;
     public static int maxPathSum(TreeNode root) {
         findNodeValue(root);

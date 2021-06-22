@@ -30,8 +30,8 @@ public class DiagonalTraverse_498 {
           System.out.println(res);
     }
 
-    // r = d < cols: 0: d-cols-1
-    // c = d < cols: d: cols-1
+    // r = d < rows ? 0 : d - cols - 1
+    // c = d < cols ? d : cols - 1
     public static int[] findDiagonalOrder(int[][] matrix) {
         // Check for empty matrices
         if (matrix == null || matrix.length == 0) {

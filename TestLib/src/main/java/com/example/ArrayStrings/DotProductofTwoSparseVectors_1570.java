@@ -8,10 +8,17 @@ package com.example.ArrayStrings;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class DotProductofTwoSparseVectors_1570 {
-    static class SparseVector {
+    public static void main(String[] args) {
+        int[] intput1 = {1,0,0,2,3};
+        SparseVector v1 = new SparseVector(intput1);
+        int[] intput2 = {0,3,0,4,0};
+        SparseVector v2 = new SparseVector(intput2);
+        int ans = v1.dotProduct(v2);
+        System.out.println(ans);
+    }
 
+    static class SparseVector {
         Map<Integer, Integer> map = new HashMap();
         SparseVector(int[] nums) {
           for (int i=0; i< nums.length;i++) {
@@ -35,15 +42,4 @@ public class DotProductofTwoSparseVectors_1570 {
           return product;
         }
     }
-
-    public static void main(String[] args) {
-        int[] intput1 = {1,0,0,2,3};
-        SparseVector v1 = new SparseVector(intput1);
-        int[] intput2 = {0,3,0,4,0};
-        SparseVector v2 = new SparseVector(intput2);
-        int ans = v1.dotProduct(v2);
-        System.out.println(ans);
-    }
-
-
 }

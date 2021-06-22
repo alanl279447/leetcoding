@@ -18,37 +18,7 @@ public class GraphValidTree_261 {
         System.out.println(validTree(5, edges));
     }
 
-
-    //    These are the solutions using the optimizations path compression and union by size.
-    public boolean validTreeUnionFindFast(int n, int[][] edges) {
-           if (edges.length != n-1) return false;
-           int[] roots = new int[n];
-
-           //init parent nodes
-           for (int i = 0; i < n; i++) {
-               roots[i] = i;
-           }
-           for (int[] edge: edges) {
-               int root1 = find(roots, edge[0]);
-               int root2 = find(roots, edge[1]);
-
-               if (root1 == root2) return false;
-               roots[root1] = root2;
-           }
-           return true;
-    }
-
-    public int find(int[] roots, int id) {
-        while (id != roots[id]) {
-            roots[id] = roots[roots[id]];
-            id = roots[id];
-        }
-        return roots[id];
-    }
-
-
-
-    //    For the graph to be a valid tree, it must have exactly n - 1 edges.
+//    For the graph to be a valid tree, it must have exactly n - 1 edges.
 //    Any less, and it can't possibly be fully connected. Any more, and it has to contain cycles.
 //    Additionally, if the graph is fully connected and contains exactly n - 1 edges,
 //    it can't possibly contain a cycle, and therefore must be a tree!
@@ -79,6 +49,60 @@ public class GraphValidTree_261 {
             }
         }
         return seen.size() == n;
+    }
+
+    //https://leetcode.com/problems/graph-valid-tree/discuss/69018/AC-Java-Union-Find-solution
+    public boolean validTreeUnionFind(int n, int[][] edges) {
+        UnionFind set = new UnionFind(n);
+        for(int[] edge: edges) {
+            if(set.find(edge[0], edge[1])) return false;    // cycle check
+            set.union(edge[0], edge[1]);
+        }
+        return set.size() == 1;                             // single tree check
+    }
+
+    class UnionFind {
+        private int[] id, size;
+        private int count;
+
+        public UnionFind(int len) {
+            id = new int[len];
+            size = new int[len];
+            for(int i = 0; i < len; i++) {
+                id[i] = i;
+                size[i] = 1;
+            }
+            count = len;
+        }
+
+        public int size() {
+            return count;
+        }
+
+        private int root(int i) {
+            while(i != id[i]) {
+                id[i] = id[id[i]];
+                i = id[i];
+            }
+            return i;
+        }
+
+        public boolean find(int p, int q) {
+            return root(p) == root(q);
+        }
+
+        public void union(int p, int q) {
+            int pi = root(p);
+            int qi = root(q);
+            if(size[pi] < size[qi]) {
+                id[pi] = qi;
+                size[qi] += size[pi];
+            } else {
+                id[qi] = pi;
+                size[pi] += size[qi];
+            }
+            count--;
+        }
     }
 
     public static boolean validTree(int n, int[][] edges) {

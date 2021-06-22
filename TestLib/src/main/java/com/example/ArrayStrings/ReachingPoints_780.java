@@ -29,7 +29,6 @@ public class ReachingPoints_780 {
         System.out.println(reachingPoints(1,1,3,5));
     }
 
-
 //    sy+k*sx = ty => (ty-sy) / sx = k.
 //    Since sx,sy,tx,ty are all integer, then k has to be a integer which means,
 //    there must be a integer k that help us to reach ty. Which makes reminder to be 0

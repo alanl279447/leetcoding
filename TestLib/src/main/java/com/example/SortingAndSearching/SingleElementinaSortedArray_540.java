@@ -10,6 +10,7 @@ public class SingleElementinaSortedArray_540 {
 //    Input: [1,1,2,3,3,4,4,8,8]
 //    Output: 2
 //    https://leetcode.com/problems/single-element-in-a-sorted-array/
+//    https://leetcode.com/problems/single-element-in-a-sorted-array/solution/
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -30,13 +31,13 @@ public class SingleElementinaSortedArray_540 {
             int mid = lo + (hi - lo) / 2;
             boolean halvesAreEven = (hi - mid) % 2 == 0;
             if (nums[mid + 1] == nums[mid]) {
-                if (halvesAreEven) {
+                if (halvesAreEven) {   //right side is even, duplicate is on the right, low = mid+2
                     lo = mid + 2;
                 } else {
                     hi = mid - 1;
                 }
             } else if (nums[mid - 1] == nums[mid]) {
-                if (halvesAreEven) {
+                if (halvesAreEven) {   //right side is even, left is odd
                     hi = mid - 2;
                 } else {
                     lo = mid + 1;

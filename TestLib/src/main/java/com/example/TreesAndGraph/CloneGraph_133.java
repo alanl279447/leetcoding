@@ -2,10 +2,12 @@ package com.example.TreesAndGraph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class CloneGraph_133 {
 //    Input: adjList = [[2,4],[1,3],[2,4],[1,3]]
@@ -29,7 +31,7 @@ public class CloneGraph_133 {
             return null;
         }
         HashMap<Node,Node> visitedMap = new HashMap<>();   //visited map of the node and clone
-        LinkedList<Node> queue = new LinkedList<>();  //queue of nodes to Visit
+        Queue<Node> queue = new LinkedList<>();  //queue of nodes to Visit
         queue.add(node);
         visitedMap.put(node, new Node(node.val, new ArrayList<>()));
 

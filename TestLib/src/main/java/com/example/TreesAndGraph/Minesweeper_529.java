@@ -20,7 +20,7 @@ public class Minesweeper_529 {
     //E unrevealed empty space
     //B relvealed empty space
     //X revealed mine
-
+    //O(mn)
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -40,7 +40,6 @@ public class Minesweeper_529 {
 
     //condition if M or X change to M and return Board
     //explore all the neighbours (-1,0), (-1,1), (0,1), (1,1), (1,0), (1,-1), (0,-1),(-1-1)
-
     //DFS soln
     private static int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {-1, -1}, {1, 1}, {1, -1}, {-1, 1}};
     public static char[][] updateBoard(char[][] board, int[] click) {

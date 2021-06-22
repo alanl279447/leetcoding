@@ -34,11 +34,6 @@ public class WordLadder_II_126 {
         System.out.print(findLadders("hit", "cog", Arrays.asList(dict)));
     }
 
-//    public static List<List<String>> findLaddersTest(String beginWord, String endWord, List<String> wordList) {
-//       Set<String> wordDict = new HashSet<>(wordList);
-//       HashMap<String, List<String>> map = new HashMap<>();
-//    }
-
     //bfs for all the next combinations
     //dfs to find all until the end
     public static List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
@@ -72,6 +67,10 @@ public class WordLadder_II_126 {
             list.remove(list.size() -1);
         }
     }
+
+    //set
+    //String s : set
+    //
 
     private static void bfs(Set<String> startSet, String beginWord, String endWord, Map<String, List<String>> map, Set<String> dict) {
         if(startSet.size() == 0) return;

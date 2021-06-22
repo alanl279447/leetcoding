@@ -1,9 +1,12 @@
 package com.example.TreesAndGraph;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class LowestCommonAncestor_236 {
 
@@ -17,14 +20,15 @@ public class LowestCommonAncestor_236 {
 //    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
     public static TreeNode root;
-    private static TreeNode ans = null;
+    //private static TreeNode ans = null;
 
     public static void main(String[] args) {
         addNode(3);
-        lowestCommonAncestor(root, root.left, root.left.right.right);
+        TreeNode ans = lowestCommonAncestorIterative(root, root.left, root.left.right.right);
         System.out.print(ans.val);
     }
 
+    //https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/discuss/65228/5-lines-Java-solution
     //fastest solution
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode node1, TreeNode node2) {
         if (root == null) return null;
@@ -32,58 +36,54 @@ public class LowestCommonAncestor_236 {
         if (root.equals(node1) || root.equals(node2)) return root;
         TreeNode left = lowestCommonAncestor(root.left, node1, node2);
         TreeNode right = lowestCommonAncestor(root.right, node1, node2);
-        // case 1
-        if (left != null && right != null) return root;
-        // at this point, left and right can't be both non-null
-        // case 4 and 5, report target node or LCA back to parent
+
+        if (left != null && right != null) return root;  // which means p,q exist below different subtrees;
+
+        // which means p,q exist below the same subtree;
         if (left != null) return left;
         if (right != null) return right;
         // case 4, not found return null
         return null;
     }
 
+    public static TreeNode lowestCommonAncestorIterative(TreeNode root, TreeNode p, TreeNode q) {
+        // Stack for tree traversal
+        Deque<TreeNode> stack = new ArrayDeque<>();
 
-    public TreeNode lowestCommonAncestorTest(TreeNode root, TreeNode p, TreeNode q) {
-        Map<TreeNode, TreeNode> parents = new HashMap<>();
-        Map<TreeNode, Integer> depth = new HashMap<>();
-        Queue<TreeNode> queue = new ArrayDeque<>();
+        // HashMap for parent pointers
+        Map<TreeNode, TreeNode> parent = new HashMap<>();
 
-        queue.add(root);
-        depth.put(root, 0);
+        parent.put(root, null);
+        stack.push(root);
 
-        int currentDepth = 0;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            currentDepth++;
-            for (int i = 0; i < size; i++) {
-                TreeNode current = queue.poll();
-                if (current.left != null) {
-                    parents.put(current.left, current);
-                    depth.put(current.left, currentDepth);
-                    queue.add(current.left);
-                }
-
-                if (current.right != null) {
-                    parents.put(current.right, current);
-                    depth.put(current.right, currentDepth);
-                    queue.add(current.right);
-                }
+        // Iterate until we find both the nodes p and q
+        while (!parent.containsKey(p) || !parent.containsKey(q)) {
+            TreeNode node = stack.pop();
+            // While traversing the tree, keep saving the parent pointers.
+            if (node.left != null) {
+                parent.put(node.left, node);
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                parent.put(node.right, node);
+                stack.push(node.right);
             }
         }
 
+        // Ancestors set() for node p.
+        Set<TreeNode> ancestors = new HashSet<>();
 
-
-        while (p != q) {
-            if (depth.get(p) < depth.get(q)) {
-                q = parents.get(q);
-            } else if (depth.get(p) == 0 || depth.get(q) == 0) {
-                return root;
-            } else {
-                p = parents.get(p);
-            }
+        // Process all ancestors for node p using parent pointers.
+        while (p != null) {
+            ancestors.add(p);
+            p = parent.get(p);
         }
 
-        return p;
+        // The first ancestor of q which appears in
+        // p's ancestor set() is their lowest common ancestor.
+        while (!ancestors.contains(q))
+            q = parent.get(q);
+        return q;
     }
 
 

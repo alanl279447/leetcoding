@@ -27,6 +27,15 @@ fun main (args: Array<String>) {
 //so there are 2 ^ (j - i) subsequences in total.
 //So we can update res = (res + 2 ^ (j - i)) % mod.
 
+//3,5,6,7  9
+//left+right <= target
+//res += 2^(right-left)
+
+// 3
+// 3  3       3  3 3
+// 3  3  6    3  3 3  3  6  3 3 6
+// 3  3  6  8
+
 fun numSubSeq(nums: IntArray, target: Int) :Int{
     Arrays.sort(nums)
     var res = 0

@@ -1,9 +1,11 @@
 package com.example.ArrayStrings;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class FirstUniqueNumber_1429 {
 
@@ -26,34 +28,52 @@ public class FirstUniqueNumber_1429 {
     public static void main(String args[]) {
         int[] nums = {2,3,5};
         FirstUnique obj = new FirstUnique(nums);
-        int param_1 = obj.showFirstUnique();
+        int param_1 = obj.showFirstUnique();   //2
         System.out.println(param_1);
         obj.add(5);
-        int param_2 = obj.showFirstUnique();
+        int param_2 = obj.showFirstUnique();  //2
         System.out.println(param_2);
         obj.add(2);
-        int param_3 = obj.showFirstUnique();
+        int param_3 = obj.showFirstUnique();   //3
         System.out.println(param_3);
         obj.add(3);
-        int param_4 = obj.showFirstUnique();
+        int param_4 = obj.showFirstUnique();   //-1
         System.out.println(param_4);
     }
 
+//    LinkedHashSet         | O(1)     | O(1)     | O(1)     | O(1)     | O(1) | Hash Table + Linked List
+
     static class FirstUnique {
-        Map<Integer, Integer> freq = new HashMap<>();
-        Queue<Integer> q = new LinkedList<>();
+        private Set<Integer> setQueue = new LinkedHashSet<>();
+        private Map<Integer, Boolean> isUnique = new HashMap<>();
+
         public FirstUnique(int[] nums) {
-            for (int x : nums)
-                add(x);
+            for (int num : nums) {
+                this.add(num);
+            }
         }
+
         public int showFirstUnique() {
-            while (!q.isEmpty() && freq.get(q.peek()) > 1)
-                q.poll();
-            return q.isEmpty() ? -1 : q.peek();
+            // If the queue contains values, we need to get the first one from it.
+            // We can do this by making an iterator, and getting its first item.
+            if (!setQueue.isEmpty()) {
+                return setQueue.iterator().next();
+            }
+            return -1;
         }
+
         public void add(int value) {
-            freq.put(value, freq.getOrDefault(value, 0) + 1);
-            q.offer(value);
+            // Case 1: This value is not yet in the data structure.
+            // It should be ADDED.
+            if (!isUnique.containsKey(value)) {
+                isUnique.put(value, true);
+                setQueue.add(value);
+                // Case 2: This value has been seen once, so is now becoming
+                // non-unique. It should be REMOVED.
+            } else if (isUnique.get(value)) {
+                isUnique.put(value, false);
+                setQueue.remove(value);
+            }
         }
     }
 

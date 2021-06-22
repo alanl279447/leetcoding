@@ -30,43 +30,13 @@ public class CourseSchedule_ii_210 {
         }
     }
 
-    public static int[] findOrderTest(int numCourses, int[][] prerequisites) {
-      int[] inDegree = new int[numCourses];
-      List<List<Integer>> adj = new ArrayList<>();
-      int[] result = new int[numCourses];
-      for (int i = 0; i < numCourses; i++) {
-          adj.add(new ArrayList<>());
-      }
-      for (int[] pre: prerequisites) {
-          adj.get(pre[1]).add(pre[0]);  //adj list for the dependency
-          inDegree[pre[0]]++;           // increase the inDegree for the courses having pre-requisite
-      }
-
-      Queue<Integer> queue = new LinkedList<>();
-      for (int i = 0; i < numCourses; i++) {
-          if (inDegree[i] == 0) {
-              queue.offer(i);
-          }
-      }
-
-      int index = 0;
-      while (!queue.isEmpty()) {
-          int node = queue.poll();
-          result[index++] = node;
-          for (int neigh: adj.get(node)) {
-              if (--inDegree[neigh] == 0) {
-                  queue.offer(neigh);
-              }
-          }
-      }
-      return index == numCourses ? result : new int[0];
-    }
-
     //java BFS soln with adj list
     public static int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] degree = new int[numCourses], res = new int[numCourses];
         List<Integer>[] graph = new ArrayList[numCourses];
-        for (int i = 0; i < numCourses; i++) graph[i] = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
         for (int i = 0; i < prerequisites.length; i++) {
             degree[prerequisites[i][0]]++;
             graph[prerequisites[i][1]].add(prerequisites[i][0]);
@@ -90,5 +60,4 @@ public class CourseSchedule_ii_210 {
         }
         return index == numCourses ? res : new int[0];
     }
-
 }

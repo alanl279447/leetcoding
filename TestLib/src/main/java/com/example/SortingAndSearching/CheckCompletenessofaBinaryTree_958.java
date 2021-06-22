@@ -11,45 +11,29 @@ public class CheckCompletenessofaBinaryTree_958 {
 //    Explanation: Every level before the last is full (ie. levels with node-values {1} and {2, 3}),
 //    and all nodes in the last level ({4, 5, 6}) are as far left as possible.
 //    https://leetcode.com/problems/check-completeness-of-a-binary-tree/
+//    https://leetcode.com/problems/check-completeness-of-a-binary-tree/discuss/205768/Java-easy-Level-Order-Traversal-one-while-loop
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         addNode(1);
-        System.out.println(isCompleteTreeTest(root));
-    }
-
-    //queue with the root added
-    //if queue.peek != null, add both the left & right
-    //while queue !isEmpty && queue.peek() == null poll elements
-    public static boolean isCompleteTreeTest(TreeNode root) {
-        Queue<TreeNode> bfs = new LinkedList<TreeNode>();
-        bfs.offer(root);
-        while (bfs.peek() != null) {
-            TreeNode node = bfs.poll();
-            bfs.offer(node.left);
-            bfs.offer(node.right);
-        }
-        while (!bfs.isEmpty() && bfs.peek() == null)
-            bfs.poll();
-        return bfs.isEmpty();
+        System.out.println(isCompleteTree(root));
     }
 
     public static boolean isCompleteTree(TreeNode root) {
-      if (root == null) return true;
-      Queue<TreeNode> queue = new LinkedList();
-      queue.offer(root);
-      boolean isEnd = false;
-      while (!queue.isEmpty()) {
-          TreeNode curr = queue.poll();
-          if (curr == null) isEnd = true;
-          else {
-              if(isEnd) return false;
-              queue.add(curr.left);
-              queue.add(curr.right);
-          }
-      }
-      return false;
+        boolean end = false;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            if(cur == null) end = true;
+            else{
+                if(end) return false;
+                queue.add(cur.left);
+                queue.add(cur.right);
+            }
+        }
+        return true;
     }
 
     public static class TreeNode {

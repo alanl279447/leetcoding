@@ -33,40 +33,13 @@ public class RandomPickIndex_398 {
         System.out.println(minStack.pick(3));
     }
 
-
-    class SolutionTest {
-
-        Random random = null;
-        int[] numbers = null;
-        public SolutionTest(int[] nums) {
-           random = new Random();
-            numbers = nums;
-        }
-
-        public int pick(int target) {
-            int index = -1;
-            int count = 0;
-            for (int i = 0; i < numbers.length; i++) {
-                 if (numbers[i] == target) {
-                     count++;
-                     int randonIndex = random.nextInt(count);
-                     if (randonIndex == 0) {
-                         index = i;
-                     }
-                 }
-             }
-            return index;
-        }
-    }
-
-
     public static class Solution {
 
         int[] a = null;
         Random random = null;
         public Solution(int[] nums) {
-           a = nums;
-           random = new Random();
+            a = nums;
+            random = new Random();
         }
 
         public int pick(int target) {
@@ -75,7 +48,6 @@ public class RandomPickIndex_398 {
             for (int i = 0; i < a.length; i++) {
                 if (a[i] == target) {
                     count++;
-
                     int index = random.nextInt(count);
                     if (index == 0) {
                         res = i;

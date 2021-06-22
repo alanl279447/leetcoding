@@ -18,7 +18,8 @@ public class FindPivotIndex724 {
     // totalSum - leftSum - nums[i] = leftSum
     // 28 - 11 - 6 = 11
     public static void main(String args[]) {
-        int[] input = {1,7,3,6,5,6};
+//        int[] input = {1,7,3,6,5,6};
+        int[] input = {-1,-1,-1,0,1,1};
         int res = pivotIndex(input);
         System.out.println(res);
     }

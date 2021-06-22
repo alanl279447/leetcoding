@@ -29,11 +29,11 @@ public class UniqueWordAbbreviation_288 {
     }
 
     static class ValidWordAbbr {
+        HashMap<String, String> map = null;
 
-        HashMap<String, String> map = new HashMap<>();
         public ValidWordAbbr(String[] dictionary) {
             map = new HashMap<String, String>();
-            for(String str:dictionary){
+            for(String str:dictionary) {
                 String key = getKey(str);
                 // If there is more than one string belong to the same key
                 // then the key will be invalid, we set the value to ""

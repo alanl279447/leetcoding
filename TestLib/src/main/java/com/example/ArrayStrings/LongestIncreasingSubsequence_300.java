@@ -11,15 +11,14 @@ import java.util.Stack;
 public class LongestIncreasingSubsequence_300 {
 
     public static void main(String[] args) {
-        int[] input = {10,9,2,5,3,7,101,18,1};
-       // int[] input = {4,5,6,3};
+//        int[] input = {10,9,2,5,3,7,101,18,1};
+        int[] input = {4,5,6,3,7};
         int result = lengthOfLIS(input);
         System.out.print(result);
     }
 
 //    (1) if x is larger than all tails, append it, increase the size by 1
 //    (2) if tails[i-1] < x <= tails[i], update tails[i]
-
     //time complexity 0(nlonn)
     public static int lengthOfLIS(int[] nums) {
         int[] tails = new int[nums.length];

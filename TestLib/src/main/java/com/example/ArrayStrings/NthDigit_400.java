@@ -16,24 +16,6 @@ public class NthDigit_400 {
     public static void main(String[] args) {
         System.out.println(findNthDigit(15));
     }
-
-//    public static int findNthDigitTest(int n) {
-//        int len=1;
-//        int start=1;
-//        int count=9;   //for 1-9
-//
-//        while(n>len*count){
-//            n -=len*count;
-//            len +=1;
-//            count=count*10; //10-90
-//            start=start*10; //1,10,100..
-//        }
-//
-//        start+=(n-1)/len;
-//        String s =Integer.toString(start);
-//
-//    }
-
     public static int findNthDigit(int n) {
         int len = 1;
         long count = 9;

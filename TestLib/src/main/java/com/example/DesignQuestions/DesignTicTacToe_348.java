@@ -59,9 +59,7 @@ public class DesignTicTacToe_348 {
         System.out.println(param_1);
     }
 
-
     public static class TicTacToe {
-
         /**
          * Initialize your data structure here.
          */
@@ -81,7 +79,8 @@ public class DesignTicTacToe_348 {
             cols[col] += toAdd;
 
             if (row == col) diagonal += toAdd;
-            if (col == cols.length - row - 1) antiDiagonal += toAdd;
+            if ((row + col) == (n - 1))antiDiagonal += toAdd;
+            //if (col == cols.length - row - 1) antiDiagonal += toAdd;
 
             if (rows[row] == n || cols[col] == n || diagonal == n || antiDiagonal == n)
                 return 1;

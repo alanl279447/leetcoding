@@ -33,6 +33,8 @@ public class BinaryTreeVerticalOrderTraversal_314 {
           System.out.println(res.toString());
     }
 
+    // find the min, max
+    // Queue will nodes & idx
     private static int min = 0, max = 0;
     public static List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
@@ -60,8 +62,9 @@ public class BinaryTreeVerticalOrderTraversal_314 {
         }
         return list;
     }
+
     private static void computeRange(TreeNode root, int idx){
-        if(root == null)    return;
+        if(root == null) return;
         min = Math.min(min, idx);
         max = Math.max(max, idx);
         computeRange(root.left, idx - 1);
@@ -81,7 +84,7 @@ public class BinaryTreeVerticalOrderTraversal_314 {
 
     public static class Node {
         TreeNode node;
-        int hd; //horiozntal distance
+        int hd; //horizontal distance
 
         public Node(TreeNode node, int hd) {
             this.node = node;

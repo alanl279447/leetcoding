@@ -18,6 +18,22 @@ public class RangeSumBST_938 {
         System.out.println(rangeSumBST(root, 7,15));
     }
 
+
+    static int sum = 0;
+    public static int rangeSumBSTTRecursive(TreeNode root, int L, int R) {
+        helper(root, L, R);
+        return sum;
+    }
+
+    public static void helper(TreeNode node, int L, int R) {
+        if (node == null) return;
+
+        if (L < node.val) helper(node.left, L, R);
+        if (node.val < R) helper(node.right, L, R);
+
+        if (L <= node.val && node.val <=R) sum += node.val;
+    }
+
     //dfs
     public static int rangeSumBST(TreeNode root, int L, int R) {
        if (root == null) return 0;

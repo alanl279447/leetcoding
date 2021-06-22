@@ -19,6 +19,7 @@ public class LowestCommonAncestor_III_1650 {
         System.out.print(ans.val);
     }
 
+//    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/discuss/933885/Java-100.-This-is-a-Linked-List-question.
     public static Node lowestCommonAncestorFast(Node p, Node q) {
         Node p1 = p, p2 = q;
         while (p1 != p2) {
@@ -28,6 +29,7 @@ public class LowestCommonAncestor_III_1650 {
         return p1;
     }
 
+    //alternative approach
     public static Node lowestCommonAncestorSlow(Node p, Node q) {
          List<Node> pathNodes = findPath(p);
          while (q != null) {

@@ -21,39 +21,14 @@ public class OpentheLock_752 {
         System.out.print(openLock(deadends, "0202"));
     }
 
-    //0000
-    public static int openLockTest(String[] deadends, String target) {
-       Deque<String> queue = new LinkedList();
-       Set<String> visited = new HashSet();
-       Set<String> deadEndsSet = new HashSet<>(Arrays.asList(deadends));
-
-       queue.offer("0000");
-       visited.add("0000");
-       int level = 0;
-       while (!queue.isEmpty()) {
-           int size  = queue.size();
-           while (size >0) {
-               String entry = queue.poll();
-               if (entry.equals(target)) return level;
-               if (visited.contains(entry)) continue;
-               for (int i=0;i<4;i++) {
-                   char c = entry.charAt(i);
-                   String s1 = entry.substring(0,i)+ (c=='0'?9:c-'0'+1)+entry.substring(i+1);
-                   String s2 = entry.substring(0,i)+ (c=='9'?0:c-'0'-1)+entry.substring(i+1);
-                   if (!visited.contains(s1) && !deadEndsSet.contains(s1)) {
-                       queue.offer(s1);
-                   }
-                   if (!visited.contains(s2) && !deadEndsSet.contains(s2)) {
-                       queue.offer(s2);
-                   }
-               }
-               size--;
-           }
-           level++;
-       }
-       return -1;
-    }
-
+    //Complexity: O(N^2 * A^N + D)
+    //where, N is Number of dials (4 in our case)
+    //A is number of alphabets (10 in our case -> 0 to 9)
+    //D is the size of deadends.
+    //
+    //There are 10 x 10 x 10 x 10 possible combinations => 10^4 => A^N
+    //For each combination, we are looping 4 times (which is N) and in each iteration, there are substring operations ( which is O(N) * constant) => O(4N*constant) => O(4N) => O(NN) => O(N^2)
+    //Total complexity => A^N * N^2, plus D to create the hashset => N^2 * A^N + D
     public static int openLock(String[] deadends, String target) {
         Queue<String> q = new LinkedList<>();
         Set<String> deads = new HashSet<>(Arrays.asList(deadends));

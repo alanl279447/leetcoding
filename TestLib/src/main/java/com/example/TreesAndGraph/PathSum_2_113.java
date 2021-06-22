@@ -15,8 +15,7 @@ public class PathSum_2_113 {
 //        /  \    / \
 //       7    2  5   1
 //    https://leetcode.com/problems/path-sum-ii/
-
-    //5+4+11+7 = 27
+//    5+4+11+7 = 27
 
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
@@ -24,25 +23,6 @@ public class PathSum_2_113 {
         addNode(5);
         System.out.print(pathSum(root, 22 ));
     }
-
-
-    public static List<List<Integer>> pathSumTest(TreeNode root, int sum) {
-        List<List<Integer>> result = new ArrayList<>();
-        helper(result, new ArrayList<>(), root, sum);
-        return result;
-    }
-
-    public static void helper(List<List<Integer>> result, List<Integer> temp, TreeNode node, int sum) {
-        if (node == null) return;
-        if (sum == node.val && node.left==null && node.right==null) {
-            temp.add(node.val);
-            result.add(new ArrayList<>(temp));
-        } else {
-            temp.add(node.val);
-
-        }
-    }
-
 
     //time complexity 0(n^2)
     // 0(n) to traverse all nodes, 0(n) to copy the list over
@@ -53,8 +33,7 @@ public class PathSum_2_113 {
         return pathsList;
     }
 
-    private static void recurseTree(TreeNode node, int remainingSum,
-                                    List<Integer> pathNodes, List<List<Integer>> pathsList) {
+    private static void recurseTree(TreeNode node, int remainingSum, List<Integer> pathNodes, List<List<Integer>> pathsList) {
         if (node == null) {
             return;
         }

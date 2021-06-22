@@ -15,36 +15,27 @@ public class LongestSubstringwithAtLeastKRepeatingCharacters_395 {
         System.out.print(result);
     }
 
-    //charMap (3,2,3,0,0,0...0)
-    // start=0, cur=0, result=0
-    //0 to n-1
-    // charMap(char)< k {
-    //
-
+//    https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/
     public static int longestSubstring(String s, int k) {
-        if (s == null || s.length() == 0) return 0;
-        char[] chars = new char[26];
-        // record the frequency of each character
-        for (int i = 0; i < s.length(); i += 1) chars[s.charAt(i) - 'a'] += 1;
-        boolean flag = true;
-        for (int i = 0; i < chars.length; i += 1) {
-            if (chars[i] < k && chars[i] > 0) flag = false;
-        }
-        // return the length of string if this string is a valid string
-        if (flag == true) return s.length();
-        int result = 0;
-        int start = 0, cur = 0;
-        // otherwise we use all the infrequent elements as splits
+        return longestSubstringUtil(s, 0, s.length(), k);
+    }
 
-        //aaabbccc
-        while (cur < s.length()) {
-            if (chars[s.charAt(cur) - 'a'] < k) {
-                result = Math.max(result, longestSubstring(s.substring(start, cur), k));
-                start = cur + 1;
-            }
-            cur++;
+    static int longestSubstringUtil(String s, int start, int end, int k) {
+        if (end < k) return 0;
+        int[] countMap = new int[26];
+        // update the countMap with the count of each character
+        for (int i = start; i < end; i++) {
+            countMap[s.charAt(i) - 'a']++;
         }
-        result = Math.max(result, longestSubstring(s.substring(start), k));
-        return result;
+
+        for (int mid = start; mid < end; mid++) {
+            if (countMap[s.charAt(mid) - 'a'] >= k) continue;
+            int midNext = mid + 1;
+            while (midNext < end && countMap[s.charAt(midNext) - 'a'] < k) {
+                midNext++;
+            }
+            return Math.max(longestSubstringUtil(s, start, mid, k), longestSubstringUtil(s, midNext, end, k));
+        }
+        return (end - start);
     }
 }

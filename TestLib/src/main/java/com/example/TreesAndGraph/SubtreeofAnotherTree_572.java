@@ -17,29 +17,30 @@ public class SubtreeofAnotherTree_572 {
 //             1   2
 //    Return true, because t has the same structure and node values with a subtree of s.
 //    https://leetcode.com/problems/subtree-of-another-tree/
+//    time complexity 0(m*n)
     public static TreeNode root = null;
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
         TreeNode s = addNodeNews(3);
         TreeNode t = addNodeNewt(4);
-        System.out.print(isSubtree(s,t));
+        System.out.print(isSubtreeIterative(s,t));
     }
 
     //recursive solution
-    public static boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null) return false;
-        if (isSame(s, t)) return true;
-        return isSubtree(s.left, t) || isSubtree(s.right, t);
-    }
-
-    private static boolean isSame(TreeNode s, TreeNode t) {
-        if (s == null && t == null) return true;
-        if (s == null || t == null) return false;
-
-        if (s.val != t.val) return false;
-        return isSame(s.left, t.left) && isSame(s.right, t.right);
-    }
+//    public static boolean isSubtree(TreeNode s, TreeNode t) {
+//        if (s == null) return false;
+//        if (isSame(s, t)) return true;
+//        return isSubtree(s.left, t) || isSubtree(s.right, t);
+//    }
+//
+//    private static boolean isSame(TreeNode s, TreeNode t) {
+//        if (s == null && t == null) return true;
+//        if (s == null || t == null) return false;
+//
+//        if (s.val != t.val) return false;
+//        return isSame(s.left, t.left) && isSame(s.right, t.right);
+//    }
 
     //iterative solution
     public static boolean isSubtreeIterative(TreeNode s, TreeNode t) {

@@ -26,10 +26,7 @@ fun main(args: Array<String>) {
     myHashMap.get(2)
 }
 
-
 class MyHashMap() {
-
-
     var ListNodes = arrayOfNulls<LinkedList<Int, Int>>(10001)
     /** Initialize your data structure here. */
     class LinkedList<E, V>(key: E, value: V) {

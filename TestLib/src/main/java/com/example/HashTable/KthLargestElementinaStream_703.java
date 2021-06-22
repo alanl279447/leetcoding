@@ -18,25 +18,30 @@ public class KthLargestElementinaStream_703 {
 
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
-        int[] arr = {4,5,8,2};
+        int[] arr = {4,5,8,2};      //7, 5,8
         KthLargest obj = new KthLargest(3, arr);
-        int param_1 = obj.add(3);
+//        int param_1 = obj.add(3);    //4
+
+        int param_1 = obj.add(7);   //5
+
         System.out.println(param_1);
+        int param_2  = obj.add(5);   // return 5
+        System.out.println(param_2);
     }
 
     static class KthLargest {
         PriorityQueue<Integer> pq = null;
-        int k=0;
+        int K=0;
         public KthLargest(int k, int[] nums) {
           pq = new PriorityQueue<>(k);
-          k = k;
+          K =k;
           for (int num:nums) {
               add(num);
           }
         }
 
         public int add(int val) {
-           if (pq.size() < k) {
+           if (pq.size() < K) {
                pq.offer(val);
            } else if (pq.peek() < val) {
               pq.poll();

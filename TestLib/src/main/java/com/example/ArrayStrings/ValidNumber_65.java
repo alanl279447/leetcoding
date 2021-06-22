@@ -31,19 +31,7 @@ public class ValidNumber_65 {
         System.out.print(result);
     }
 
-
-//    public static boolean isNumberTest(String s) {
-//      int len = s.length();
-//      boolean isNumSeen = false, isDotSeen = false, isESeen = false;
-//      boolean isNumberAfterE = false;
-//
-//
-//
-//
-//    }
-
-
-
+    //number  .  e  sign
     //check for number b/w [0, 9]
     // dot check if eSeen or dotSeen then false
     // e  check if e seen !numberSeen

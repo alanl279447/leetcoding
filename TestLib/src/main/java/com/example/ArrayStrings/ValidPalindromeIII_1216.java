@@ -4,13 +4,14 @@ package com.example.ArrayStrings;
 //        Output: true
 //        Explanation: Remove 'b' and 'e' characters.
 //https://leetcode.com/problems/valid-palindrome-iii/
+//check Longest_Palindromic_Subsequence_516
 
 public class ValidPalindromeIII_1216 {
     public static void main(String[] args) {
         System.out.println("Valid Palindrome result:  " + isValidPalindrome("abcdeca", 2));
     }
 
-    //find the longest palindrome subString
+    //find the longest palindrome subSequence
     //len -llps <= k return true else false
     public static boolean isValidPalindrome(String s, int k) {
        int len = s.length();

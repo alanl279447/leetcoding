@@ -15,20 +15,22 @@ import javafx.scene.layout.Priority;
 //         O(V 2 log V)   v - number of cities
 public class CheapestFlightsWithinKStops_787 {
     public static void main(String[] args) {
-        int[][] flights = {{0,1,100}, {1,2,100}, {0,2,500}};
-        System.out.print(findCheapestPrice(3, flights, 0, 2, 0));
+        int[][] flights = {{0,1,100}, {1,2,100}, {0,2,150}};
+        System.out.print(findCheapestPrice(3, flights, 0, 2, 1));
     }
 
-    //adjacency list for the nodes, ie city1, <city2, price>
-    //min heap sorted based on the cost, add the src node first
-    //loop through all the adj nodes, until you find the dest.
+    //adj list City - neighbours (cityx, price)
+    //PQ which has int[] {price, node, stops so far}
+    //adj nodes and check for destination.
     public static int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         Map<Integer, Map<Integer, Integer>> prices = new HashMap<>();
         for (int[] f : flights) {
-            if (!prices.containsKey(f[0])) prices.put(f[0], new HashMap<>());
+            if (!prices.containsKey(f[0])) {
+                prices.put(f[0], new HashMap<>());
+            }
             prices.get(f[0]).put(f[1], f[2]);
         }
-        Queue<int[]> pq = new PriorityQueue<>((a, b) -> (Integer.compare(a[0], b[0])));
+        Queue<int[]> pq = new PriorityQueue<>((a, b) -> (Integer.compare(a[0], b[0])));   //{price, node, stops so far}
         pq.add(new int[] {0, src, k + 1});
         while (!pq.isEmpty()) {
             int[] top = pq.remove();

@@ -23,40 +23,6 @@ public class WildcardMatching_44 {
         System.out.println(isMatch(s,p));
     }
 
-    public static boolean isMatchPrac(String s, String p) {
-        char[] sChars = s.toCharArray();
-        char[] pChars = p.toCharArray();
-
-        int writeIndex = 0;
-        boolean firstIndex = true;
-        for (int i=0; i < pChars.length; i++) {
-            if (pChars[i] == '*') {
-                if (firstIndex) {
-                  pChars[writeIndex++]=pChars[i];
-                  firstIndex=false;
-                } else {
-                    pChars[writeIndex++]=pChars[i];
-                    firstIndex=true;
-                }
-            }
-        }
-        boolean[][] T = new boolean[sChars.length+1][pChars.length+1];
-        if (pChars[1] == '*') {
-            T[0][1] = true;
-        }
-        T[0][0] = true;
-        for (int i=1; i <= sChars.length; i ++) {
-            for (int j=1; j <=writeIndex; j++) {
-                if (pChars[j-1]=='?' || sChars[i-1]==pChars[j-1]) {
-                    T[i][j] = T[i-1][j-1];
-                } else if (pChars[j-1]=='*') {
-                    T[i][j]=T[i-1][j] || T[j-1][i];
-                }
-            }
-        }
-        return T[sChars.length][writeIndex];
-    }
-
 
     public static boolean isMatch(String s, String p) {
         char[] str = s.toCharArray();

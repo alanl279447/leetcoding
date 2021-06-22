@@ -19,24 +19,21 @@ public class FindKClosestElements_658 {
 //        int[] nums = {0,0,0,0,2,3,4};
         List<Integer> result = findClosestElements(nums, 2,1);
         for (Integer res: result) {
-            System.out.print(res);
+            System.out.println(res);
         }
     }
-
 
     public static List<Integer> findClosestElements(int[] arr, int k, int x) {
          List<Integer> result = new ArrayList<>();
          int left =0;
          int right = arr.length-1;
-
-         while(right-left >=k) {
+         while(right-left >= k) {
           if (Math.abs(arr[left] -x) > Math.abs(arr[right] -x)) {
               left++;
           } else {
               right--;
           }
          }
-//        List<Integer> result = new ArrayList<>(k);
         for (int i = left; i <= right; i++) {
             result.add(arr[i]);
         }

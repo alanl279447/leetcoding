@@ -17,7 +17,6 @@ public class UniquePaths_62 {
         System.out.println(res);
     }
 
-
     public static int uniquePaths(int m, int n) {
        int[][] dp = new int[m][n];
 

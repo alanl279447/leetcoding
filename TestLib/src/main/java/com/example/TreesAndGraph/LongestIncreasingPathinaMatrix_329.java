@@ -9,9 +9,10 @@ import java.util.List;
 //        https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
 public class LongestIncreasingPathinaMatrix_329 {
     public static TreeNode root;
-    private static TreeNode ans = null;
-
     public static final int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public static void main(String[] args) {
+    }
+
 
     public static int longestIncreasingPath(int[][] matrix) {
         if(matrix.length == 0) return 0;

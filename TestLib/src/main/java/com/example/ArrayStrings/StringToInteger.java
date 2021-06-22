@@ -7,9 +7,9 @@ public class StringToInteger {
 //    https://leetcode.com/problems/string-to-integer-atoi/
 
     public static void main(String[] args) {
-        System.out.println("Start main " + myAtoi("-42"));
-        System.out.println("Start main " + myAtoi("2147483646"));
-        System.out.println("Start main " + myAtoi("2147483646"));
+        System.out.println("Start main " + myAtoi("-0042"));
+//        System.out.println("Start main " + myAtoi("2147483646"));
+//        System.out.println("Start main " + myAtoi("2147483646"));
     }
 
     //1 check for preceeding/trailing white spaces

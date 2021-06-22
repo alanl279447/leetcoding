@@ -58,9 +58,7 @@ public class BasicCalculatorIII_772 {
                  sign = current;
              }
          }
-
         while(!stack.isEmpty()) result += stack.pop();
-
         return result;
          }
 }

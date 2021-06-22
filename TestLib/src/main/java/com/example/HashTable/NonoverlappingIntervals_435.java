@@ -21,6 +21,8 @@ public class NonoverlappingIntervals_435 {
         System.out.println(result);
     }
 
+
+    //  1,2  2,3  1,3  3,4
     //Time complexity is 0(nlogn)
     public static int eraseOverlapIntervalsTest(int[][] intervals) {
         Arrays.sort(intervals, (a,b)-> a[1]-b[1]);

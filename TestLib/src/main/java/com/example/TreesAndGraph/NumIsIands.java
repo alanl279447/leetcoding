@@ -29,7 +29,7 @@ public class NumIsIands {
         int row  =  grid.length;
         int col = grid[0].length;
         int count=0;
-        LinkedList<int[]> queue = new LinkedList<>();
+        Queue<int[]> queue = new LinkedList<>();
         for (int r = 0; r < row; r++) {
             for (int c =0; c < col; c++) {
                 if (grid[r][c]=='1') {
@@ -43,7 +43,7 @@ public class NumIsIands {
     }
 
     public static int[][] dirs = {{1,0}, {-1,0}, {0,1}, {0,-1}};
-    public static void bfs(char[][] grid, int r, int c, LinkedList<int[]> queue) {
+    public static void bfs(char[][] grid, int r, int c, Queue<int[]> queue) {
         while(!queue.isEmpty()) {
             int[] currentElement = queue.poll();
             for (int[] dir: dirs) {

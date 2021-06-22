@@ -1,9 +1,6 @@
 package com.example.Stack;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +24,6 @@ public class NextGreaterElementI_496 {
          System.out.print(res);
     }
 
-//    int[] nums1 = {4,1,2};
-//    int[] nums2 = {1,3,4,2};
     public static int[] nextGreaterElement(int[] findNums, int[] nums) {
         Map<Integer, Integer> map = new HashMap<>(); // map from x to next greater element of x
         Stack<Integer> stack = new Stack<>();

@@ -34,10 +34,8 @@ public class DesignHashMap_706 {
         hashMap.get(2);            // returns -1 (not found)
     }
 
-
-    //LinkedList is used for colision handling
-    //
-
+    //hashing function
+    //avoid collision   - LinkedList
     static class MyHashMap {
         final ListNode[] nodes = new ListNode[10000];
 

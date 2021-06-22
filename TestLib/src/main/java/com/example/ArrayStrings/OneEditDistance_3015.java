@@ -9,7 +9,7 @@ public class OneEditDistance_3015 {
 
     //submitted to leetcode
     public static void main(String[] args) {
-        String s = "azb";
+        String s = "ab";
         String t = "acb";
         System.out.println("Palindrome result:  " + isOneEditDistance(s, t));
     }
@@ -32,7 +32,7 @@ public class OneEditDistance_3015 {
                 if(sLength == tLength) {
                     return s.substring(i+1).equals(t.substring(i+1));
                 } else {
-                    return s.substring(i).equals(t.substring(i+1));
+                    return s.substring(i).equals(t.substring(i+1));   //delete
                 }
             }
         }

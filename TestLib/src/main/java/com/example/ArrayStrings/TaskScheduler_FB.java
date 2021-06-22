@@ -1,6 +1,4 @@
 package com.example.ArrayStrings;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,11 +11,11 @@ public class TaskScheduler_FB {
     public static void main(String args[]) {
 
         char[] input = {'A','B','C','A','B','C'};
-        int result = leastIntervalTest(input, 3);
+        int result = leastInterval(input, 3);
         System.out.println(result);  //3
     }
 
-    public static int leastIntervalTest(char[] tasks, int n) {
+    public static int leastInterval(char[] tasks, int n) {
        if (tasks == null || tasks.length==0) return 0;
        HashMap<Character, Integer> lastOccurMap = new HashMap();
        int resultTime = 0;
@@ -34,28 +32,4 @@ public class TaskScheduler_FB {
        }
        return resultTime;
     }
-
-
-//    public static int leastInterval(char[] tasks, int n) {
-//        Map<Character, Integer> map = new HashMap<>();
-//        int totalTime = 0;
-//        for (int i = 0; i < tasks.length; i++) {
-//            char c = tasks[i];
-//            int tasktime = map.getOrDefault(c, 0);
-//            if (tasktime == 0) {
-//                totalTime++;
-//                map.put(c, totalTime);
-//            } else {
-//                int expiredTime = totalTime - tasktime;
-//                if (expiredTime > n) {
-//                    totalTime++;
-//                } else {
-//                    totalTime +=(n-expiredTime)+1;
-//                }
-//                map.put(c, totalTime);
-//            }
-//        }
-//        return totalTime;
-//    }
-
 }

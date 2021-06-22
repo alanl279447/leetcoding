@@ -16,6 +16,8 @@ public class BurstBalloons_312 {
         System.out.print(findMinArrowShots(points));
     }
 
+    //1,6  2,8  7,12  10,16
+
     public static int findMinArrowShots(int[][] points) {
         if (points.length == 0) {
             return 0;

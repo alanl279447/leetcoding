@@ -25,8 +25,14 @@ public class TargetSum_494 {
         System.out.print(findTargetSumWays(nums, 3));
     }
 
+
     //sumP - sumN = target
-    //sumP - sumN + sumP+sumN = target + sum
+    //sumP -sumN + (sumP+sumN) = target+sum
+    // 2 sumP = target+sum
+    //sumP = (target+sum)/2
+
+    //sumP - sumN = target
+    //sumP - sumN + sumP + sumN = target + sum
     // sumP = (target+sum)/2
 //    Find a subset P of nums such that sum(P) = (target + sum(nums)) / 2
 
@@ -36,7 +42,7 @@ public class TargetSum_494 {
             sum += nums[i];
         }
         if(S > sum || (sum + S) % 2 == 1)   return 0;
-        return subsetSum(nums, (sum + S) / 2);
+        return subsetSumDP(nums, (sum + S) / 2);
     }
 
     private static int subsetSum(int[] nums, int S){
@@ -50,20 +56,15 @@ public class TargetSum_494 {
         return dp[S];
     }
 
+//    https://leetcode.com/problems/target-sum/discuss/97334/Java-(15-ms)-C%2B%2B-(3-ms)-O(ns)-iterative-DP-solution-using-subset-sum-with-explanation
     private static int subsetSumDP(int[] nums, int S){
-        int[][]dp = new int[nums.length+1][S+1];
-        dp[0][0]=1;
-        for (int i = 1; i < nums.length; i++) {
-            int curr = nums[i-1];
-            for (int j=0; j <= S; j++) {
-                if (j < curr) {
-                    dp[i][j] = dp[i-1][j];
-                } else {
-                    dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-curr]);
-                }
-            }
-        }
-        return dp[nums.length][S];
+        int[][]dp = new int[nums.length][S+1];
+        for (int i = 0; i < nums.length; i++) dp[i][0] = 1;
+        for (int i = 1; i < nums.length; i++)
+            //note you need to loop descending, otherwise you'll pickup duplicated partial result along the way
+            for (int j = S; j >= nums[i]; j--)
+                dp[i][j] = dp[i-1][j] + dp[i-1][j - nums[i]];
+        return dp[nums.length-1][S];
     }
 
     public static class TreeNode {

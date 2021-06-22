@@ -27,7 +27,6 @@ public class IntersectionofTwoArrays_349 {
         Arrays.sort(nums1); // assume sorted
         Arrays.sort(nums2); // assume sorted
         int[] intersections = new int[nums1.length];
-
         int i1 = 0 , i2 = 0, j = 0;
 
         while(i1 < nums1.length && i2 < nums2.length) {

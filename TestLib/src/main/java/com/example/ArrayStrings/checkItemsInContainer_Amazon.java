@@ -12,15 +12,15 @@ public class checkItemsInContainer_Amazon {
     //O(n log n + m log n)
 //    https://aonecode.com/amazon-online-assessment-items-in-containers
     public static void main(String[] args) {
-        List<Integer> res1=numberOfItems("|**|*|*", Arrays.asList(1,1), Arrays.asList(5,6));
-        List<Integer> res2=numberOfItems("*|*", Arrays.asList(1), Arrays.asList(5));
-        for (Integer res: res1) System.out.print(res);
-        System.out.println();
-        for (Integer res: res2) System.out.println(res);
+        List<Integer> res1=numberOfItems("|**|*|*", Arrays.asList(1,1), Arrays.asList(5,6));  //2,3
+//        List<Integer> res2=numberOfItems("*|*", Arrays.asList(1), Arrays.asList(5));    //0
+        for (Integer res: res1) System.out.println(res);
+//        System.out.println();
+//        for (Integer res: res2) System.out.println(res);
     }
 
     public static List<Integer> numberOfItems(String s, List<Integer> start, List<Integer> end) {
-        NavigableMap<Integer, Integer> treeMap = new TreeMap<>();
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
         int countSoFar = 0;
         for (int i = 0; i< s.length(); i++) {
             if (s.charAt(i) == '|') {

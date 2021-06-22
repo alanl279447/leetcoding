@@ -14,10 +14,14 @@ public class LongestValidParentheses_32 {
 //    https://leetcode.com/problems/longest-valid-parentheses/
 
     public static void main(String[] args) {
-//        int result = longestValidParentheses(")()())");
-        int result = longestValidParentheses("())()");
+        int result = longestValidParentheses("())((())");
+//        int result = longestValidParentheses("())()");
         System.out.println(result);
     }
+
+    //        ())((())
+    // stack  2, 3,
+    // ans = 1-(-1) = 2,  6-4 = 2, 7-3 = 4
 
     public static int longestValidParentheses(String s) {
         int maxans = 0;
@@ -37,29 +41,4 @@ public class LongestValidParentheses_32 {
         }
         return maxans;
     }
-
-
-//    public static int longestValidParentheses(String s) {
-//      if(s.length() ==0) return 0;
-//      char[] chars = s.toCharArray();
-//      int maxLength = 1;
-//
-//      Stack<Integer> stack = new Stack<>();
-//      stack.push(-1);
-//
-//      for (int i=0; i <chars.length;i++) {
-//          if (chars[i] == '(') {
-//              stack.push(i);
-//          } else {
-//              if (stack.size() > 1 && s.charAt(stack.peek()) == '(') {
-//                  stack.pop();
-//                  maxLength = Math.max(maxLength, i - stack.size());
-//              } else {
-//                  stack.push(i);
-//              }
-//          }
-//      }
-//      return maxLength;
-//    }
-
 }

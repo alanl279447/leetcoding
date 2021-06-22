@@ -70,21 +70,17 @@ public class NestedListWeightSum_339 {
     static class NestedInteger {
         int integer;
         List<NestedInteger> list;
-
         public int getInteger() {
             return integer;
         }
-
         public boolean isInteger() {
             if (list == null) {
                 return true;
             }
             return false;
         }
-
         public List<NestedInteger> getList() {
             return list;
         }
     }
-
 }

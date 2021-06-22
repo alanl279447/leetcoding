@@ -55,17 +55,25 @@ public class MinimumKnightMoves_1197 {
     }
 
 
-//  0,0-0 1,0-3, 2,0-2, 1,1-2
-//    2,1,4
-//    3,2,
-//    0
+  //  0,0-0 1,0-3, 2,0-2, 1,1-2
+//    2,1,4/
+//    3,2/,1
+//    0/,3,2
+
+// 5
+// 4   2  3  2 3
+// 3   3  2 3/ 2
+// 2   2  1/4  3
+// 1   3 /2 1  2
+// 0   /0 3 2  3
+
     public static int minKnightMoves(int x, int y) {
         Map<String, Integer> map=new HashMap<>();
         // base case
         map.put("0,0", 0);
         map.put("1,0", 3);
         map.put("1,1", 2);
-        map.put("2,0", 2);
+        map.put("0,1", 3);
         return dfs(x,y,map);
     }
 

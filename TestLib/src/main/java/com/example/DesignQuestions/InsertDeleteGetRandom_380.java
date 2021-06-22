@@ -37,8 +37,10 @@ public class InsertDeleteGetRandom_380 {
         System.out.println(param_3);
     }
 
-    public static class RandomizedSet {
+//    map<Int, Int>   value, list index
+//    list<Int>
 
+    public static class RandomizedSet {
         Map<Integer, Integer> map = null;
         List<Integer> list = null;
         Random random = null;
@@ -81,5 +83,4 @@ public class InsertDeleteGetRandom_380 {
            return list.get(random.nextInt(list.size()));
         }
     }
-
 }

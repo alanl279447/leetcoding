@@ -49,6 +49,9 @@ public class ReverseNodeinKList {
         return pre;
     }
 
+    //head, create a node object
+    //
+
     public static class ListNode {
       int val;
       ListNode next;

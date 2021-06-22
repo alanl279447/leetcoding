@@ -79,7 +79,4 @@ public class SerializeandDeserializeNaryTree_428 {
             children = _children;
         }
     };
-
-
-
 }

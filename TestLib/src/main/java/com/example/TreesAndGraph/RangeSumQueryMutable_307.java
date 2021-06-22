@@ -32,15 +32,15 @@ public class RangeSumQueryMutable_307 {
         public void init(){
             if(n == 0) return;
 
-            fen[1] = arr[0];
-            for(int i = 1; i < n; i++){
+            //fen[1] = arr[0];
+            for(int i = 0; i < n; i++){
                 fen[i+1] = fen[i] + arr[i];
             }
             for(int i = n; i >0 ; i--){
                 int parent = i - (i & -i);
                 if(parent >= 0) fen[i] -= fen[parent];
             }
-            System.out.println(Arrays.toString(fen));
+            //System.out.println(Arrays.toString(fen));
         }
 
         //helper
@@ -58,7 +58,7 @@ public class RangeSumQueryMutable_307 {
             i++;
             while(i <= n){
                 fen[i] += val;
-                i = i + (i & -i);
+                i = i + (i & -i);  //go downwards to update
             }
         }
 

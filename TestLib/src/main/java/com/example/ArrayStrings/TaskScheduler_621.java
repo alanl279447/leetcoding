@@ -14,21 +14,6 @@ public class TaskScheduler_621 {
         System.out.println(result);
     }
 
-    public static int leastIntervalTest(char[] tasks, int n) {
-      int[] charMap = new int[26];
-      for (int i = 0; i < tasks.length; i++) {
-          charMap[tasks[i]-'A']++;
-      }
-      Arrays.sort(charMap);
-      int maxIdle = charMap[25]-1 * n;
-      for (int i = 24; i >=0; i--) {
-          maxIdle -= Math.min(charMap[i], maxIdle);
-      }
-      return maxIdle>0?tasks.length+maxIdle:tasks.length;
-    }
-
-
-
     public static int leastInterval(char[] tasks, int n) {
         int[] char_count = new int[26];
         for (char c: tasks) {

@@ -28,6 +28,7 @@ public class IsGraphBipartite_785 {
         System.out.print(isBipartite(nums1));
     }
 
+
     public static boolean isBipartite(int[][] graph) {
         int length = graph.length;
         int[] colors = new int[length];

@@ -1,9 +1,6 @@
 package com.example.ArrayStrings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PalindromePermutation_266 {
@@ -11,7 +8,6 @@ public class PalindromePermutation_266 {
 //    Input: "carerac"
 //    Output: true
 //    https://leetcode.com/problems/palindrome-permutation/
-
     public static void main(String[] args) {
         boolean result = canPermutePalindrome("carerac");
         System.out.println(result);

@@ -9,6 +9,8 @@ public class PartitionEqualSubsetSum_416 {
 //    Explanation: The array can be partitioned as [1, 5, 5] and [11].
 //    https://leetcode.com/problems/partition-equal-subset-sum/
 //    same as MinimumSubsetSumDifference_GFG
+
+    //time complexity 0(mn)
     public static TreeNode root = null;
     public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
@@ -33,9 +35,9 @@ public class PartitionEqualSubsetSum_416 {
             int curr = nums[i];
             for (int j = 1; j <= sum; j++) {
                 if (j < curr) {
-                    dp[i][j] = dp[i-1][j];
+                    dp[i][j] = dp[i-1][j];  //if we can reach j skipping nums[i]
                 } else {
-                    dp[i][j] = dp[i][j] | dp[i][j-curr];
+                    dp[i][j] = dp[i][j] | dp[i][j-curr];  //we can reach j using nums[i]
                 }
             }
         }

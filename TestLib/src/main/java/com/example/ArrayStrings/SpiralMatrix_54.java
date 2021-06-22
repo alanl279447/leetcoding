@@ -22,7 +22,6 @@ public class SpiralMatrix_54 {
 //
 //    https://leetcode.com/problems/spiral-matrix/
 
-
     public static void main(String[] args) {
         int[][] board = {{0,1,0}, {0,0,1}, {1,1,1}, {0,0,0}};
         List<Integer> result = spiralOrder(board);
@@ -30,7 +29,6 @@ public class SpiralMatrix_54 {
             System.out.println(res);
         }
     }
-
 
     //row = 0, col 0 to cols-1
     //col = cols-1 row 0+1 to rows-1
@@ -77,5 +75,4 @@ public class SpiralMatrix_54 {
         }
         return res;
     }
-
 }

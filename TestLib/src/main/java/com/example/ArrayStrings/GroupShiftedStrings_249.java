@@ -22,30 +22,9 @@ public class GroupShiftedStrings_249 {
     public static void main(String[] args) {
         String[] input = {"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"};
         List<List<String>> groupAnagrams = groupStrings(input);
-
         for (List<String> item: groupAnagrams)
             System.out.println(item.toString());
     }
-
-
-//    public static List<List<String>> groupStringsTest(String[] inputs) {
-//        HashMap<String, List<String>> map = new HashMap<>();
-//
-//        for (String input: inputs) {
-//
-//
-//
-//        }
-//    }
-//
-//    public String getKey(String input) {
-//        int len = input.length();
-//
-//
-//    }
-//
-
-
 
     public static List<List<String>> groupStrings(String[] strings) {
         Map<String, List<String>> map = new HashMap<>();

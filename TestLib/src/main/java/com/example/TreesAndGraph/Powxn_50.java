@@ -11,7 +11,6 @@ public class Powxn_50 {
         System.out.print(myPow(2.0, 3));
     }
 
-
     //absN = abs(3); //0011
     //absN&1==1 ans *=num;
     //x *=x;

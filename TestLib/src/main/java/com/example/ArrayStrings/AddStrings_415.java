@@ -10,6 +10,12 @@ public class AddStrings_415 {
         System.out.println(result);
     }
 
+
+    //123
+    //345
+    // SB(store sum)           carry
+    // SB (Charnum1+Charnum2)%10   (Charnum1+Charnum2)/10
+
     public static String addStrings(String num1, String num2) {
 
         int length1 = num1.length();

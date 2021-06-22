@@ -30,13 +30,19 @@ public class SplitArraywithEqualSum_548 {
         System.out.println(splitArray(nums));
     }
 
+    // int[] sum = new int[nums.len]
+    //sum[i] = sum[i-1]+nums[i]
+
     public static boolean splitArray(int[] nums) {
+        if (nums.length < 7)
+            return false;
        int len = nums.length;
        int[] sum = new int[nums.length];
        sum[0] = nums[0];
        for (int i=1; i < len; i++) {
            sum[i] += sum[i-1]+nums[i];
        }
+
        for (int j = 3; j < len-3; j++) {
            Set<Integer> set = new HashSet<Integer>();
            for (int i = 1; i < j-1; i++) {
@@ -52,4 +58,9 @@ public class SplitArraywithEqualSum_548 {
        }
        return false;
     }
+
+
+    // j = 3; j < len-3
+    // k = j+2; k < len-1
+
 }

@@ -1,5 +1,7 @@
 package com.example.TreesAndGraph;
 
+
+import java.nio.charset.CharacterCodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -65,7 +67,6 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
     }
     //union find
 
-
     //dfs soln
     public static int countComponentsDfs(int nodesCount, int[][] edges) {
         if (nodesCount <= 1) return 1;
@@ -76,8 +77,8 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
         }
 
         for (int[] edge: edges) {
-           map.get(edge[0]).add(edge[1]);
-           map.get(edge[1]).add(edge[0]);
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
         }
 
         int count = 0;
@@ -88,17 +89,58 @@ public class NumberofConnectedComponentinanUndirectedGraph_323 {
                 count++;
             }
         }
-       return count;
+        return count;
     }
 
     public static void dfs(int currentNode, Set<Integer> visited, Map<Integer, List<Integer>> map) {
         for (Integer neigh: map.get(currentNode)) {
-          if (visited.add(neigh)) {
-              dfs(neigh, visited, map);
-          }
+            if (visited.add(neigh)) {
+                dfs(neigh, visited, map);
+            }
         }
     }
     //dfs soln
+
+
+
+
+
+
+
+
+
+
+//    public static List<String> countComponentsDfsPrint(List<Character> nodes, char[][] edges) {
+//        Map<Character, List<Character>> map = new HashMap<>();
+//        List<String> result = new ArrayList<>();
+//        for (char[] edge: edges) {
+//            map.putIfAbsent(edge[0], new ArrayList<>());
+//            map.putIfAbsent(edge[1], new ArrayList<>());
+//
+//            map.get(edge[0]).add(edge[1]);
+//            map.get(edge[1]).add(edge[0]);
+//        }
+//
+//        int count = 0;
+//        Set<Character> set = new HashSet<>();
+//        for (Character node: nodes) {
+//            StringBuilder sb = new StringBuilder();
+//            dfsTest(node, map, set, sb);
+//            result.add(sb.toString());
+//            count++;
+//        }
+//        return result;
+//    }
+//
+//    public static void dfsTest(Character node, Map<Character, List<Character>> map, Set<Character> set, StringBuilder sb) {
+//        if (set.add(node)) {
+//            sb.append(node);
+//            for (Character nei: map.get(node)) {
+//                sb.append("<->");
+//                dfsTest(nei, map, set, sb);
+//            }
+//        }
+//    }
 
 
     public static void addNode(int value) {

@@ -16,7 +16,6 @@ public class ReadNCharactersGivenRead4II_158 {
         // System.out.println("Palindrome result:  " + isPalindrome(input));
     }
 
-//    Input: file = "abc", queries = [1,2,1]
     char[] temp = new char[4];    //prev buffer
     int tmpPtr = 0;               //chars read
     int tmpCount = 0;             //total chars

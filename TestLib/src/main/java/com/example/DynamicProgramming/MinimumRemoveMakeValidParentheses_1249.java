@@ -11,6 +11,12 @@ public class MinimumRemoveMakeValidParentheses_1249 {
         System.out.println(result);
     }
 
+//lee(t(c)o)de)"
+//stringBuilder temp   lee(t(c)o)de
+//openParan 1,2 , 1, 0    //closed paren
+// i = len && openParen > 0   remove open paren
+//return sb
+
     public static String minRemoveToMakeValid(String input) {
         int openParen = 0;
         int length = input.length();

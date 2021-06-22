@@ -1,8 +1,5 @@
 package com.example.ArrayStrings;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class SingleNumber_136 {
 
 //    Input: [4,1,2,1,2]

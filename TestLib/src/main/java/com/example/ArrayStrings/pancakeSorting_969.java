@@ -1,7 +1,11 @@
 package com.example.ArrayStrings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class pancakeSorting_969 {
 
@@ -17,28 +21,13 @@ public class pancakeSorting_969 {
 //    https://leetcode.com/problems/pancake-sorting/
 //    time complexity 0(N^2)
     public static void main(String args[]) {
-        int[] input = {3,2,4,1};
+        int[] input = {3,1,4,2};
         List<Integer> res = pancakeSort(input);
         for(Integer re: res)
           System.out.println(re);
+//        List<Integer> input = Arrays.asList(5,1,4,2);
+//        countSmaller(input);
     }
-
-    public static List<Integer> pancakeSortTest(int[] A) {
-        int length = A.length, largest = length;
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            int index = find(A, largest);
-            if (index == largest-1) continue;
-
-            flip(A, index);
-            flip(A, largest-1);
-
-            result.add(index+1);
-            result.add(largest--);
-        }
-           return result;
-    }
-
 
 //    At each round, we identify the value to sort (named as value_to_sort), which is the number we would put in place at this round.
 //    We then locate the index of the value_to_sort.
@@ -57,7 +46,7 @@ public class pancakeSorting_969 {
                 continue;
             }
             flip(A, index);
-            flip(A, largest - 1);
+            flip(A, largest - 1);   //5,1,4,2
             result.add(index + 1);
             result.add(largest--);
         }
@@ -78,5 +67,37 @@ public class pancakeSorting_969 {
             A[i++] = A[j];
             A[j--] = temp;
         }
+    }
+
+    public static List<Integer> countSmaller(List<Integer> nums) {
+        int[] res = new int[nums.size()];
+        List<Integer> resList = new ArrayList<>();
+        for (int i = nums.size() - 1; i >= 0; i--) {
+            res[i] = biInsert(resList, nums.get(i));
+            //System.out.println(res[i]);
+        }
+        resList.clear();
+
+        for (int i = 0; i < nums.size(); i++) {
+            resList.add(res[i]);
+        }
+        return resList;
+    }
+        //5,1,4,2
+    public static int biInsert(List<Integer> list, int target) {
+        int l = 0;
+        int r = list.size() - 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int m = list.get(mid);
+            if (m < target) {
+                l = mid + 1;
+            }
+            else if (m >= target) {
+                r = mid - 1;
+            }
+        }
+        list.add(l, target);
+        return l;
     }
 }

@@ -3,7 +3,7 @@ package com.example.TreesAndGraph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Search2DMatrix_74 {
+public class    Search2DMatrix_74 {
 //    Input:
 //    matrix = [
 //            [1,   3,  5,  7],

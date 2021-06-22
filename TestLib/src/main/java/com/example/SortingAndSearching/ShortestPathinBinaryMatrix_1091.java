@@ -24,6 +24,12 @@ public class ShortestPathinBinaryMatrix_1091 {
         System.out.print(shortestPathBinaryMatrix(grid));
     }
 
+
+    //queue add the starting point
+    //get the size, loop the size get the node
+    //check if node ==target, else get neighbours
+    //check for nei and add to queue
+
     static int[][] dir = {{0,1}, {-1,0}, {0,-1}, {1,0}, {1,1}, {1,-1}, {-1, 1}, {-1,-1}};
     public static int shortestPathBinaryMatrix(int[][] grid) {
         int m = grid.length;

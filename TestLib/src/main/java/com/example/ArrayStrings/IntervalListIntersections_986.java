@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class IntervalListIntersections_986 {
 
@@ -44,22 +45,25 @@ public class IntervalListIntersections_986 {
         return lists.toArray(new int[lists.size()][]);
     }
 
-    public int[] findBuildings(int[] heights) {
-        if (heights == null) return new int[]{};
-        int len = heights.length;
-        Deque<Integer> stack = new ArrayDeque();
-        int tempHeight = heights[len-1];
-        for (int i = len-1; i >=0; i--) {
-            if (heights[i] > tempHeight) {
+    //Input: heights = [4,2,3,1]
+    //Output: [0,2,3]
+    public int[] findBuildings(int[] hs) {
+        if (hs == null || hs.length ==0) return new int[] {};
+        Deque<Integer> stack = new ArrayDeque<>();
+        int len = hs.length-1;
+        int tempMax = hs[len];
+        stack.offerFirst(len);
+        for (int i = hs.length-2; i >=0; i--) {
+            if (hs[i] > tempMax) {
                 stack.offerFirst(i);
+                tempMax = hs[i];
             }
-            tempHeight = Math.max(tempHeight, heights[i]);
         }
-        int[] result = new int[stack.size()];
+        int[] res = new int[stack.size()];
         int i = 0;
         while (!stack.isEmpty()) {
-            result[i++] = stack.pollFirst();
+            res[i++] = stack.pollFirst();
         }
-        return result;
+        return res;
     }
 }

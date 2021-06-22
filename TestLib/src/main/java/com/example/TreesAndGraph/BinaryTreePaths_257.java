@@ -26,7 +26,13 @@ public class BinaryTreePaths_257 {
     public static TreeNode root;
     private static TreeNode ans = null;
 
-
+    public static void main(String[] args) {
+        addNode(1);
+        List<String> result = binaryTreePaths(root);
+        for (String res: result) {
+            System.out.println(res);
+        }
+    }
 
     public static List<String> binaryTreePaths(TreeNode root) {
         LinkedList<String> paths = new LinkedList();
@@ -51,8 +57,8 @@ public class BinaryTreePaths_257 {
         root = new TreeNode(value);
         root.left = new TreeNode(2);
         root.left.right = new TreeNode(5);
-        root.left.right.left = new TreeNode(4);
-        root.left.right.right = new TreeNode(6);
+//        root.left.right.left = new TreeNode(4);
+//        root.left.right.right = new TreeNode(6);
         root.right = new TreeNode(3);
     }
 

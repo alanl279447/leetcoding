@@ -35,30 +35,4 @@ public class DecodeWays_91 {
       }
       return dp[s.length()];
     }
-
-//    public static int numDecodingsOptimized(String s) {
-//
-//        int firstIndex, secondIndex;
-//        firstIndex = 1;
-//        secondIndex = s.charAt(0) =='0' ? 0:1;
-//
-//        for (int i = 2; i <= s.length(); i++) {
-//            int first = Integer.parseInt(s.substring(i-1, i));
-//            int second = Integer.parseInt(s.substring(i-2, i));
-//
-//            int current = 0;
-//            if (first >=1) {
-//                current += secondIndex;
-//            }
-//            if (second >= 10 && second <= 26) {
-//                current += firstIndex;
-//            }
-//            firstIndex = secondIndex;
-//            secondIndex = current;
-//        }
-//        return secondIndex;
-//    }
-
-
-
 }

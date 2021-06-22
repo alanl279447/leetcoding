@@ -15,7 +15,7 @@ public class FractiontoRecurringDecimal_166 {
 //    public static List<List<Integer>> levelOrder = new ArrayList<List<Integer>>();
     public static void main(String[] args) {
 //        String res = fractionToDecimal(2,3);
-        String res = fractionToDecimal(-20,5);
+        String res = fractionToDecimal(2,3);
         System.out.println(res);
     }
 

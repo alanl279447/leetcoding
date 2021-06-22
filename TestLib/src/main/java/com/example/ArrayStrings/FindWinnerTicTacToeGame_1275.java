@@ -19,9 +19,6 @@ public class FindWinnerTicTacToeGame_1275 {
         System.out.println(res);
     }
 
-
-
-
     public static String tictactoe(int[][] moves) {
         int remaining = 9;
         Map<Integer, Integer> rows = new HashMap();
@@ -50,7 +47,7 @@ public class FindWinnerTicTacToeGame_1275 {
                     return winner(player);
                 }
             }
-            //anti_diag: row + col  == n
+            //anti_diag: row + col  == n -1
             if(row + col == 2){
                 anti_diag += player;
                 if(Math.abs(anti_diag) == 3){

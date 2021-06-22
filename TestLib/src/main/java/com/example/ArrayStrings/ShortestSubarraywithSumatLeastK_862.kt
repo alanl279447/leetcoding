@@ -6,31 +6,36 @@ import java.util.*
 //Output: 3
 //https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
 
+//related https://leetcode.com/problems/minimum-size-subarray-sum/
+//https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/189039/Detailed-intuition-behind-Deque-solution
+
 fun main (args: Array<String>) {
     println(shortestSubarray(intArrayOf(3,-2, 5), 4))   //1
 //    println(shortestSubarray(intArrayOf(17,85,93,-45,-21), 150))
 }
 
+
+//this can have negative values!!!
+// the first element in the deque is smaler than the others (queue is increasing),
+//So because the Deque is increasing (B[d[0]] <= B[d[1]]), we have B[i] - B[d[0]] >= B[i] - B[d[1]],
 fun shortestSubarray(A: IntArray, K: Int): Int {
-    val N: Int = A.size
-    val P = LongArray(N + 1)
-    for (i in 0 until N) {
-        P[i + 1] = P[i] + A[i].toLong()
+    val n: Int = A.size
+    val B = IntArray(n + 1)
+    for (i in 0 until n) {
+        B[i + 1] = B[i] + A[i]      //0,3,1,6
     }
+    var res = n + 1
 
-    // Want smallest y-x with P[y] - P[x] >= K
-    var ans = N + 1 // N+1 is impossible
+    val dq: Deque<Int> = LinkedList()   //montonic increasing queue
 
-    val monoq: Deque<Int> = LinkedList() //opt(y) candidates, as indices of P
-    for (y in P.indices) {
-        // Want opt(y) = largest x with P[x] <= P[y] - K;
-        while (!monoq.isEmpty() && P[y] <= P[monoq.getLast()])  {
-            monoq.removeLast()
+    for (i in 0 until n + 1) {
+        while (!dq.isEmpty() && B[i] - B[dq.peekFirst()] >= K) {
+            res = Math.min(res, i - dq.pollFirst())
         }
-        while (!monoq.isEmpty() && P[y] >= P[monoq.getFirst()] + K) {
-            ans = Math.min(ans, y - monoq.removeFirst())
+        while (!dq.isEmpty() && B[i] <= B[dq.peekLast()]) {
+            dq.pollLast()
         }
-        monoq.addLast(y)
+        dq.add(i)
     }
-    return if (ans < N + 1) ans else -1
+    return if (res <= n) res else -1
 }

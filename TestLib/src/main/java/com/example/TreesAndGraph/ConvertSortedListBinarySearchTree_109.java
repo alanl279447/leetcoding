@@ -26,6 +26,10 @@ public class ConvertSortedListBinarySearchTree_109 {
         result = result.left;
     }
 
+
+    //middle node
+    //head to middle prev = left subTree
+    //middle to end is rightSubTree
     public static TreeNode sortedListToBST(ListNode head) {
         if (head == null) return null;
         if (head.next == null) return new TreeNode(head.val);

@@ -21,7 +21,6 @@ fun main(args: Array<String>) {
 ////
 ////}
 
-
 //0,3,1,1,1
 fun heightChecker(heights: IntArray): Int {
     val heightToFreq = IntArray(101)

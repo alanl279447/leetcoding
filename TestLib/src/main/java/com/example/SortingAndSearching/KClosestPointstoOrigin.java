@@ -3,6 +3,7 @@ package com.example.SortingAndSearching;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,7 +44,8 @@ public class KClosestPointstoOrigin {
                 right = pivot - 1;
             }
         }
-        return Arrays.copyOfRange(points, 0, K);
+
+        return Arrays.copyOfRange(points ,0, K);
     }
 
     private static int findPivot(int[][] points, int left, int right){
@@ -69,83 +71,11 @@ public class KClosestPointstoOrigin {
         points[right] = temp;
     }
 
-//    Assume your location is [m, n] and the location of a post office is [p, q],
-//    the Euclidean distance between the office and you is SquareRoot((m - p) * (m - p) + (n - q) * (n - q)).
     private static int distance(int[] p1, int[] p2){
-        return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
+        return (p1[0]*p1[0] - p2[0]*p2[0] + p1[1]*p1[1] - p2[1]*p2[1]);
     }
 
-//    public static int[][] kClosest(int[][] points, int K) {
-//        int len =  points.length, l = 0, r = len - 1;
-//        while (l <= r) {
-////            int mid = helper(points, l, r);
-////            int mid = getPartitionId(points, l,r);
-//            int mid = getPartitionIdPrac(points, l, r);
-//            if (mid == K) break;
-//            if (mid < K) {
-//                l = mid + 1;
-//            } else {
-//                r = mid - 1;
-//            }
-//        }
-//        return Arrays.copyOfRange(points, 0, K);
-//    }
-//
-//    private static int getPartitionIdPrac(int[][] A, int low, int high) {
-//        int pivot = low;
-//        while (low<high) {
-//            if (low<high && compare(A[low], A[pivot]) <=0) low++;
-//            else if (low<high && compare(A[high], A[pivot]) >0) high--;
-//            else swap(A, low,high);
-//        }
-//        swap(A, high, pivot);
-//        return high;
-//    }
-//
-//    private static void swap(int[][] A, int index1, int index2) {
-//        int[] temp = A[index1];
-//        A[index1] = A[index2];
-//        A[index2] = temp;
-//    }
-//
-//    // returns random pivot index between low and high inclusive.
-//    private static int getPivot(int low, int high) {
-//        Random rand = new Random();
-//        return rand.nextInt((high - low) + 1) + low;
-//    }
-//
-//    private static int getPartitionId(int[][] A, int low, int high) {
-//        int pivot = getPivot(low, high);
-//        swap(A, pivot,low);
-//        int border = low+1;
-//        for (int i=border; i <=high; i++) {
-//            if (compare(A[i],A[low]) < 0) {
-//                swap(A, i, border++);
-//            }
-//        }
-//        swap(A, low, border-1);
-//        return border-1;
-//    }
-//
-//    //improve on quick sort logic
-//    private static int helper(int[][] A, int l, int r) {
-//        int[] pivot = A[l];
-//        while (l < r) {
-//            while (l < r && compare(A[r], pivot) >= 0) r--;
-//            A[l] = A[r];
-//            while (l < r && compare(A[l], pivot) <= 0) l++;
-//            A[r] = A[l];
-//        }
-//        A[l] = pivot;
-//        return l;
-//    }
-//
-//    private static int compare(int[] p1, int[] p2) {
-//        return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
-//    }
-
-
-    public static class TreeNode {
+public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

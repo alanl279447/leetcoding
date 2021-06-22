@@ -62,5 +62,4 @@ public class FindFirstLastPositionElementSortedArray_34 {
         }
         return index;
     }
-
 }

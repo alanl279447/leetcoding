@@ -19,11 +19,9 @@ import java.util.PriorityQueue;
 //        Hence [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] is the reconstructed queue.
 //        https://leetcode.com/problems/queue-reconstruction-by-height/
 
-
 //  {7,0}, {4,4}, {7,1}, {5,0}, {6,1}, {5,2}
 //  (7,0), (7,1), (6,1), (5,0), (5,2), (4,4)
 //  (5,0), (7,0), (5,2), (6,1),(4,4), (7,1)
-
 
 public class QueueReconstructionbyHeight_406 {
     public static void main(String[] args) {
@@ -42,6 +40,8 @@ public class QueueReconstructionbyHeight_406 {
             int[] cur = pq.poll();
             list.add( cur[1], cur );
         }
+
+//        return list.toArray(new int[list.size()][2]);
         int[][] res = new int[people.length][2];
         for( int i = 0; i < people.length; i++ ) {
             res[i] = list.get(i);

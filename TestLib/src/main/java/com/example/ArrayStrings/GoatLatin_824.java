@@ -37,7 +37,7 @@ public class GoatLatin_824 {
 
     public static String toGoatLatin(String S) {
         List<Character>list=new ArrayList<Character>(Arrays.asList('a','e','i','o','u','A','E','I','O','U'));
-        String arr[]=S.split(" ");
+        String arr[]=S.split("\\s");
         String a="a",test="";
         StringBuffer sb=new StringBuffer();
 

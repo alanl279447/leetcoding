@@ -37,15 +37,6 @@ public class WallsandGates_286 {
         }
     }
 
-    public static void wallsAndGatesTest(int[][] rooms) {
-        if (rooms==null || rooms.length==0) return;
-
-        Queue<Cell> queue = new ArrayDeque<>();
-
-
-    }
-
-
     public static void wallsAndGates(int[][] rooms) {
         if (rooms == null || rooms.length < 1) return;
         Queue<Cell>  queue = new ArrayDeque<>();
@@ -79,13 +70,12 @@ public class WallsandGates_286 {
     public static class Cell {
         int row;
         int column;
-        int distance;
+        //int distance;
 
         public Cell(int r, int c, int d) {
            row = r;
            column = c;
-           distance = d;
+          // distance = d;
         }
     }
-
 }

@@ -13,8 +13,8 @@ public class SortColors75 {
 
     public static TreeNode root = null;
     public static void main(String[] args) {
-//        int[] input = {2,0,2,1,1,0};
-        int[] input = {2,0,1};
+        int[] input = {2,0,2,1,1,0};
+//        int[] input = {2,0,1};
         sortColors(input);
         for (int inp: input) {
             System.out.println(inp);

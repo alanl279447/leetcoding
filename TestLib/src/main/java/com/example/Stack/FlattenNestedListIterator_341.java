@@ -4,8 +4,10 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
 public class FlattenNestedListIterator_341 {
 
@@ -56,28 +58,32 @@ public class FlattenNestedListIterator_341 {
     }
 
     public static class NestedIterator implements Iterator<Integer> {
-
-        Deque<NestedInteger> stack = null;
+        Deque<NestedInteger> stack = new ArrayDeque<>();
         public NestedIterator(List<NestedInteger> nestedList) {
-            stack = new ArrayDeque(nestedList);
+            prepareStack(nestedList);
         }
 
         @Override
         public Integer next() {
-             if (!hasNext()) throw new NoSuchElementException();
-            NestedInteger item = stack.removeFirst();
-            return item.getInteger();
+            if (!hasNext()) {
+                return null;
+            }
+            return stack.pop().getInteger();
         }
 
         @Override
         public boolean hasNext() {
-            while(!stack.isEmpty() && !stack.peekFirst().isInteger()) {
-                List<NestedInteger> list = stack.removeFirst().getList();
-                for (int i = list.size()-1; i >0; i--) {
-                    stack.offerFirst(list.get(i));
-                }
+            while (!stack.isEmpty() && !stack.peek().isInteger()) {
+                List<NestedInteger> list = stack.pop().getList();
+                prepareStack(list);
             }
             return !stack.isEmpty();
+        }
+
+        private void prepareStack(List<NestedInteger> nestedList) {
+            for (int i = nestedList.size() - 1; i >= 0; i--) {
+                stack.push(nestedList.get(i));
+            }
         }
     }
 
@@ -100,36 +106,4 @@ public class FlattenNestedListIterator_341 {
             return list;
         }
     }
-
-//    public static class TreeNode {
-//        int val;
-//        TreeNode left;
-//        TreeNode right;
-//        TreeNode(int x) { val = x; }
-//    }
-//
-//    public static void addNode(int value) {
-//        root = addNodeRecursive(root, value);
-//        root.left = new TreeNode(9);
-//        root.right = new TreeNode(20);
-//        root.right.left = new TreeNode(15);
-//        root.right.right = new TreeNode(7);
-//    }
-//
-//    public static TreeNode addNodeRecursive(TreeNode node, int value) {
-////        TreeNode newNode = null;
-//        if (node == null) {
-//            node = new TreeNode(value);
-//            return node;
-//        }
-//
-//        if (value < node.val) {
-//            node.left = addNodeRecursive(node.left, value);
-//        } else if (value > node.val){
-//            node.right = addNodeRecursive(node.right, value);
-//        } else {
-//            return node;
-//        }
-//        return node;
-//    }
 }

@@ -21,6 +21,8 @@ public class PathWithMaximumMinimumValue_work_1102 {
         System.out.println(result);
     }
     static int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+
     public static int maximumMinimumPath(int[][] A) {
         int n = A.length;
         int m = A[0].length;
@@ -28,7 +30,6 @@ public class PathWithMaximumMinimumValue_work_1102 {
         // in the BFS approach, for each step, we are interested in getting the maximum min that we have seen so far,
         // thus we reverse the ordering in the pq
         Queue<int[]> pq = new PriorityQueue<>((a, b) -> b[2] - a[2]);
-
         pq.offer(new int[]{0, 0, A[0][0]});
 
         // BFS
